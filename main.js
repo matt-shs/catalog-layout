@@ -78,11 +78,14 @@ function createCardsFromJson(dataArray) {
     const metaContainer = document.createElement("div");
     metaContainer.className = "meta-container";
 
-    const metaText = document.createElement("p");
-    metaText.className = "meta";
-    metaText.innerHTML = `<span class="meta__part">${item.sku}</span>${item.size || ""
-      } ${item.material || ""}`;
-    metaContainer.appendChild(metaText);
+    // Loop through all variants found for this product group and create a line for each
+    (item.variants || []).forEach(variant => {
+        const metaText = document.createElement("p");
+        metaText.className = "meta";
+        // Display SKU (bolded), Size, and Material for the variant
+        metaText.innerHTML = `<span class="meta__part">${variant.sku}</span>${variant.size} ${variant.material}`;
+        metaContainer.appendChild(metaText);
+    });
 
     card.appendChild(metaContainer);
     cardsContainer.appendChild(card);
@@ -141,33 +144,76 @@ async function lookupSKUs() {
   const skus = tagify.value
     .map((t) => t.value.trim().toUpperCase())
     .slice(0, 500);
+
   if (skus.length === 0) {
     cardsContainer.innerHTML = "";
     cards = [];
     statusLine.textContent = "No SKUs entered. Enter SKUs and press Lookup.";
     return;
   }
+
+  statusLine.textContent = "Searching for products...";
+
   const products = await loadProductsJson();
+
   if (!products.length) {
     createCardsFromJson([]);
-    statusLine.textContent = "No products available.";
+    statusLine.textContent = "No product data is available to search against.";
     return;
   }
+
   const map = new Map();
   products.forEach((p) => map.set(String(p.sku).toUpperCase(), p));
-  const found = [],
-    notFound = [];
+
+  // Map to hold the final grouped products. 
+  // Key: normalized producttitle, Value: {representativeProduct, variants: []}
+  const finalResults = new Map(); 
+  const notFound = [];
+
   skus.forEach((sku) => {
     const p = map.get(sku);
-    if (p) found.push(p);
-    else notFound.push(sku);
+
+    if (p) {
+      const title = p.producttitle.trim().toUpperCase();
+      
+      const variantData = {
+          sku: p.sku,
+          size: p.size || '',
+          material: p.material || ''
+      };
+
+      if (!finalResults.has(title)) {
+        // First time seeing this title. Set up the representative product structure, 
+        // using the first variant's image/details as the card basis.
+        finalResults.set(title, {
+            ...p, 
+            variants: [] // Initialize variants array
+        });
+      }
+      
+      // Add the requested variant to the list for this product group
+      finalResults.get(title).variants.push(variantData);
+
+    } else {
+      notFound.push(sku);
+    }
   });
-  createCardsFromJson(found);
-  statusLine.textContent =
-    `${found.length} product(s) found.` +
-    (notFound.length
-      ? ` SKUs not found (${notFound.length}): ${notFound.join(", ")}`
-      : "");
+  
+  const found = Array.from(finalResults.values()); // Array of grouped product objects
+
+  createCardsFromJson(found); // Pass the full grouped structure
+
+  const titleCount = found.length;
+  let statusText = `${titleCount} unique product group(s) found based on title.`;
+
+  if (notFound.length) {
+    statusText += ` SKUs not found (${notFound.length}): ${notFound.join(", ")}`;
+  } else if (titleCount < skus.length) {
+    const groupedCount = skus.length - titleCount;
+    statusText += ` (${groupedCount} duplicate variants were grouped.)`;
+  }
+
+  statusLine.textContent = statusText;
 }
 
 document.getElementById("copyBtn").addEventListener("click", async () => {
@@ -185,16 +231,38 @@ document.getElementById("copyBtn").addEventListener("click", async () => {
     return;
   }
   try {
-    await navigator.clipboard.writeText(skus);
-    Swal.fire({
-      toast: true,
-      position: "bottom-end",
-      icon: "success",
-      title: "Copied!",
-      showConfirmButton: false,
-      timer: 2000,
-      timerProgressBar: true,
+    // Fallback copy logic included for sandbox environments
+    const success = await new Promise((resolve, reject) => {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(skus).then(() => resolve(true)).catch(reject);
+        } else {
+            const textarea = document.createElement('textarea');
+            textarea.value = skus;
+            textarea.style.position = 'fixed';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                resolve(true);
+            } catch (err) {
+                reject(err);
+            } finally {
+                document.body.removeChild(textarea);
+            }
+        }
     });
+
+    if (success) {
+      Swal.fire({
+        toast: true,
+        position: "bottom-end",
+        icon: "success",
+        title: "Copied!",
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+      });
+    }
   } catch (err) {
     console.error("copy failed", err);
   }
@@ -272,9 +340,9 @@ document.getElementById("exportPdf").addEventListener("click", async () => {
     const pageWidth = 590,
       pageHeight = 840; // A4-ish
     const margin = 50,
-      gap = 5,
+      gap = 10,
       padding = 5;
-    const scaleFactor = 1.05; // scale cards slightly
+    const scaleFactor = 1; // scale cards slightly
 
     const fontRegular = await pdfDoc.embedFont(StandardFonts.Helvetica);
     const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
@@ -301,6 +369,16 @@ document.getElementById("exportPdf").addEventListener("click", async () => {
       return;
     }
 
+    // --- Calculate the maximum number of text lines needed per card ---
+    let maxLinesPerCard = 1; 
+    cards.forEach(card => {
+        // Count how many <p class="meta"> elements were generated for variants
+        const lineCount = card.querySelectorAll(".meta").length;
+        if (lineCount > maxLinesPerCard) {
+            maxLinesPerCard = lineCount;
+        }
+    });
+
     const baseCardWidth =
       (pageWidth - margin * 2 - gap * (cardsPerRow - 1)) / cardsPerRow;
     const cardWidthPdf = baseCardWidth * scaleFactor;
@@ -315,6 +393,11 @@ document.getElementById("exportPdf").addEventListener("click", async () => {
       8,
       Math.round(screenFontSize * (cardWidthPdf / sampleScreenWidth))
     );
+    
+    // --- Use maxLinesPerCard for row height calculation ---
+    const textLineHeight = pdfFontSize * 1.2;
+    const cardContainerHeight = imgMaxHeightPdf + maxLinesPerCard * textLineHeight + padding * 2;
+    const rowHeight = cardContainerHeight;
 
     const imageBuffers = await Promise.all(
       cards.map((card) =>
@@ -328,8 +411,7 @@ document.getElementById("exportPdf").addEventListener("click", async () => {
 
     let page = pdfDoc.addPage([pageWidth, pageHeight]);
     let yOffset = pageHeight - margin;
-    const rowHeight = imgMaxHeightPdf + 2 * pdfFontSize + padding * 2;
-
+    
     let pageIndex = 1; // start at 1
     for (let i = 0; i < cards.length; i += cardsPerRow) {
       let rowCards = cards.slice(i, i + cardsPerRow);
@@ -403,8 +485,13 @@ document.getElementById("exportPdf").addEventListener("click", async () => {
             }
           }
 
+          // --- Draw Text (Metadata) for all variants ---
           const paragraphs = Array.from(card.querySelectorAll(".meta"));
-          let textY = yOffset - imgMaxHeightPdf - padding - pdfFontSize;
+          
+          // Calculate the Y coordinate for the baseline of the first line of text.
+          // Start from the bottom of the image area (`yOffset - imgMaxHeightPdf - padding`) 
+          // and move down by one line height to find the baseline of the first line.
+          let currentTextY = yOffset - imgMaxHeightPdf - padding - textLineHeight; 
 
           paragraphs.forEach((p) => {
             const spans = p.querySelectorAll(".meta__part");
@@ -432,7 +519,7 @@ document.getElementById("exportPdf").addEventListener("click", async () => {
             spans.forEach((span) => {
               page.drawText(span.textContent, {
                 x: currentX,
-                y: textY,
+                y: currentTextY,
                 size: pdfFontSize,
                 font: fontBold,
                 color: rgb(0, 0, 0),
@@ -443,12 +530,15 @@ document.getElementById("exportPdf").addEventListener("click", async () => {
             if (remainingText.trim() !== "") {
               page.drawText(remainingText, {
                 x: currentX,
-                y: textY,
+                y: currentTextY,
                 size: pdfFontSize,
                 font: fontRegular,
                 color: rgb(0, 0, 0),
               });
             }
+            
+            // Move the Y baseline position up for the next variant line
+            currentTextY -= textLineHeight; 
           });
         }
       }
