@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SKU Lookup</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; }
+  input, button { padding: 8px; font-size: 14px; }
+  input { width: 400px; }
+  button { margin-left: 8px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+  th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+  th { background: #f0f0f0; }
+  td img { max-width: 100px; height: auto; }
+</style>
+</head>
+<body>
+
+<h1>SKU Lookup</h1>
+
+<input id="skuInput" type="text" placeholder="Enter up to 200 SKUs, comma separated">
+<button id="lookupBtn">Lookup</button>
+<p id="status"></p>
+
+<div id="resultsContainer"></div>
+
+<script>
+// Sample JSON data
+const data = {
+  "products": [
+    {"sku":"DA-01","producttitle":"DIRECTIONAL ARROWS - DIRECTIONAL FLOW ARROW TAPE","picturename":"DA-01.jpg","size":"1”x18Y","material":"AD"},
+    {"sku":"DA-07","producttitle":"DIRECTIONAL ARROWS - DIRECTIONAL FLOW ARROW TAPE SHOULD BE THE SAME","picturename":"Dx-07.bmp","size":"1”X18Y","material":"TAPE"},
+    {"sku":"LT-401","producttitle":"EMPTY CYLINDER TAGS","picturename":"401.jpg","size":"6.125X3","material":"LT"},
+    {"sku":"LT-402","producttitle":"FULL CYLINDER TAGS","picturename":"402.jpg","size":"6.125X3","material":"LT"},
+    {"sku":"LT-405","producttitle":"EQUIPMENT INSPECTION RECORD EQUIPMENT NO ___ LOCATION ___ REMARKS ___ INSPECTION RECORD DO","picturename":"405.jpg","size":"6.125X3","material":"LT"},
+    {"sku":"LT-406","producttitle":"WARNING TAGS","picturename":"406.jpg","size":"6.125X3","material":"LT"},
+    {"sku":"LT-407","producttitle":"EMPTY CYLINDER ---- DO NOT USE  BLANK BACK","picturename":"TB_407.jpg","size":"6.125X3","material":"LT"},
+    {"sku":"LT-408","producttitle":"FULL CYLINDER ---- READY FOR USE BLANK BACK","picturename":"TB_408.jpg","size":"6.125X3","material":"LT"},
+    {"sku":"LT-409","producttitle":"OUT OF ORDER WHT/RED HEADER BLANK BACK","picturename":"409.jpg","size":"6.125X3","material":"LT"},
+    {"sku":"LT-410","producttitle":"SAFETY INSPECTION RECORD","picturename":"410.jpg","size":"6.125X3","material":"LT"}
+    // Add the rest of your products...
+  ]
+};
+
+// Build a Map for fast lookup
+const productMap = new Map();
+data.products.forEach(p => productMap.set(p.sku.toUpperCase(), p));
+
+// Handle lookup
+document.getElementById('lookupBtn').addEventListener('click', () => {
+  const input = document.getElementById('skuInput').value.trim();
+  const statusEl = document.getElementById('status');
+  const resultsEl = document.getElementById('resultsContainer');
+  resultsEl.innerHTML = '';
+
+  if (!input) {
+    statusEl.textContent = 'Please enter at least one SKU.';
+    return;
+  }
+
+  // Parse SKUs, remove duplicates, limit to 200
+  let skus = input.split(',').map(s => s.trim().toUpperCase()).filter(s => s);
+  if (skus.length > 200) {
+    skus = skus.slice(0, 200);
+    statusEl.textContent = 'Only the first 200 SKUs will be processed.';
+  } else {
+    statusEl.textContent = '';
+  }
+
+  // Lookup
+  const results = skus.map(sku => productMap.get(sku)).filter(Boolean);
+
+  if (results.length === 0) {
+    resultsEl.textContent = 'No products found for the entered SKUs.';
+    return;
+  }
+
+  // Build table
+  const table = document.createElement('table');
+  const thead = document.createElement('thead');
+  const tbody = document.createElement('tbody');
+
+  const headers = ['SKU','Product Title','Picture','Size','Material'];
+  const trHead = document.createElement('tr');
+  headers.forEach(h => { const th = document.createElement('th'); th.textContent = h; trHead.appendChild(th); });
+  thead.appendChild(trHead);
+
+  results.forEach(p => {
+    const tr = document.createElement('tr');
+    const tdSKU = document.createElement('td'); tdSKU.textContent = p.sku; tr.appendChild(tdSKU);
+    const tdTitle = document.createElement('td'); tdTitle.textContent = p.producttitle; tr.appendChild(tdTitle);
+    const tdPic = document.createElement('td'); 
+    const img = document.createElement('img'); 
+    img.src = p.picturename; 
+    img.alt = p.sku; 
+    tdPic.appendChild(img); 
+    tr.appendChild(tdPic);
+    const tdSize = document.createElement('td'); tdSize.textContent = p.size; tr.appendChild(tdSize);
+    const tdMat = document.createElement('td'); tdMat.textContent = p.material; tr.appendChild(tdMat);
+    tbody.appendChild(tr);
+  });
+
+  table.appendChild(thead);
+  table.appendChild(tbody);
+  resultsEl.appendChild(table);
+});
+</script>
+
+</body>
+</html>

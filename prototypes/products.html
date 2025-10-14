@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SKU Table with Tagify & Copy Toast</title>
+
+<link href="https://unpkg.com/tabulator-tables@5.5.1/dist/css/tabulator.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+
+<script src="https://unpkg.com/tabulator-tables@5.5.1/dist/js/tabulator.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+<style>
+body {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  margin:0;
+  background:white;
+  color:#111827;
+}
+
+/* Controls element */
+.controls {
+  display:flex;
+  gap:8px;
+  align-items:center;
+  background:#f7fafc;
+  padding:12px;
+  box-shadow:0 1px 3px rgba(2,6,23,0.06);
+  overflow:hidden;
+  margin-bottom:16px;
+}
+
+/* Tagify input */
+#skuInput { width:100%; }
+
+.tagify {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height:95px; /* two lines */
+  padding: 4px 8px;
+  border: 1px solid #e6edf3;
+  border-radius: 6px;
+  box-sizing: border-box;
+  background: white; /* updated background */
+}
+
+.tagify .tagify__input {
+  flex: 1 0 120px;
+  min-width: 80px;
+  height: auto;
+  box-sizing: border-box;
+}
+
+/* Buttons styling */
+.controls button { flex:0 0 auto; padding:8px 12px; border-radius:6px; border:0; cursor:pointer; font-weight:600; }
+.lookup-btn{background:#2563eb;color:#fff;}
+.clear-btn{background:#ef4444;color:#fff;}
+.copy-btn{background:#6b7280;color:#fff;}
+
+/* Results wrapper */
+.results-wrapper{
+  padding:12px;
+  background:white;
+  overflow:auto;
+}
+
+.export-buttons { display:flex; gap:8px; margin-bottom:6px; flex-wrap:wrap; }
+.status-bar { font-size:13px; color:#334155; margin-bottom:8px; }
+.tabulator .tabulator-cell{padding:4px 6px;}
+.prod-img{width:60px;height:60px;object-fit:cover;border-radius:4px;background:#f1f5f9;border:1px solid #eef2f7;}
+</style>
+</head>
+<body>
+
+<div class="controls">
+  <input id="skuInput" placeholder="Paste SKUs (comma or line separated, max 500)" />
+  <button id="lookupBtn" class="lookup-btn">Lookup</button>
+  <button id="copyBtn" class="copy-btn">Copy</button>
+  <button id="clearBtn" class="clear-btn">Clear</button>
+</div>
+
+<div class="results-wrapper">
+  <div class="export-buttons">
+    <button id="exportXlsxBtn">Export XLSX</button>
+  </div>
+  <div class="status-bar" id="statusBar">No products loaded</div>
+  <div id="tabulatorContainer"></div>
+</div>
+
+<script>
+const IMAGE_PATH = '';
+let productMap = new Map(), table = null;
+
+// Load JSON products
+fetch('products.json')
+  .then(r => r.ok ? r.json() : Promise.reject('Failed to load products.json'))
+  .then(products => { 
+    products.forEach(p => productMap.set(String(p.sku).toUpperCase(), p)); 
+    initTable(); 
+  })
+  .catch(console.error);
+
+// Initialize Tabulator
+function initTable(){
+  table = new Tabulator("#tabulatorContainer", {
+    data:[],
+    layout:"fitColumns",
+    responsiveLayout:"collapse",
+    pagination:"local",
+    paginationSize:25,
+    rowHeight:36,
+    columns:[
+      {title:"SKU", field:"sku"},
+      {title:"Product Title", field:"producttitle"},
+      {title:"Picture", field:"picturename", formatter:cell=>{
+        const val = cell.getValue();
+        return val ? `<img class="prod-img" src="${IMAGE_PATH + val}" alt="${cell.getRow().getData().sku}">` : '';
+      }},
+      {title:"Size", field:"size"},
+      {title:"Material", field:"material"}
+    ]
+  });
+}
+
+// Initialize Tagify
+const input = document.getElementById('skuInput');
+const tagify = new Tagify(input, { delimiters:/[,|\n|\r]/, maxTags:500, duplicate:false });
+
+input.addEventListener('paste', e=>{
+  e.preventDefault();
+  const paste = (e.clipboardData||window.clipboardData).getData('text');
+  const items = [...new Set(paste.split(/[\n\r,]+/).map(s=>s.trim()).filter(Boolean))];
+  tagify.addTags(items);
+});
+
+// Lookup SKUs
+function lookupSKUs(){
+  const skus = tagify.value.map(t=>t.value.trim().toUpperCase()).slice(0,500);
+  const found=[], notFound=[];
+  for(const sku of skus){ const p = productMap.get(sku); p ? found.push(p) : notFound.push(sku); }
+  if(table) table.setData(found).then(()=>table.redraw(true));
+  document.getElementById('statusBar').textContent = `${found.length} product(s) found.${notFound.length?` SKUs not found (${notFound.length}): ${notFound.join(', ')}`:''}`;
+}
+
+// Event listeners
+document.getElementById('lookupBtn').addEventListener('click', lookupSKUs);
+input.addEventListener('keydown', e=>{ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); lookupSKUs(); } });
+
+// Clear button
+document.getElementById('clearBtn').addEventListener('click', ()=>{
+  tagify.removeAllTags();
+  if(table) table.clearData();
+  document.getElementById('statusBar').textContent = 'No products loaded';
+});
+
+// Export XLSX button
+document.getElementById('exportXlsxBtn').addEventListener('click', ()=>{ if(table) table.download("xlsx","products.xlsx",{sheetName:"Products"}); });
+
+// Copy button with SweetAlert2 toast
+document.getElementById('copyBtn').addEventListener('click', async ()=>{
+  const skus = tagify.value.map(t=>t.value).join(', ');
+  if (!skus) {
+    Swal.fire({
+      toast: true,
+      position: 'bottom-end',
+      icon: 'info',
+      title: 'Nothing to copy',
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true
+    });
+    return;
+  }
+  try {
+    await navigator.clipboard.writeText(skus);
+    Swal.fire({
+      toast: true,
+      position: 'bottom-end',
+      icon: 'success',
+      title: 'Copied to clipboard!',
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true
+    });
+  } catch (err) { console.error('Copy failed', err); }
+});
+</script>
+
+</body>
+</html>

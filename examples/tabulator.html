@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tabulator — Example HTML</title>
+
+  <!-- Tabulator CSS (unpkg CDN) -->
+  <link href="https://unpkg.com/tabulator-tables@5.4.4/dist/css/tabulator.min.css" rel="stylesheet">
+
+  <style>
+    body{font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial; margin:20px}
+    header{display:flex;gap:12px;align-items:center;justify-content:space-between}
+    .controls {display:flex;gap:8px;flex-wrap:wrap}
+    #example-table{margin-top:12px}
+    .btn{padding:8px 12px;border-radius:6px;border:1px solid #ccc;background:#f7f7f7;cursor:pointer}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Tabulator JS — Example</h1>
+    <div class="controls">
+      <button id="download-csv" class="btn">Download CSV</button>
+      <button id="download-json" class="btn">Download JSON</button>
+      <button id="add-row" class="btn">Add Row</button>
+      <input id="name-filter" placeholder="Filter name contains..." />
+      <button id="clear-filter" class="btn">Clear Filter</button>
+    </div>
+  </header>
+
+  <!-- Table placeholder -->
+  <div id="example-table"></div>
+
+  <!-- Simple status area -->
+  <div id="status" style="margin-top:12px;color:#666;font-size:14px">Rows: <span id="row-count">0</span></div>
+
+  <!-- Tabulator JS (unpkg CDN) -->
+  <script src="https://unpkg.com/tabulator-tables@5.4.4/dist/js/tabulator.min.js"></script>
+
+  <script>
+    // Sample data
+    const tableData = [
+      {id:1,name:"Alice",age:29,gender:"Female",score:88,registered:"2023-02-12"},
+      {id:2,name:"Bob",age:34,gender:"Male",score:72,registered:"2022-11-05"},
+      {id:3,name:"Carla",age:27,gender:"Female",score:95,registered:"2024-06-21"},
+      {id:4,name:"Daniel",age:45,gender:"Male",score:61,registered:"2021-09-10"},
+      {id:5,name:"Eve",age:22,gender:"Female",score:79,registered:"2020-12-01"}
+    ];
+
+    // Create Tabulator
+    const table = new Tabulator("#example-table", {
+      data:tableData,           // load initial data
+      layout:"fitColumns",    // fit columns to width
+      height:400,
+      selectable: true,
+      pagination: "local",
+      paginationSize: 5,
+      movableColumns: true,
+      reactiveData: true, // allows direct updates to tableData if desired
+      columns:[
+        {title:"ID", field:"id", width:60, sorter:"number"},
+        {title:"Name", field:"name", editor:"input", headerFilter:"input", sorter:"string", responsive:0},
+        {title:"Age", field:"age", hozAlign:"center", editor:"number", sorter:"number"},
+        {title:"Gender", field:"gender", editor:"select", editorParams:{values:["Male","Female","Other"]}},
+        {title:"Score", field:"score", sorter:"number", formatter:function(cell, formatterParams){
+          // simple custom formatter to color high scores
+          const v = cell.getValue();
+          return `<div style="font-weight:600">${v}</div>`;
+        }},
+        {title:"Registered", field:"registered", sorter:"date", hozAlign:"center"},
+        {title:"Actions", hozAlign:"center", formatter:function(cell, formatterParams){
+          return `<button data-row="${cell.getRow().getData().id}" class="row-edit">Edit</button> <button data-row="${cell.getRow().getData().id}" class="row-delete">Delete</button>`;
+        }, width:180, headerSort:false}
+      ],
+      rowSelectionChanged:function(data,rows){
+        document.getElementById('row-count').textContent = data.length;
+      },
+      cellEdited:function(cell){
+        // called when a cell is edited
+        console.log('Cell edited', cell.getField(), '->', cell.getValue());
+      }
+    });
+
+    // Wire up action buttons in Actions column using event delegation
+    document.querySelector('#example-table').addEventListener('click', (e) =>{
+      const target = e.target;
+      if(target.matches('.row-delete')){
+        const rowId = Number(target.dataset.row);
+        table.deleteRow(rowId);
+      }
+      if(target.matches('.row-edit')){
+        const rowId = Number(target.dataset.row);
+        const row = table.getRow(rowId);
+        if(row){
+          row.getCell('name').edit(); // focus edit on name cell as an example
+        }
+      }
+    });
+
+    // Download buttons
+    document.getElementById('download-csv').addEventListener('click', ()=>{
+      table.download('csv', 'tabulator-data.csv');
+    });
+    document.getElementById('download-json').addEventListener('click', ()=>{
+      table.download('json', 'tabulator-data.json');
+    });
+
+    // Add row
+    let nextId = tableData.length + 1;
+    document.getElementById('add-row').addEventListener('click', ()=>{
+      table.addRow({id: nextId, name:`New user ${nextId}`, age:20, gender:'Other', score:0, registered:new Date().toISOString().slice(0,10)}, true)
+        .then(()=>{ nextId++; });
+    });
+
+    // Filter by name (simple contains)
+    const nameFilterInput = document.getElementById('name-filter');
+    nameFilterInput.addEventListener('input', (e)=>{
+      const v = e.target.value;
+      if(v) table.setFilter('name', 'like', v);
+      else table.clearFilter();
+    });
+    document.getElementById('clear-filter').addEventListener('click', ()=>{ nameFilterInput.value=''; table.clearFilter(); });
+
+    // Example: load remote data (commented out). To use, uncomment and replace the URL.
+    // table.replaceData('https://api.example.com/data')
+    //   .catch(err => console.error('Failed to load remote data', err));
+
+    // Expose table for console debugging
+    window._tabulator = table;
+
+  </script>
+</body>
+</html>

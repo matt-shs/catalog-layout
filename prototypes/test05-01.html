@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Catalog (Lookup-only, centered card text)</title>
+
+<link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
+
+<style>
+  body { font-family: Arial; background: #fff; display: flex; justify-content: center; margin: 20px; }
+  .page-container { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 1200px; }
+
+  .top-controls {width: 100%;display:flex;gap:10px;align-items:center;margin-bottom:12px;background:#f7fafc;padding:10px;border-radius:8px;box-sizing:border-box; }
+
+  /* Tagify input: fixed 2-line height with vertical scroll, white background */
+  .tagify { width:100%; display:flex; flex-wrap:wrap; overflow-y:auto; overflow-x:hidden;
+            height:95px; padding:6px 8px; border-radius:8px; box-sizing:border-box; background:white; border:1px solid #e6edf3; }
+  .tagify .tagify__input { flex:1 0 120px; min-width:80px; height:auto; box-sizing:border-box; }
+
+  .top-controls button { padding:8px 12px; border-radius:6px; border:0; cursor:pointer; font-weight:600; }
+  .lookup-btn{background:#2563eb;color:#fff;}
+  .copy-btn{background:#6b7280;color:#fff;}
+  .clear-btn{background:#ef4444;color:#fff;}
+
+  .controls { margin-bottom: 20px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; width:100%; }
+  .controls label { font-size:14px; }
+  input[type="number"] { width: 80px; padding: 6px; font-size: 14px; border-radius:6px; border:1px solid #d1d5db; }
+  .controls button { padding: 6px 12px; font-size: 14px; cursor: pointer; border-radius:6px; border:0; background:#111827;color:#fff; }
+
+  .status-line { width:100%; font-size:13px; color:#334155; margin:6px 0 12px; text-align:left; }
+
+  .cards-container { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; width:100%; min-height:80px; }
+  .card { background: #fff; border-radius: 2px; padding: 8px; box-sizing: border-box; display:flex; flex-direction:column; align-items:center; }
+  .card img { width: 100%; height: auto; margin-bottom: 6px; object-fit: contain; }
+  .meta-container { display: flex; flex-direction: column; align-items: center; width:100%; }
+  /* Center the meta text under the image */
+  .meta { display: inline-block; margin: 0 0 2px 0; text-align: center; width:100%; word-break:break-word; }
+  .meta__part { font-weight: bold; margin-right: 8px; }
+
+  .spinner { border: 2px solid #f3f3f3; border-top: 2px solid #333; border-radius: 50%; width: 14px; height: 14px; animation: spin 1s linear infinite; display: inline-block; vertical-align: middle; margin-left: 6px; }
+  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+  @media (max-width:700px){
+    .top-controls { flex-direction: column; align-items: stretch; }
+    .controls { flex-direction: column; align-items: stretch; }
+  }
+</style>
+</head>
+<body>
+<div class="page-container">
+  <!-- Tagify row -->
+  <div class="top-controls" aria-label="SKU controls">
+    <input id="skuInput" placeholder="Paste SKUs (comma or line separated, max 500)" />
+    <button id="lookupBtn" class="lookup-btn">Lookup</button>
+    <button id="copyBtn" class="copy-btn">Copy</button>
+    <button id="clearBtn" class="clear-btn">Clear</button>
+  </div>
+
+  <!-- existing controls (cards per row, export) -->
+  <div class="controls" style="width:100%">
+    <label for="cardsPerRow">Cards per row: </label>
+    <input type="number" id="cardsPerRow" min="1" max="8" value="5">
+    <button id="exportPdf">Export PDF</button>
+  </div>
+
+  <div class="status-line" id="statusLine">Press Lookup to query products.json.</div>
+
+  <div class="cards-container" id="cardsContainer"></div>
+</div>
+
+<script>
+const IMAGE_PATH = 'images/';          // where images live
+const fallbackImage = IMAGE_PATH + 'noimage.svg';
+
+const cardsContainer = document.getElementById('cardsContainer');
+const inputCardsPerRow = document.getElementById('cardsPerRow');
+const statusLine = document.getElementById('statusLine');
+
+let cachedProducts = null; // will hold array from products.json after first fetch
+let cards = [];            // current DOM cards (for layout/export)
+
+// layout helpers
+function getDynamicFontSize(cardsPerRow) {
+  if(cardsPerRow <= 2) return 18;
+  if(cardsPerRow <= 4) return 14;
+  if(cardsPerRow <= 6) return 10;
+  return 10;
+}
+
+function updateCardLayout() {
+  const cardsPerRow = Math.min(Math.max(parseInt(inputCardsPerRow.value)||1,1),8);
+  const gap = 10;
+  const containerWidth = Math.min(window.innerWidth - 40, 1200);
+  const cardWidth = (containerWidth - gap*(cardsPerRow-1)) / cardsPerRow;
+  const baseFontSize = getDynamicFontSize(cardsPerRow);
+  const imgHeight = Math.max(80, Math.round(cardWidth * 0.6));
+
+  cards.forEach(card => {
+    card.style.width = cardWidth + 'px';
+    const img = card.querySelector('img');
+    if(img) img.style.height = imgHeight + 'px';
+    card.querySelectorAll('.meta').forEach(p => p.style.fontSize = baseFontSize+'px');
+  });
+
+  cardsContainer.style.width = containerWidth + 'px';
+}
+
+window.addEventListener('resize', updateCardLayout);
+inputCardsPerRow.addEventListener('input', updateCardLayout);
+
+// preload image helper
+async function preloadImage(src) {
+  return new Promise(resolve => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.src = src;
+    img.onload = () => resolve(src);
+    img.onerror = () => resolve(fallbackImage);
+  });
+}
+
+// render cards (meta preserved: SKU then size+material)
+function createCardsFromJson(dataArray) {
+  cardsContainer.innerHTML = '';
+  cards = [];
+
+  dataArray.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    const img = document.createElement('img');
+    img.src = fallbackImage;
+    card.dataset.image = IMAGE_PATH + (item.picturename || '');
+
+    preloadImage(IMAGE_PATH + (item.picturename || '')).then(realSrc => {
+      img.src = realSrc;
+      card.dataset.image = realSrc;
+    }).catch(()=>{ img.src = fallbackImage; });
+
+    card.appendChild(img);
+
+    const metaContainer = document.createElement('div');
+    metaContainer.className = 'meta-container';
+
+    const metaText = document.createElement('p');
+    metaText.className = 'meta';
+    metaText.innerHTML = `<span class="meta__part">${item.sku}</span>${item.size || ''} ${item.material || ''}`;
+    metaContainer.appendChild(metaText);
+
+    card.appendChild(metaContainer);
+    cardsContainer.appendChild(card);
+    cards.push(card);
+  });
+
+  updateCardLayout();
+}
+
+// load products.json (cached after first fetch)
+async function loadProductsJson() {
+  if(cachedProducts) return cachedProducts;
+  try {
+    const resp = await fetch('products.json');
+    if(!resp.ok) throw new Error('failed to fetch products.json');
+    const json = await resp.json();
+    // accept either { products:[...] } or an array
+    cachedProducts = Array.isArray(json) ? json : (json.products || []);
+    return cachedProducts;
+  } catch(err){
+    cachedProducts = [];
+    Swal.fire({ toast:true, position:'bottom-end', icon:'error', title:'Failed to load products.json', showConfirmButton:false, timer:2000, timerProgressBar:true });
+    return cachedProducts;
+  }
+}
+
+// Tagify init
+const input = document.getElementById('skuInput');
+const tagify = new Tagify(input, { delimiters:/[,|\n|\r]/, maxTags:500, duplicate:false });
+
+// paste handling (split by comma/newline, dedupe)
+input.addEventListener('paste', e=>{
+  e.preventDefault();
+  const paste = (e.clipboardData||window.clipboardData).getData('text');
+  const items = [...new Set(paste.split(/[\n\r,]+/).map(s=>s.trim()).filter(Boolean))];
+  tagify.addTags(items);
+});
+
+// Lookup -> fetch products.json (if necessary) and filter
+async function lookupSKUs(){
+  const skus = tagify.value.map(t=>t.value.trim().toUpperCase()).slice(0,500);
+
+  if(skus.length === 0){
+    // empty input -> clear results and notify
+    cardsContainer.innerHTML = '';
+    cards = [];
+    statusLine.textContent = 'No SKUs entered. Enter SKUs and press Lookup.';
+    return;
+  }
+
+  const products = await loadProductsJson(); // may be []
+  if(!products.length){
+    createCardsFromJson([]); // clear UI
+    statusLine.textContent = 'No products available (products.json empty or failed to load).';
+    return;
+  }
+
+  const map = new Map();
+  products.forEach(p => map.set(String(p.sku).toUpperCase(), p));
+
+  const found = [];
+  const notFound = [];
+  skus.forEach(sku => {
+    const p = map.get(sku);
+    if(p) found.push(p);
+    else notFound.push(sku);
+  });
+
+  createCardsFromJson(found);
+  statusLine.textContent = `${found.length} product(s) found.` + (notFound.length ? ` SKUs not found (${notFound.length}): ${notFound.join(', ')}` : '');
+}
+
+// Copy button
+document.getElementById('copyBtn').addEventListener('click', async ()=>{
+  const skus = tagify.value.map(t=>t.value).join(', ');
+  if(!skus){
+    Swal.fire({ toast:true, position:'bottom-end', icon:'info', title:'Nothing to copy', showConfirmButton:false, timer:2000, timerProgressBar:true });
+    return;
+  }
+  try {
+    await navigator.clipboard.writeText(skus);
+    Swal.fire({ toast:true, position:'bottom-end', icon:'success', title:'Copied to clipboard!', showConfirmButton:false, timer:2000, timerProgressBar:true });
+  } catch(err){ console.error('copy failed', err); }
+});
+
+// Clear -> clear tags and cards/status
+document.getElementById('clearBtn').addEventListener('click', ()=>{
+  tagify.removeAllTags();
+  cardsContainer.innerHTML = '';
+  cards = [];
+  statusLine.textContent = 'No products loaded. Press Lookup to query products.json.';
+});
+
+// Lookup button + Enter key
+document.getElementById('lookupBtn').addEventListener('click', lookupSKUs);
+input.addEventListener('keydown', e => { if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); lookupSKUs(); }});
+
+// ---------------------- PDF helpers and export ----------------------
+
+// convert SVG URL text -> PNG ArrayBuffer (high-resolution) using canvas scaling
+async function svgToPngArrayBuffer(svgUrl, maxWidth, maxHeight, scale = 6){
+  const svgText = await fetch(svgUrl).then(r => r.text());
+  return new Promise(resolve => {
+    const img = new Image();
+    img.onload = () => {
+      const aspect = img.naturalHeight / img.naturalWidth || 1;
+      let width = maxWidth;
+      let height = width * aspect;
+      if(height > maxHeight){
+        height = maxHeight;
+        width = height / aspect;
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.round(width * scale);
+      canvas.height = Math.round(height * scale);
+      const ctx = canvas.getContext('2d');
+      ctx.scale(scale, scale);
+      ctx.drawImage(img, 0, 0, width, height);
+      canvas.toBlob(blob => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.readAsArrayBuffer(blob);
+      }, 'image/png');
+    };
+    img.onerror = () => {
+      // return fallback image buffer
+      fetch(fallbackImage).then(r=>r.arrayBuffer()).then(arr=>resolve(arr));
+    };
+    // feed SVG as data URI so cross-origin not an issue
+    img.src = 'data:image/svg+xml;base64,' + btoa(svgText);
+  });
+}
+
+// get image ArrayBuffer for PDFs (handles svg -> png conversion, bmp -> png conversion)
+async function getImageBuffer(src, cardWidthPdf, imgMaxHeightPdf){
+  try {
+    const extension = (src.split('.').pop() || '').toLowerCase();
+    if(extension === 'svg'){
+      return await svgToPngArrayBuffer(src, cardWidthPdf, imgMaxHeightPdf, 6);
+    }
+
+    // load image element for bmp conversion or to ensure accessible
+    if(extension === 'bmp'){
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.src = src;
+      await new Promise((res)=>{ img.onload = res; img.onerror = res; });
+      const aspect = img.naturalHeight / img.naturalWidth || 1;
+      let width = cardWidthPdf;
+      let height = width * aspect;
+      if(height > imgMaxHeightPdf){ height = imgMaxHeightPdf; width = height / aspect; }
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.round(width);
+      canvas.height = Math.round(height);
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, width, height);
+      return await new Promise(resolve => canvas.toBlob(blob => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.readAsArrayBuffer(blob);
+      }, 'image/png'));
+    }
+
+    // common case: jpg/png - fetch raw bytes
+    return await fetch(src).then(r => r.arrayBuffer());
+  } catch(err){
+    console.warn('getImageBuffer error', err);
+    return await fetch(fallbackImage).then(r => r.arrayBuffer());
+  }
+}
+
+// Export PDF: uses current DOM cards (cards array). Restores button text+state.
+document.getElementById('exportPdf').addEventListener('click', async () => {
+  const exportButton = document.getElementById('exportPdf');
+  exportButton.textContent = 'Exporting';
+  const spinner = document.createElement('span');
+  spinner.className = 'spinner';
+  exportButton.appendChild(spinner);
+  exportButton.disabled = true;
+
+  try {
+    const { PDFDocument, StandardFonts, rgb } = PDFLib;
+    const pdfDoc = await PDFDocument.create();
+
+    const pageWidth = 600, pageHeight = 800; // A4
+    const margin = 50, gap = 5, padding = 5;
+    const scaleFactor = 1.1; // scale cards slightly
+
+    const fontRegular = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+
+    const cardsPerRow = Math.min(Math.max(parseInt(inputCardsPerRow.value) || 1, 1), 8);
+
+    if (!cards.length) {
+      Swal.fire({ toast: true, position: 'bottom-end', icon: 'info', title: 'No cards to export', showConfirmButton: false, timer: 1500, timerProgressBar: true });
+      return;
+    }
+
+    const baseCardWidth = (pageWidth - margin * 2 - gap * (cardsPerRow - 1)) / cardsPerRow;
+    const cardWidthPdf = baseCardWidth * scaleFactor;
+    const imgMaxHeightPdf = cardWidthPdf * 0.6;
+
+    const sampleScreenWidth = Math.max(100, cards[0].getBoundingClientRect().width);
+    const screenFontSize = getDynamicFontSize(cardsPerRow);
+    const pdfFontSize = Math.max(8, Math.round(screenFontSize * (cardWidthPdf / sampleScreenWidth)));
+
+    // Load all images
+    const imageBuffers = await Promise.all(cards.map(card => getImageBuffer(card.dataset.image || fallbackImage, cardWidthPdf, imgMaxHeightPdf)));
+
+    let page = pdfDoc.addPage([pageWidth, pageHeight]);
+    let yOffset = pageHeight - margin;
+
+    const rowHeight = imgMaxHeightPdf + 2 * pdfFontSize + padding * 2; // extra padding for second row
+
+    for (let i = 0; i < cards.length; i += cardsPerRow) {
+      let rowCards = cards.slice(i, i + cardsPerRow);
+      if (rowCards.length < cardsPerRow) {
+        const missing = cardsPerRow - rowCards.length;
+        for (let m = 0; m < missing; m++) rowCards.push(null); // blank placeholder
+      }
+
+      if (yOffset - rowHeight < margin) {
+        page = pdfDoc.addPage([pageWidth, pageHeight]);
+        yOffset = pageHeight - margin;
+      }
+
+      const rowWidth = rowCards.length * cardWidthPdf + (rowCards.length - 1) * gap;
+      const containerX = (pageWidth - rowWidth) / 2;
+
+      for (let j = 0; j < rowCards.length; j++) {
+        const card = rowCards[j];
+        const xOffset = containerX + j * (cardWidthPdf + gap);
+
+        if (card) {
+          const buffer = imageBuffers[cards.indexOf(card)];
+          if (buffer) {
+            let image;
+            const fileName = card.dataset.image.toLowerCase();
+            if (fileName.endsWith('.svg') || fileName.endsWith('.png') || fileName.endsWith('.bmp')) image = await pdfDoc.embedPng(buffer);
+            else if (fileName.endsWith('.jpg') || fileName.endsWith('.jpeg')) image = await pdfDoc.embedJpg(buffer);
+
+            if (image) {
+              const aspect = image.height / image.width;
+              let imgWidthPdf = cardWidthPdf;
+              let imgHeightPdf = imgWidthPdf * aspect;
+              if (imgHeightPdf > imgMaxHeightPdf) {
+                imgHeightPdf = imgMaxHeightPdf;
+                imgWidthPdf = imgHeightPdf / aspect;
+              }
+              const xImage = xOffset + (cardWidthPdf - imgWidthPdf) / 2;
+              page.drawImage(image, { x: xImage, y: yOffset - imgHeightPdf - padding, width: imgWidthPdf, height: imgHeightPdf });
+            }
+          }
+
+          // draw text (original + second empty row)
+          const paragraphs = Array.from(card.querySelectorAll('.meta'));
+          let textY = yOffset - imgMaxHeightPdf - padding - pdfFontSize;
+
+          paragraphs.forEach(p => {
+            const spans = p.querySelectorAll('.meta__part');
+            let lineWidth = 0;
+            spans.forEach(span => lineWidth += fontBold.widthOfTextAtSize(span.textContent, pdfFontSize) + 4);
+            const remainingText = p.textContent.replace(Array.from(spans).map(s => s.textContent).join(''), '');
+            if (remainingText.trim() !== '') lineWidth += fontRegular.widthOfTextAtSize(remainingText, pdfFontSize);
+
+            const xTextStart = xOffset + (cardWidthPdf - lineWidth) / 2;
+            let currentX = xTextStart;
+
+            spans.forEach(span => {
+              page.drawText(span.textContent, { x: currentX, y: textY, size: pdfFontSize, font: fontBold, color: rgb(0, 0, 0) });
+              currentX += fontBold.widthOfTextAtSize(span.textContent, pdfFontSize) + 4;
+            });
+            if (remainingText.trim() !== '') {
+              page.drawText(remainingText, { x: currentX, y: textY, size: pdfFontSize, font: fontRegular, color: rgb(0, 0, 0) });
+            }
+
+            textY -= pdfFontSize + 2; // move down for first row
+            textY -= pdfFontSize + 2; // second empty row
+          });
+        }
+      }
+
+      yOffset -= rowHeight + gap;
+    }
+
+    const pdfBytes = await pdfDoc.save();
+    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'cards.pdf';
+    link.click();
+
+  } finally {
+    exportButton.textContent = 'Export PDF';
+    exportButton.disabled = false;
+    const spinnerEl = exportButton.querySelector('.spinner');
+    if (spinnerEl) spinnerEl.remove();
+  }
+});
+</script>
+</body>
+</html>

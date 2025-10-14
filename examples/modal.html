@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SweetAlert2 Example</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <button id="openModal">Open SweetAlert2 Modal</button>
+
+  <!-- Include SweetAlert2 from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    document.getElementById('openModal').addEventListener('click', function() {
+      Swal.fire({
+        title: 'Hello!',
+        text: 'This is a SweetAlert2 modal.',
+        icon: 'success', // options: 'success', 'error', 'warning', 'info', 'question'
+        showCancelButton: true,
+        confirmButtonText: 'Awesome!',
+        cancelButtonText: 'Cancel'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire('Great!', 'You clicked Awesome!', 'success');
+        } else if (result.isDismissed) {
+          Swal.fire('Cancelled', 'You clicked Cancel', 'info');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tagify Copy to Clipboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+    }
+    input {
+      width: 300px;
+      padding: 8px;
+      font-size: 16px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Tagify Copy Example</h2>
+<input id="tags-input" placeholder="Add tags...">
+<br>
+<button id="copyBtn">Copy Tags to Clipboard</button>
+
+<script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
+<script>
+  // Initialize Tagify on the input
+  var input = document.getElementById('tags-input');
+  var tagify = new Tagify(input);
+
+  // Copy tags to clipboard
+  document.getElementById('copyBtn').addEventListener('click', function() {
+    // Get tags as an array of strings
+    var tagsArray = tagify.value.map(tag => tag.value);
+    // Join them with comma or any separator
+    var textToCopy = tagsArray.join(', ');
+
+    // Copy to clipboard using navigator API
+    navigator.clipboard.writeText(textToCopy).then(() => {
+      alert('Tags copied to clipboard:\n' + textToCopy);
+    }).catch(err => {
+      console.error('Failed to copy:', err);
+    });
+  });
+</script>
+
+</body>
+</html>

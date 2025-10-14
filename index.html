@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Catalog</title>
+
+<!-- External Libraries CSS -->
+<link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+
+<!-- Local Stylesheet -->
+<link rel="stylesheet" href="main.css">
+
+<!-- External Libraries JS -->
+<script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
+
+</head>
+<body>
+<div class="page-container">
+    <div class="top-controls" aria-label="SKU controls">
+        <input id="skuInput" placeholder="Paste SKUs (comma or line separated, max 500)" />
+        <button id="lookupBtn" class="lookup-btn">Lookup</button>
+        <button id="copyBtn" class="copy-btn">Copy</button>
+        <button id="clearBtn" class="clear-btn">Clear</button>
+    </div>
+
+    <div class="controls" style="width:100%">
+        <label for="cardsPerRow">Cards per row: </label>
+        <input type="number" id="cardsPerRow" min="1" max="8" value="3">
+
+        <label for="headerHeight">Header height (rows): </label>
+        <input type="number" id="headerHeight" min="0" max="8" value="0">
+
+        <label>Apply Header To:</label>
+        <label><input type="radio" name="headerType" value="odd"> Odd Pages</label>
+        <label><input type="radio" name="headerType" value="even" checked> Even Pages</label>
+
+        <button id="exportPdf">Export PDF</button>
+    </div>
+
+    <div class="status-line" id="statusLine">Press Lookup to query products...</div>
+
+    <div class="cards-container" id="cardsContainer"></div>
+</div>
+
+<!-- Local JavaScript -->
+<script src="main.js"></script>
+</body>
+</html>

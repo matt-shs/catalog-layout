@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Cards PDF Export with Correct Image & Text</title>
+<style>
+  body { font-family: Arial; background: #fff; display: flex; justify-content: center; margin: 20px; }
+  .page-container { display: flex; flex-direction: column; align-items: center; }
+  .controls { margin-bottom: 20px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  input { width: 80px; padding: 4px; font-size: 14px; }
+  button { padding: 6px 12px; font-size: 14px; cursor: pointer; display: flex; align-items: center; }
+  .cards-container { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; max-width: 100%; }
+  .card { background: #fff; border-radius: 0; padding: 10px; box-sizing: border-box; display: flex; flex-direction: column; }
+  .card img { width: 100%; height: auto; margin-bottom: 6px; object-fit: cover; }
+  .meta { margin: 0 0 2px 0; font-size: 12px; } /* increased font on screen */
+  .meta__part { font-weight: bold; margin-right: 5px; }
+
+  .spinner {
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #333;
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 6px;
+  }
+
+  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+<div class="page-container">
+  <div class="controls">
+    <label for="cardsPerRow">Cards per row: </label>
+    <input type="number" id="cardsPerRow" min="1" max="12" value="5">
+    <button id="exportPdf">Export PDF</button>
+  </div>
+  <div class="cards-container" id="cardsContainer"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
+<script>
+const cardsContainer = document.getElementById('cardsContainer');
+let cards = [];
+const inputCardsPerRow = document.getElementById('cardsPerRow');
+const cardImages = ['PWS_4.png', 'TB_408.jpg']; // Add more images here
+
+function createRandomCards(count) {
+  cardsContainer.innerHTML = '';
+  cards = [];
+  const relatedOptions = [1,3,4,8];
+  for (let i = 0; i < count; i++) {
+    const card = document.createElement('div');
+    card.className = 'card';
+    const img = document.createElement('img');
+    const randomImage = cardImages[Math.floor(Math.random() * cardImages.length)];
+    img.src = randomImage;
+    img.onerror = () => { img.style.display = 'none'; };
+    card.dataset.image = randomImage;
+    card.appendChild(img);
+
+    const mainPart = document.createElement('p');
+    mainPart.className = 'meta';
+    mainPart.innerHTML = `<span class="meta__part">PN-${Math.floor(Math.random()*100000)}</span>5x3 AL`;
+    card.appendChild(mainPart);
+
+    const relatedCount = relatedOptions[Math.floor(Math.random()*4)];
+    for (let j=0; j<relatedCount; j++){
+      const p = document.createElement('p');
+      p.className = 'meta';
+      p.textContent = 'PN-'+Math.floor(Math.random()*100000);
+      card.appendChild(p);
+    }
+
+    cardsContainer.appendChild(card);
+    cards.push(card);
+  }
+}
+
+function updateCardLayout() {
+  const cardsPerRow = Math.min(Math.max(parseInt(inputCardsPerRow.value)||1,1),12);
+  const gap = 10;
+  const containerWidth = Math.min(window.innerWidth-40, 1200);
+  const cardWidth = `calc(${100 / cardsPerRow}% - ${(gap * (cardsPerRow - 1)) / cardsPerRow}px)`;
+  cardsContainer.style.width = containerWidth + 'px';
+  cards.forEach(card => card.style.width = cardWidth);
+}
+
+inputCardsPerRow.addEventListener('input', updateCardLayout);
+window.addEventListener('resize', updateCardLayout);
+
+createRandomCards(50);
+updateCardLayout();
+
+document.getElementById('exportPdf').addEventListener('click', async () => {
+  const exportButton = document.getElementById('exportPdf');
+  const originalText = exportButton.textContent;
+
+  exportButton.textContent = 'Exporting';
+  const spinner = document.createElement('span');
+  spinner.className = 'spinner';
+  exportButton.appendChild(spinner);
+  exportButton.disabled = true;
+
+  try {
+    const { PDFDocument, StandardFonts, rgb } = PDFLib;
+    const pdfDoc = await PDFDocument.create();
+    const pageWidth = 595;
+    const pageHeight = 842;
+    const margin = 20;
+    const gap = 10;
+    const padding = 6;
+
+    const fontRegular = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+
+    const cardsPerRow = Math.min(Math.max(parseInt(inputCardsPerRow.value)||1,1),12);
+    const cardWidthPdf = (pageWidth - margin*2 - gap*(cardsPerRow-1)) / cardsPerRow;
+
+    // Compute font size relative to screen and increase slightly
+    const sampleCard = cards[0];
+    const cardRect = sampleCard.getBoundingClientRect();
+    const scaleFactor = cardWidthPdf / cardRect.width;
+    const fontSize = 12 * scaleFactor * 1.2; // 20% bigger than on-screen
+
+    // Preload images
+    const imageBuffers = await Promise.all(cards.map(card => {
+      const imgElem = card.querySelector('img');
+      if(imgElem && imgElem.complete && imgElem.naturalWidth!==0){
+        return fetch(imgElem.src).then(r=>r.arrayBuffer());
+      } else return null;
+    }));
+
+    let page = pdfDoc.addPage([pageWidth, pageHeight]);
+    let yOffset = pageHeight - margin;
+
+    for(let i=0; i<cards.length; i+=cardsPerRow){
+      const rowCards = cards.slice(i, i+cardsPerRow);
+
+      // Compute row height based on tallest card in row (image + text)
+      const rowHeight = Math.max(...rowCards.map((c, idx) => {
+        const imgBuffer = imageBuffers[idx];
+        let imgHeightPdf = cardWidthPdf; // default square
+        if(imgBuffer){
+          const fileName = c.dataset.image.toLowerCase();
+          let tempImg = new Image();
+          tempImg.src = c.dataset.image;
+          const aspect = tempImg.height / tempImg.width || 1;
+          imgHeightPdf = cardWidthPdf * aspect;
+        }
+        const textLines = c.querySelectorAll('.meta').length;
+        return imgHeightPdf + padding + textLines*(fontSize+2);
+      }));
+
+      if(yOffset - rowHeight < margin){
+        page = pdfDoc.addPage([pageWidth, pageHeight]);
+        yOffset = pageHeight - margin;
+      }
+
+      let xOffset = margin;
+      for(const card of rowCards){
+        const idx = cards.indexOf(card);
+        const imgBuffer = imageBuffers[idx];
+        let imgHeightPdf = cardWidthPdf;
+
+        if(imgBuffer){
+          const fileName = card.dataset.image.toLowerCase();
+          let image;
+          if(fileName.endsWith('.png')) image = await pdfDoc.embedPng(imgBuffer);
+          else if(fileName.endsWith('.jpg') || fileName.endsWith('.jpeg')) image = await pdfDoc.embedJpg(imgBuffer);
+
+          if(image){
+            const aspect = image.height / image.width;
+            imgHeightPdf = cardWidthPdf * aspect;
+            page.drawImage(image, { x: xOffset, y: yOffset - imgHeightPdf - padding, width: cardWidthPdf, height: imgHeightPdf });
+          } else {
+            page.drawRectangle({ x: xOffset, y: yOffset - imgHeightPdf - padding, width: cardWidthPdf, height: imgHeightPdf, color: rgb(0.8,0.8,0.8) });
+            page.drawText('No Image', { x: xOffset+5, y: yOffset - imgHeightPdf/2, size: fontSize, color: rgb(0.3,0.3,0.3) });
+          }
+        }
+
+        // Draw text below image
+        let textY = yOffset - imgHeightPdf - padding - fontSize;
+        const paragraphs = Array.from(card.querySelectorAll('.meta'));
+        for(const p of paragraphs){
+          let xText = xOffset + 2;
+          const spans = p.querySelectorAll('.meta__part');
+          if(spans.length > 0){
+            spans.forEach(span => {
+              page.drawText(span.textContent, { x: xText, y: textY, size: fontSize, font: fontBold, color: rgb(0,0,0) });
+              xText += fontBold.widthOfTextAtSize(span.textContent + ' ', fontSize); // spacing after part number
+            });
+            const remaining = p.textContent.replace(Array.from(spans).map(s=>s.textContent).join(''), '');
+            if(remaining.trim() !== ''){
+              page.drawText(remaining, { x: xText, y: textY, size: fontSize, font: fontRegular, color: rgb(0,0,0) });
+            }
+          } else {
+            page.drawText(p.textContent, { x: xText, y: textY, size: fontSize, font: fontRegular, color: rgb(0,0,0) });
+          }
+          textY -= fontSize + 2;
+        }
+
+        xOffset += cardWidthPdf + gap;
+      }
+
+      yOffset -= rowHeight + gap;
+    }
+
+    const pdfBytes = await pdfDoc.save();
+    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'cards.pdf';
+    link.click();
+
+  } finally {
+    exportButton.textContent = originalText;
+    exportButton.disabled = false;
+  }
+});
+</script>
+</body>
+</html>

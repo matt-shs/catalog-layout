@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Cards PDF Export with JSON and Image Fallback</title>
+<style>
+  body { font-family: Arial; background: #fff; display: flex; justify-content: center; margin: 20px; }
+  .page-container { display: flex; flex-direction: column; align-items: center; }
+  .controls { margin-bottom: 20px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  input { width: 80px; padding: 4px; font-size: 14px; }
+  button { padding: 6px 12px; font-size: 14px; cursor: pointer; display: flex; align-items: center; }
+  .cards-container { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; max-width: 100%; }
+  .card { background: #fff; border-radius: 0; padding: 5px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; }
+  .card img { width: 100%; height: auto; margin-bottom: 4px; object-fit: contain; }
+  .meta-container { display: flex; flex-direction: column; align-items: center; }
+  .meta { display: inline-block; margin: 0 0 2px 0; text-align: left; }
+  .meta__part { font-weight: bold; margin-right: 8px; }
+  .spinner { border: 2px solid #f3f3f3; border-top: 2px solid #333; border-radius: 50%; width: 14px; height: 14px; animation: spin 1s linear infinite; display: inline-block; vertical-align: middle; margin-left: 6px; }
+  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+<div class="page-container">
+  <div class="controls">
+    <label for="cardsPerRow">Cards per row: </label>
+    <input type="number" id="cardsPerRow" min="1" max="8" value="5">
+    <button id="exportPdf">Export PDF</button>
+  </div>
+  <div class="cards-container" id="cardsContainer"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
+<script>
+const cardsContainer = document.getElementById('cardsContainer');
+const inputCardsPerRow = document.getElementById('cardsPerRow');
+const imagePath = 'images/';
+const fallbackImage = 'images/noimage.svg';
+
+const cardData = [
+  {"sku":"DA-01","producttitle":"DIRECTIONAL ARROWS - DIRECTIONAL FLOW ARROW TAPE","picturename":"DA-01.jpg","size":"1”x18Y","material":"AD"},
+  {"sku":"DA-07","producttitle":"DIRECTIONAL ARROWS - DIRECTIONAL FLOW ARROW TAPE SHOULD BE THE SAME","picturename":"Dx-07.bmp","size":"1”X18Y","material":"TAPE"},
+  {"sku":"LT-401","producttitle":"EMPTY CYLINDER TAGS","picturename":"401.jpg","size":"6.125X3","material":"LT"},
+  {"sku":"LT-402","producttitle":"FULL CYLINDER TAGS","picturename":"402.jpg","size":"6.125X3","material":"LT"},
+  {"sku":"LT-405","producttitle":"EQUIPMENT INSPECTION RECORD EQUIPMENT NO ___ LOCATION ___ REMARKS ___ INSPECTION RECORD DO","picturename":"405.jpg","size":"6.125X3","material":"LT"}
+];
+
+let cards = [];
+
+function getDynamicFontSize(cardsPerRow) {
+  if(cardsPerRow <= 2) return 20;
+  if(cardsPerRow <= 4) return 16;
+  if(cardsPerRow <= 6) return 12;
+  return 10;
+}
+
+function updateCardLayout() {
+  const cardsPerRow = Math.min(Math.max(parseInt(inputCardsPerRow.value)||1,1),8);
+  const gap = 10;
+  const containerWidth = Math.min(window.innerWidth-40, 1200);
+  const cardWidth = (containerWidth - gap*(cardsPerRow-1))/cardsPerRow;
+  const baseFontSize = getDynamicFontSize(cardsPerRow);
+  const imgHeight = cardWidth * 0.6;
+
+  cards.forEach(card => {
+    card.style.width = cardWidth + 'px';
+    const img = card.querySelector('img');
+    img.style.height = imgHeight + 'px';
+    card.querySelectorAll('.meta').forEach(p => p.style.fontSize = baseFontSize+'px');
+  });
+
+  cardsContainer.style.width = containerWidth + 'px';
+}
+
+window.addEventListener('resize', updateCardLayout);
+inputCardsPerRow.addEventListener('input', updateCardLayout);
+
+// Preload image with fallback
+async function preloadImage(src) {
+  return new Promise(resolve => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.src = src;
+    img.onload = () => resolve(src);
+    img.onerror = () => resolve(fallbackImage);
+  });
+}
+
+// Create cards with immediate fallback to prevent flash
+function createCardsFromJson(dataArray) {
+  cardsContainer.innerHTML = '';
+  cards = [];
+
+  dataArray.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    const img = document.createElement('img');
+    img.src = fallbackImage; // start with fallback immediately
+    card.dataset.image = imagePath + item.picturename; // intended image path
+
+    // Preload real image and replace if available
+    preloadImage(imagePath + item.picturename).then(realSrc => {
+      img.src = realSrc;
+      card.dataset.image = realSrc; // update for PDF export
+    });
+
+    card.appendChild(img);
+
+    const metaContainer = document.createElement('div');
+    metaContainer.className = 'meta-container';
+
+    const metaText = document.createElement('p');
+    metaText.className = 'meta';
+    metaText.innerHTML = `<span class="meta__part">${item.sku}</span>${item.size} ${item.material}`;
+    metaContainer.appendChild(metaText);
+
+    card.appendChild(metaContainer);
+    cardsContainer.appendChild(card);
+    cards.push(card);
+  });
+
+  updateCardLayout();
+}
+
+// Initial load
+createCardsFromJson(cardData);
+
+// SVG to PNG conversion
+async function svgToPng(svgUrl, maxWidth, maxHeight, scale=6) {
+  const svgText = await fetch(svgUrl).then(r => r.text());
+  return new Promise(resolve => {
+    const img = new Image();
+    img.onload = () => {
+      const aspect = img.naturalHeight / img.naturalWidth;
+      let width = maxWidth;
+      let height = width * aspect;
+      if(height > maxHeight){ height = maxHeight; width = height / aspect; }
+      const canvas = document.createElement('canvas');
+      canvas.width = width * scale;
+      canvas.height = height * scale;
+      const ctx = canvas.getContext('2d');
+      ctx.scale(scale, scale);
+      ctx.drawImage(img, 0, 0, width, height);
+      canvas.toBlob(blob => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.readAsArrayBuffer(blob);
+      });
+    };
+    img.src = 'data:image/svg+xml;base64,' + btoa(svgText);
+  });
+}
+
+// Get image buffer for PDF
+async function getImageBuffer(src, cardWidthPdf, imgMaxHeightPdf){
+  try {
+    const extension = src.split('.').pop().toLowerCase();
+    if(extension === 'svg') return svgToPng(src, cardWidthPdf, imgMaxHeightPdf, 6);
+
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.src = src;
+
+    await new Promise((resolve, reject) => {
+      img.onload = resolve;
+      img.onerror = () => reject(`Failed to load image: ${src}`);
+    });
+
+    if(extension === 'bmp'){
+      const aspect = img.naturalHeight / img.naturalWidth;
+      let width = cardWidthPdf;
+      let height = width * aspect;
+      if(height > imgMaxHeightPdf){ height = imgMaxHeightPdf; width = height / aspect; }
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, width, height);
+      return new Promise(resolve => {
+        canvas.toBlob(blob => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.readAsArrayBuffer(blob);
+        }, 'image/png');
+      });
+    } else {
+      return fetch(src).then(r => r.arrayBuffer());
+    }
+  } catch(err){
+    console.warn(err);
+    return fetch(fallbackImage).then(r => r.arrayBuffer());
+  }
+}
+
+// PDF Export
+document.getElementById('exportPdf').addEventListener('click', async () => {
+  const exportButton = document.getElementById('exportPdf');
+  const originalText = exportButton.textContent;
+  exportButton.textContent = 'Exporting';
+  const spinner = document.createElement('span');
+  spinner.className = 'spinner';
+  exportButton.appendChild(spinner);
+  exportButton.disabled = true;
+
+  try {
+    const { PDFDocument, StandardFonts, rgb } = PDFLib;
+    const pdfDoc = await PDFDocument.create();
+    const pageWidth = 595, pageHeight = 842;
+    const margin = 20, gap = 10, padding = 4;
+
+    const fontRegular = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+
+    const cardsPerRow = Math.min(Math.max(parseInt(inputCardsPerRow.value)||1,1),8);
+    const cardWidthPdf = (pageWidth - margin*2 - gap*(cardsPerRow-1)) / cardsPerRow;
+    const screenFontSize = getDynamicFontSize(cardsPerRow);
+    const pdfFontSize = screenFontSize * (cardWidthPdf / cards[0].getBoundingClientRect().width);
+    const imgMaxHeightPdf = cardWidthPdf * 0.6;
+
+    const imageBuffers = await Promise.all(cards.map(card => getImageBuffer(card.dataset.image, cardWidthPdf, imgMaxHeightPdf)));
+
+    let page = pdfDoc.addPage([pageWidth,pageHeight]);
+    let yOffset = pageHeight - margin;
+
+    for(let i=0; i<cards.length; i+=cardsPerRow){
+      const rowCards = cards.slice(i,i+cardsPerRow);
+      const rowHeight = imgMaxHeightPdf + pdfFontSize + 2 + padding;
+
+      if(yOffset - rowHeight < margin){
+        page = pdfDoc.addPage([pageWidth,pageHeight]);
+        yOffset = pageHeight - margin;
+      }
+
+      let xOffset = margin;
+      for(const card of rowCards){
+        const idx = cards.indexOf(card);
+        const buffer = imageBuffers[idx];
+        if(buffer){
+          let image;
+          const fileName = card.dataset.image.toLowerCase();
+          if(fileName.endsWith('.svg') || fileName.endsWith('.png') || fileName.endsWith('.bmp')) image = await pdfDoc.embedPng(buffer);
+          else if(fileName.endsWith('.jpg') || fileName.endsWith('.jpeg')) image = await pdfDoc.embedJpg(buffer);
+
+          if(image){
+            const aspect = image.height / image.width;
+            let imgWidthPdf = cardWidthPdf;
+            let imgHeightPdf = imgWidthPdf * aspect;
+            if(imgHeightPdf > imgMaxHeightPdf){
+              imgHeightPdf = imgMaxHeightPdf;
+              imgWidthPdf = imgHeightPdf / aspect;
+            }
+            const xImage = xOffset + (cardWidthPdf - imgWidthPdf)/2;
+            page.drawImage(image, { x:xImage, y:yOffset - imgHeightPdf - padding, width:imgWidthPdf, height:imgHeightPdf });
+          }
+        }
+
+        // Draw text centered per line
+        const paragraphs = Array.from(card.querySelectorAll('.meta'));
+        let textY = yOffset - imgMaxHeightPdf - padding - pdfFontSize;
+
+        paragraphs.forEach(p => {
+          const spans = p.querySelectorAll('.meta__part');
+          let lineWidth = 0;
+          spans.forEach(span => lineWidth += fontBold.widthOfTextAtSize(span.textContent, pdfFontSize) + 4);
+          const remainingText = p.textContent.replace(Array.from(spans).map(s => s.textContent).join(''), '');
+          if(remainingText.trim() !== '') lineWidth += fontRegular.widthOfTextAtSize(remainingText, pdfFontSize);
+
+          const xTextStart = xOffset + (cardWidthPdf - lineWidth)/2;
+          let currentX = xTextStart;
+
+          spans.forEach(span => {
+            page.drawText(span.textContent, { x:currentX, y:textY, size:pdfFontSize, font:fontBold, color:rgb(0,0,0) });
+            currentX += fontBold.widthOfTextAtSize(span.textContent, pdfFontSize) + 4;
+          });
+
+          if(remainingText.trim() !== ''){
+            page.drawText(remainingText, { x:currentX, y:textY, size:pdfFontSize, font:fontRegular, color:rgb(0,0,0) });
+          }
+
+          textY -= pdfFontSize + 2;
+        });
+
+        xOffset += cardWidthPdf + gap;
+      }
+      yOffset -= rowHeight + gap;
+    }
+
+    const pdfBytes = await pdfDoc.save();
+    const blob = new Blob([pdfBytes], { type:'application/pdf' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'cards.pdf';
+    link.click();
+
+  } finally {
+    exportButton.textContent = originalText;
+    exportButton.disabled = false;
+  }
+});
+</script>
+</body>
+</html>

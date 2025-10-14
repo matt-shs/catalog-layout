@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Header Location: Even or Odd</title>
+<style>
+  body {
+    font-family: sans-serif;
+    background: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .radio-group {
+    background: white;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  .radio-group h3 {
+    margin-bottom: 15px;
+    text-align: center;
+  }
+
+  .options {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  label {
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  input[type="radio"] {
+    margin-right: 8px;
+    transform: scale(1.3);
+    accent-color: #007BFF; /* Modern browsers */
+  }
+
+  .result {
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+
+<div class="radio-group">
+  <h3>Header Location</h3>
+  <div class="options">
+    <label><input type="radio" name="headerLocation" value="Even"> Even</label>
+    <label><input type="radio" name="headerLocation" value="Odd" checked> Odd</label>
+  </div>
+  <div class="result" id="result">Selected: Odd</div>
+</div>
+
+<script>
+  const radios = document.querySelectorAll('input[name="headerLocation"]');
+  const result = document.getElementById('result');
+
+  radios.forEach(radio => {
+    radio.addEventListener('change', () => {
+      result.textContent = 'Selected: ' + radio.value;
+    });
+  });
+</script>
+
+</body>
+</html>

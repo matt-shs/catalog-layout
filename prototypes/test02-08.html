@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dynamic Cards PDF - Fixed Images</title>
+<style>
+body {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: #d1d5db;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.controls {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.controls label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  font-weight: 500;
+}
+button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  background: #2563eb;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+#screenPreview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+.page {
+  display: grid;
+  gap: 12px;
+  padding: 12px;
+  box-sizing: border-box;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  overflow: hidden; /* prevent cards from overflowing page */
+}
+.page::after {
+  content: "";
+  display: block;
+  width: 100%;
+  border-bottom: 2px dashed #999;
+  margin-top: 8px;
+}
+@media print {
+  .page::after { display: none; }
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+.image-container {
+  position: relative;
+  padding: 8px;
+  box-sizing: border-box;
+}
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.meta {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  font-size: 13px;
+  width: 100%;
+  text-align: center;
+}
+.meta .sku {
+  font-weight: 700;
+}
+.meta .size, .meta .material {
+  color: #475569;
+}
+.quality-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  width: 100%;
+  max-width: 200px;
+  padding: 0 4px;
+  margin-top: 2px;
+}
+</style>
+</head>
+<body>
+
+<div class="controls">
+  <label>PDF Quality
+    <input type="range" id="pdfQuality" min="1" max="5" value="3" step="1">
+    <div class="quality-labels"><span>L</span><span></span><span></span><span></span><span>H</span></div>
+  </label>
+  <label>Cards per Row (1-6)
+    <input type="number" id="cardsPerRow" min="1" max="6" value="3">
+  </label>
+  <label>Page Width (3-8.5 in)
+    <input type="number" id="pageWidth" min="3" max="8.5" step="0.1" value="8.5">
+  </label>
+  <label>Page Height (1-11 in)
+    <input type="number" id="pageHeight" min="1" max="11" step="0.1" value="11">
+  </label>
+  <button id="downloadPDF">Download PDF</button>
+</div>
+
+<div id="screenPreview"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+(async function(){
+  const TOTAL = 200;
+  const rowsPerPage = 4;
+  const pxPerInch = 96;
+  const gapPx = 12;
+  const paddingPx = 12;
+  const screenPreview = document.getElementById('screenPreview');
+
+  const placeholderSVG = 'data:image/svg+xml;base64,' + btoa(`
+    <svg xmlns="http://www.w3.org/2000/svg" width="600" height="600">
+      <rect width="600" height="600" fill="#ddd"/>
+      <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#999" font-size="60">Image</text>
+    </svg>
+  `);
+
+  const items = Array.from({length: TOTAL}, (_, i) => ({
+    id: i+1,
+    sku: `SKU-${String(i+1).padStart(4,'0')}`,
+    size: '3x5',
+    material: 'AL',
+    img: placeholderSVG
+  }));
+
+  const cardsPerRowInput = document.getElementById('cardsPerRow');
+  const pageWidthInput = document.getElementById('pageWidth');
+  const pageHeightInput = document.getElementById('pageHeight');
+  const downloadPDFButton = document.getElementById('downloadPDF');
+  const pdfQualityInput = document.getElementById('pdfQuality');
+
+  function renderPages(){
+    const cardsPerRow = parseInt(cardsPerRowInput.value);
+    const pageWidthIn = parseFloat(pageWidthInput.value);
+    const pageHeightIn = parseFloat(pageHeightInput.value);
+    const pageWidthPx = pageWidthIn * pxPerInch;
+    const pageHeightPx = pageHeightIn * pxPerInch;
+
+    screenPreview.innerHTML = '';
+    const cardsPerPage = cardsPerRow * rowsPerPage;
+    const totalPages = Math.ceil(TOTAL / cardsPerPage);
+
+    for(let p=0; p<totalPages; p++){
+      const pageItems = items.slice(p*cardsPerPage, (p+1)*cardsPerPage);
+      const pageDiv = document.createElement('div');
+      pageDiv.className = 'page';
+      pageDiv.style.width = pageWidthPx + 'px';
+      pageDiv.style.height = pageHeightPx + 'px';
+      pageDiv.style.gridTemplateColumns = `repeat(${cardsPerRow}, 1fr)`;
+      pageDiv.style.gridTemplateRows = `repeat(${rowsPerPage}, 1fr)`;
+      pageDiv.style.gap = gapPx + 'px';
+      pageDiv.style.padding = paddingPx + 'px';
+
+      const cardWidth = (pageWidthPx - paddingPx*2 - (cardsPerRow-1)*gapPx)/cardsPerRow;
+      const cardHeight = (pageHeightPx - paddingPx*2 - (rowsPerPage-1)*gapPx)/rowsPerPage;
+      const metaHeight = 32;
+      const imgSize = Math.min(cardWidth, cardHeight - metaHeight);
+
+      pageItems.forEach(it => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.style.width = cardWidth + 'px';
+        card.style.height = cardHeight + 'px';
+
+        const imgContainer = document.createElement('div');
+        imgContainer.className = 'image-container';
+        imgContainer.style.width = imgSize + 'px';
+        imgContainer.style.height = imgSize + 'px';
+
+        const img = new Image();
+        img.src = it.img;
+        imgContainer.appendChild(img);
+
+        const meta = document.createElement('div');
+        meta.className = 'meta';
+        meta.innerHTML = `<span class="sku">${it.sku}</span><span class="size">${it.size} ${it.material}</span>`;
+
+        card.appendChild(imgContainer);
+        card.appendChild(meta);
+        pageDiv.appendChild(card);
+      });
+
+      screenPreview.appendChild(pageDiv);
+    }
+  }
+
+  async function waitForImages(container){
+    const imgs = Array.from(container.querySelectorAll('img'));
+    await Promise.all(imgs.map(img => {
+      if(img.complete) return Promise.resolve();
+      return new Promise(res => { img.onload = img.onerror = res; });
+    }));
+  }
+
+  async function generatePDF(){
+    const { jsPDF } = window.jspdf;
+    const pageWidthIn = parseFloat(pageWidthInput.value);
+    const pageHeightIn = parseFloat(pageHeightInput.value);
+    const scaleFactor = parseInt(pdfQualityInput.value);
+
+    const pdf = new jsPDF({ unit:'in', format:[pageWidthIn,pageHeightIn] });
+    const pages = Array.from(screenPreview.children);
+
+    for(let i=0; i<pages.length; i++){
+      const pageDiv = pages[i];
+      await waitForImages(pageDiv);
+
+      const canvas = await html2canvas(pageDiv, { scale: scaleFactor, useCORS: true, allowTaint: true });
+      const imgData = canvas.toDataURL('image/jpeg', 0.95);
+
+      if(i > 0) pdf.addPage();
+      pdf.addImage(imgData, 'JPEG', 0, 0, pageWidthIn, pageHeightIn);
+    }
+
+    pdf.save('cards.pdf');
+  }
+
+  cardsPerRowInput.addEventListener('change', renderPages);
+  pageWidthInput.addEventListener('change', renderPages);
+  pageHeightInput.addEventListener('change', renderPages);
+  pdfQualityInput.addEventListener('change', renderPages);
+  downloadPDFButton.addEventListener('click', generatePDF);
+
+  renderPages();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Simple Card Grid — Dynamic Columns</title>
+<style>
+  :root {
+    --gap: 12px;
+    --cols: 3; /* default columns */
+  }
+
+  body {
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 18px;
+    background: #f7fafc;
+    color: #111827;
+  }
+
+  .controls {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:14px;
+    background:#ffffff;
+    padding:10px 12px;
+    border-radius:8px;
+    box-shadow: 0 1px 3px rgba(2,6,23,0.06);
+  }
+  .controls label { font-weight:600; }
+  .controls input[type="number"] {
+    width:60px;
+    padding:6px 8px;
+    border-radius:6px;
+    border:1px solid #d1d5db;
+    font-size:14px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(var(--cols), 1fr);
+    gap: var(--gap);
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid #e6edf3;
+    box-shadow: 0 1px 2px rgba(2,6,23,0.04);
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+
+  .card img {
+    width:100%;
+    height:140px;
+    object-fit:cover;
+    border-radius:8px;
+    background: #eceff1;
+  }
+
+  .meta { font-size:13px; color:#0f172a; }
+  .sku { font-weight:700; margin-bottom:4px; }
+  .size { color:#475569; font-size:13px; }
+</style>
+</head>
+<body>
+
+  <div class="controls" aria-label="Grid controls">
+    <label for="colsInput">Cards per row</label>
+    <input id="colsInput" type="number" min="1" max="6" step="1" value="3" />
+    <span style="color:#6b7280;font-size:13px;">(1–6)</span>
+  </div>
+
+  <main>
+    <div id="grid" class="grid" role="list" aria-label="Product cards"></div>
+  </main>
+
+<script>
+(function(){
+  const TOTAL = 50;
+  const grid = document.getElementById('grid');
+  const colsInput = document.getElementById('colsInput');
+
+  const items = Array.from({length: TOTAL}, (_, i) => {
+    return {
+      id: i+1,
+      sku: `SKU-${String(i+1).padStart(4,'0')}`,
+      size: ['S','M','L','XL'][(i+1) % 4],
+      img: `https://picsum.photos/seed/card${i+1}/600/400`
+    };
+  });
+
+  function renderGrid(cols){
+    cols = Math.max(1, Math.min(6, Math.floor(cols) || 3)); // clamp 1-6
+    document.documentElement.style.setProperty('--cols', cols);
+
+    grid.innerHTML = '';
+    const frag = document.createDocumentFragment();
+    items.forEach(it => {
+      const card = document.createElement('article');
+      card.className = 'card';
+      card.setAttribute('role','listitem');
+      card.innerHTML = `
+        <img src="${it.img}" alt="Product ${it.id}">
+        <div class="meta">
+          <div class="sku">${it.sku}</div>
+          <div class="size">Size: ${it.size}</div>
+        </div>`;
+      frag.appendChild(card);
+    });
+    grid.appendChild(frag);
+  }
+
+  renderGrid(parseInt(colsInput.value, 10) || 3);
+
+  colsInput.addEventListener('input', (e) => {
+    renderGrid(e.target.value);
+  });
+
+  colsInput.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowUp' || e.key === 'ArrowRight') { e.preventDefault(); colsInput.stepUp(); colsInput.dispatchEvent(new Event('input')); }
+    if (e.key === 'ArrowDown' || e.key === 'ArrowLeft')  { e.preventDefault(); colsInput.stepDown(); colsInput.dispatchEvent(new Event('input')); }
+  });
+})();
+</script>
+
+</body>
+</html>

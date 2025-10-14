@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Dynamic Card Grid with Page Breaks & Margins</title>
+<style>
+:root{--gap:12px}
+body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:18px;background:#fafafa;color:#111}
+
+/* Controls (non-printable) */
+.no-print{background:#fff;padding:12px;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,0.04);margin-bottom:14px}
+.no-print label{margin-right:6px}
+.no-print input[type=number]{width:70px;padding:4px;border-radius:6px;border:1px solid #ddd}
+.btn{padding:6px 10px;border-radius:8px;border:none;background:#1f6feb;color:#fff;cursor:pointer;margin-left:6px}
+
+/* Screen container */
+#screenContainer { position:relative; }
+
+.row { display:grid; gap:var(--gap); margin-bottom:var(--gap); }
+.card{
+  background:#fff;border-radius:8px;padding:10px;border:1px solid #e6e9ef;
+  box-shadow:0 1px 2px rgba(0,0,0,0.03);
+  display:flex;flex-direction:column;gap:8px;
+  break-inside:avoid; page-break-inside:avoid;
+}
+.card img{width:100%;height:140px;object-fit:cover;border-radius:6px;background:#efefef}
+.meta{font-size:13px}
+.sku{font-weight:600}
+.size{font-size:12px;color:#555}
+
+/* On-screen page overlays */
+.page-overlay{
+  position:absolute; left:0; right:0; pointer-events:none;
+  opacity:0.07; z-index:1;
+}
+.page-overlay-label{
+  position:absolute; left:50%; transform:translateX(-50%);
+  background:#111; color:#fff; padding:4px 8px; border-radius:999px;
+  font-size:12px; opacity:0.9; z-index:2;
+}
+
+/* Print container */
+#printContainer{display:none}
+@media print{
+  .no-print, .page-overlay, .page-overlay-label, #screenContainer { display:none !important; }
+  #printContainer { display:flex; flex-direction:column; width:100%; margin:0; padding:0; }
+  .print-page { width:100%; page-break-after:always; break-after:page; box-sizing:border-box; display:flex; flex-wrap:wrap; }
+  .print-page .card { flex:0 0 auto; box-sizing:border-box; margin-bottom:12px; }
+  img { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+.muted{color:#6b7280;font-size:13px;margin-left:6px}
+</style>
+</head>
+<body>
+
+<div class="no-print">
+  <label for="inchesPerPage"><strong>Inches per page:</strong></label>
+  <input id="inchesPerPage" type="number" min="1" step="0.25" value="11">
+  <label for="marginTop"><strong>Top margin:</strong></label>
+  <input id="marginTop" type="number" min="0" step="0.25" value="1">
+  <label for="marginBottom"><strong>Bottom margin:</strong></label>
+  <input id="marginBottom" type="number" min="0" step="0.25" value="1">
+  <label for="cardsPerRow"><strong>Cards per row:</strong></label>
+  <input id="cardsPerRow" type="number" min="1" max="6" step="1" value="3">
+  <button id="computeBtn" class="btn">Compute Page Breaks</button>
+</div>
+
+<div id="screenWrap" style="position:relative;">
+  <div id="screenContainer"></div>
+</div>
+
+<div id="printContainer" aria-hidden="true"></div>
+
+<script>
+(function(){
+  const TOTAL=50;
+  const screenContainer=document.getElementById('screenContainer');
+  const printContainer=document.getElementById('printContainer');
+  const inchesInput=document.getElementById('inchesPerPage');
+  const cardsPerRowInput=document.getElementById('cardsPerRow');
+  const marginTopInput=document.getElementById('marginTop');
+  const marginBottomInput=document.getElementById('marginBottom');
+  const computeBtn=document.getElementById('computeBtn');
+
+  const cardsData=[];
+  for(let i=1;i<=TOTAL;i++){
+    cardsData.push({id:i, sku:`SKU-${String(i).padStart(4,'0')}`, size:['S','M','L','XL'][i%4], img:`https://picsum.photos/seed/card${i}/600/400`});
+  }
+
+  function createCardEl(d){const el=document.createElement('div'); el.className='card';
+    el.innerHTML=`<img loading="lazy" src="${d.img}" alt="Product ${d.id}">
+    <div class="meta"><div class="sku">${d.sku}</div><div class="size">Size: ${d.size}</div></div>`;
+    return el;
+  }
+
+  function renderRows(cardsPerRow){
+    screenContainer.innerHTML='';
+    let rowDiv=null;
+    cardsData.forEach((card,i)=>{
+      if(i%cardsPerRow===0){
+        rowDiv=document.createElement('div'); rowDiv.className='row';
+        rowDiv.style.gridTemplateColumns=`repeat(${cardsPerRow},1fr)`;
+        screenContainer.appendChild(rowDiv);
+      }
+      rowDiv.appendChild(createCardEl(card));
+    });
+  }
+
+  function inchesToPx(inches){return inches*96;}
+  function clearOverlays(){document.querySelectorAll('.page-overlay, .page-overlay-label').forEach(e=>e.remove()); printContainer.innerHTML='';}
+
+  async function computePages(){
+    const cardsPerRow=parseInt(cardsPerRowInput.value)||3;
+    const inchesPerPage=parseFloat(inchesInput.value)||11;
+    const marginTop=parseFloat(marginTopInput.value)||1;
+    const marginBottom=parseFloat(marginBottomInput.value)||1;
+    renderRows(cardsPerRow);
+    await imagesLoaded();
+
+    clearOverlays();
+    const contentHeightPx = inchesToPx(inchesPerPage - marginTop - marginBottom);
+    const rowNodes=Array.from(screenContainer.querySelectorAll('.row'));
+    let pages=[], currentPageRows=[], accHeight=0, cumHeight=0;
+
+    const rowHeights=rowNodes.map(r=>r.getBoundingClientRect().height+parseFloat(getComputedStyle(r).marginBottom||0));
+
+    rowNodes.forEach((row,i)=>{
+      if(accHeight+rowHeights[i]>contentHeightPx && currentPageRows.length>0){
+        pages.push(currentPageRows); currentPageRows=[]; accHeight=0;
+      }
+      currentPageRows.push(row); accHeight+=rowHeights[i];
+    });
+    if(currentPageRows.length>0) pages.push(currentPageRows);
+
+    // screen overlays
+    pages.forEach((pRows,index)=>{
+      const overlay=document.createElement('div'); overlay.className='page-overlay';
+      overlay.style.top=cumHeight+'px';
+      overlay.style.height=pRows.reduce((sum,r)=>sum+r.getBoundingClientRect().height+parseFloat(getComputedStyle(r).marginBottom||0),0)+'px';
+      overlay.style.background=(index%2===0)?'lightblue':'lightcoral';
+      screenContainer.appendChild(overlay);
+
+      const label=document.createElement('div'); label.className='page-overlay-label';
+      label.style.top=cumHeight+'px'; label.textContent=`Page ${index+1}`;
+      screenContainer.appendChild(label);
+
+      cumHeight+=parseFloat(overlay.style.height);
+    });
+
+    // print pages
+    pages.forEach(pRows=>{
+      const pageDiv=document.createElement('section'); pageDiv.className='print-page';
+      pageDiv.style.paddingTop=`${inchesToPx(marginTop)}px`;
+      pageDiv.style.paddingBottom=`${inchesToPx(marginBottom)}px`;
+      const cardWidth=`calc(${100/cardsPerRow}% - ${(cardsPerRow-1)*12/cardsPerRow}px)`;
+      pRows.forEach(row=>{
+        Array.from(row.children).forEach(c=>{
+          const clone=c.cloneNode(true);
+          clone.style.flex=`0 0 ${cardWidth}`;
+          clone.style.marginBottom='12px';
+          pageDiv.appendChild(clone);
+        });
+      });
+      printContainer.appendChild(pageDiv);
+    });
+  }
+
+  function imagesLoaded(){return new Promise(resolve=>{
+    const imgs=Array.from(screenContainer.querySelectorAll('img'));
+    if(imgs.length===0) resolve();
+    let loaded=0;
+    imgs.forEach(img=>{
+      if(img.complete && img.naturalHeight!==0){loaded++; if(loaded===imgs.length)resolve();}
+      else{
+        img.addEventListener('load',()=>{loaded++; if(loaded===imgs.length)resolve();});
+        img.addEventListener('error',()=>{loaded++; if(loaded===imgs.length)resolve();});
+      }
+    });
+  });}
+
+  computeBtn.addEventListener('click',computePages);
+  window.addEventListener('load',()=>{setTimeout(computePages,300);});
+  window.addEventListener('beforeprint',()=>{computePages();});
+
+})();
+</script>
+</body>
+</html>

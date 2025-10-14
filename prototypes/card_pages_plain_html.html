@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Card Grid with Print Page Breaks</title>
+  <style>
+    :root{--card-gap:12px}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:16px}
+
+    /* Controls (non-printable) */
+    .no-print{background:#f7f7f9;padding:12px;border-radius:8px;margin-bottom:14px}
+    .no-print label{display:inline-block;margin-right:8px}
+    .no-print input[type=number]{width:80px;padding:6px}
+    .btn{padding:8px 12px;border-radius:6px;border:1px solid #cbd5e1;background:white;cursor:pointer}
+
+    /* Grid */
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--card-gap)}
+    .card{background:white;border:1px solid #e6e9ef;border-radius:8px;padding:10px;box-shadow:0 1px 2px rgba(0,0,0,0.02)}
+    .card img{width:100%;height:140px;object-fit:cover;border-radius:6px;background:#efefef}
+    .meta{margin-top:8px;font-size:13px}
+    .sku{font-weight:600}
+    .size{color:#555;font-size:12px}
+
+    /* Page-break marker inserted dynamically. Use strong page break rules. */
+    .page-break{display:block;break-after:page;page-break-after:always;margin:0;padding:0;height:0}
+
+    /* Hide non-print controls when printing */
+    @media print{
+      .no-print{display:none !important}
+      /* ensure background doesn't hide content */
+      *{color-adjust:exact}
+      /* avoid breaking a card across pages */
+      .card{break-inside:avoid;page-break-inside:avoid}
+    }
+
+    /* Small helper for per-page override inputs area */
+    .page-overrides{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+    .override{display:flex;align-items:center;gap:6px}
+    .override input{width:64px}
+  </style>
+</head>
+<body>
+
+  <div class="no-print">
+    <label for="inchesPerPage"><strong>Inches per printed page:</strong></label>
+    <input id="inchesPerPage" type="number" min="1" step="0.25" value="11"> in
+    <button id="computeBtn" class="btn">Compute Page Breaks</button>
+    <button id="resetBtn" class="btn">Reset</button>
+
+    <div style="margin-top:10px">
+      <small>After computing pages you can override individual page heights below (non-printable).</small>
+    </div>
+
+    <div id="overrides" class="page-overrides" aria-live="polite"></div>
+  </div>
+
+  <div id="container" class="grid" role="list"></div>
+
+  <script>
+    // Constants
+    const TOTAL = 50;
+    const CARDS_PER_ROW = 3;
+
+    // CSS inches to pixels conversion. Browsers map 1in to 96px in CSS (standard CSS unit).
+    function inchesToPx(inches){
+      return inches * 96;
+    }
+
+    // Build cards
+    const container = document.getElementById('container');
+    const cards = [];
+    for(let i=1;i<=TOTAL;i++){
+      const card = document.createElement('article');
+      card.className = 'card';
+      card.setAttribute('role','listitem');
+      card.dataset.index = i;
+
+      const img = document.createElement('img');
+      img.src = `https://picsum.photos/seed/card${i}/600/400`;
+      img.alt = `Product ${i}`;
+
+      const meta = document.createElement('div');
+      meta.className = 'meta';
+      meta.innerHTML = `<div class="sku">SKU-${String(i).padStart(4,'0')}</div><div class="size">Size: ${['S','M','L','XL'][i%4]}</div>`;
+
+      card.appendChild(img);
+      card.appendChild(meta);
+      container.appendChild(card);
+      cards.push(card);
+    }
+
+    // Utility: remove existing page-break markers
+    function removePageBreaks(){
+      document.querySelectorAll('.page-break').forEach(el => el.remove());
+    }
+
+    // Compute and insert page breaks given a page-height in inches and optional per-page overrides
+    function computePageBreaks(globalInches, overrides = {}){
+      removePageBreaks();
+
+      // read current grid gap and card positions to compute height baseline
+      const pageHeightsPx = [];
+      let currentPageTop = 0;
+      let currentPage = 1;
+      let currentLimit = inchesToPx(overrides[currentPage] ?? globalInches);
+
+      // We'll iterate through cards and when the next card would exceed the limit we insert a page-break before it.
+      for(let i=0;i<cards.length;i++){
+        const c = cards[i];
+        const rect = c.getBoundingClientRect();
+        // compute Y relative to container top
+        const containerRect = container.getBoundingClientRect();
+        const y = rect.top - containerRect.top + container.scrollTop; // use scrollTop to account for scrolling
+
+        // If the top of this card is >= currentLimit, insert a page-break before this card
+        if(y >= currentLimit){
+          // insert a page-break element before this card in the DOM
+          const br = document.createElement('div');
+          br.className = 'page-break no-print';
+          // Insert before card
+          container.insertBefore(br, c);
+
+          // finalize this page's height and advance page
+          pageHeightsPx.push(currentLimit);
+          currentPage++;
+          currentLimit = pageHeightsPx.reduce((a,b)=>a+b,0) + inchesToPx(overrides[currentPage] ?? globalInches);
+        }
+      }
+    }
+
+    // Build overrides UI (per-page) based on computed pages
+    function buildOverridesUI(globalInches){
+      const overridesDiv = document.getElementById('overrides');
+      overridesDiv.innerHTML = '';
+
+      // We'll compute an initial separation to know how many pages there are
+      // This is a simple approach: simulate placing cards and count breaks using the global setting.
+      removePageBreaks();
+
+      const tempBreaks = [];
+      let pageIndex = 1;
+      let limit = inchesToPx(globalInches);
+      const containerRect = container.getBoundingClientRect();
+
+      for(let i=0;i<cards.length;i++){
+        const rect = cards[i].getBoundingClientRect();
+        const y = rect.top - containerRect.top + container.scrollTop;
+        if(y >= limit){
+          tempBreaks.push(i); // break before card i
+          pageIndex++;
+          // new limit is previous break point + globalInches
+          limit = inchesToPx(globalInches) + (tempBreaks.length * inchesToPx(globalInches));
+        }
+      }
+
+      const pageCount = Math.max(1, tempBreaks.length + 1);
+
+      // Create inputs for each page
+      for(let p=1;p<=pageCount;p++){
+        const wrap = document.createElement('div');
+        wrap.className = 'override no-print';
+        const label = document.createElement('label');
+        label.textContent = `Page ${p}:`;
+        label.setAttribute('for', `override-${p}`);
+        const input = document.createElement('input');
+        input.type = 'number';
+        input.min = '1';
+        input.step = '0.25';
+        input.value = globalInches;
+        input.id = `override-${p}`;
+        input.addEventListener('change', ()=>{
+          // collect overrides and recompute
+          const overrides = {};
+          for(let q=1;q<=pageCount;q++){
+            const v = document.getElementById(`override-${q}`).value;
+            overrides[q] = parseFloat(v) || globalInches;
+          }
+          computePageBreaks(globalInches, overrides);
+        });
+
+        wrap.appendChild(label);
+        wrap.appendChild(input);
+        overridesDiv.appendChild(wrap);
+      }
+
+      // initial compute
+      computePageBreaks(globalInches, {});
+    }
+
+    // event handlers
+    document.getElementById('computeBtn').addEventListener('click', ()=>{
+      const val = parseFloat(document.getElementById('inchesPerPage').value) || 11;
+      buildOverridesUI(val);
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', ()=>{
+      removePageBreaks();
+      document.getElementById('inchesPerPage').value = 11;
+      document.getElementById('overrides').innerHTML = '';
+    });
+
+    // initial layout compute after images load (images may affect heights)
+    window.addEventListener('load', ()=>{
+      // wait a tick so layout stabilizes
+      setTimeout(()=>{document.getElementById('computeBtn').click();},250);
+    });
+
+    // Also recompute when window resizes (to keep page breaks correct)
+    window.addEventListener('resize', ()=>{
+      // if overrides exist, re-run with their values
+      const overridesDiv = document.getElementById('overrides');
+      if(overridesDiv.children.length){
+        document.getElementById('computeBtn').click();
+      }
+    });
+
+  </script>
+</body>
+</html>

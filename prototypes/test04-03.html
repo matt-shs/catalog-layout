@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Cards PDF Export with Dynamic Font and Sharp SVG</title>
+<style>
+  body { font-family: Arial; background: #fff; display: flex; justify-content: center; margin: 20px; }
+  .page-container { display: flex; flex-direction: column; align-items: center; }
+  .controls { margin-bottom: 20px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  input { width: 80px; padding: 4px; font-size: 14px; }
+  button { padding: 6px 12px; font-size: 14px; cursor: pointer; display: flex; align-items: center; }
+  .cards-container { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; max-width: 100%; }
+  .card { background: #fff; border-radius: 0; padding: 5px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; }
+  .card img { width: 100%; height: auto; margin-bottom: 4px; object-fit: contain; }
+  .meta-container { display: flex; flex-direction: column; align-items: center; }
+  .meta { display: inline-block; margin: 0 0 2px 0; text-align: left; }
+  .meta__part { font-weight: bold; margin-right: 8px; }
+
+  .spinner {
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #333;
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 6px;
+  }
+  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+<div class="page-container">
+  <div class="controls">
+    <label for="cardsPerRow">Cards per row: </label>
+    <input type="number" id="cardsPerRow" min="1" max="8" value="5">
+    <button id="exportPdf">Export PDF</button>
+  </div>
+  <div class="cards-container" id="cardsContainer"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
+<script>
+const cardsContainer = document.getElementById('cardsContainer');
+const inputCardsPerRow = document.getElementById('cardsPerRow');
+const cardImages = [
+  'images/PWS_4.png',
+  'images/TB_408.jpg',
+  'images/401.jpg',
+  'images/tb-430.jpg',
+  'images/420.jpg',
+  'images/noimage.svg'
+];
+const relatedOptions = [0]; 
+let cards = [];
+
+function getDynamicFontSize(cardsPerRow) {
+  if(cardsPerRow <= 2) return 20;
+  if(cardsPerRow <= 4) return 16;
+  if(cardsPerRow <= 6) return 12;
+  return 10;
+}
+
+function createRandomCards(count) {
+  cardsContainer.innerHTML = '';
+  cards = [];
+  for(let i=0; i<count; i++){
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    const img = document.createElement('img');
+    const randomImage = cardImages[Math.floor(Math.random()*cardImages.length)];
+    img.src = randomImage;
+    img.onerror = () => { img.src = 'images/noimage.svg'; };
+    card.dataset.image = randomImage;
+    card.appendChild(img);
+
+    const metaContainer = document.createElement('div');
+    metaContainer.className = 'meta-container';
+
+    const mainPart = document.createElement('p');
+    mainPart.className = 'meta';
+    mainPart.innerHTML = `<span class="meta__part">PN-${Math.floor(Math.random()*100000)}</span>5x3 AL`;
+    metaContainer.appendChild(mainPart);
+
+    const relatedCount = relatedOptions[Math.floor(Math.random()*4)];
+    for(let j=0; j<relatedCount; j++){
+      const p = document.createElement('p');
+      p.className = 'meta';
+      p.textContent = 'PN-'+Math.floor(Math.random()*100000);
+      metaContainer.appendChild(p);
+    }
+
+    card.appendChild(metaContainer);
+    cardsContainer.appendChild(card);
+    cards.push(card);
+  }
+}
+
+function updateCardLayout() {
+  const cardsPerRow = Math.min(Math.max(parseInt(inputCardsPerRow.value)||1,1),8);
+  const gap = 10;
+  const containerWidth = Math.min(window.innerWidth-40, 1200);
+  const cardWidth = (containerWidth - gap*(cardsPerRow-1))/cardsPerRow;
+  const baseFontSize = getDynamicFontSize(cardsPerRow);
+  const imgHeight = cardWidth * 0.6;
+
+  cards.forEach(card => {
+    card.style.width = cardWidth + 'px';
+    const img = card.querySelector('img');
+    img.style.height = imgHeight + 'px';
+    card.querySelectorAll('.meta').forEach(p => p.style.fontSize = baseFontSize+'px');
+  });
+
+  cardsContainer.style.width = containerWidth + 'px';
+}
+
+inputCardsPerRow.addEventListener('input', updateCardLayout);
+window.addEventListener('resize', updateCardLayout);
+
+createRandomCards(50);
+updateCardLayout();
+
+// Convert SVG to PNG with preserved aspect ratio
+async function svgToPng(svgUrl, maxWidth, maxHeight, scale=6) {
+  const svgText = await fetch(svgUrl).then(r => r.text());
+  return new Promise(resolve => {
+    const img = new Image();
+    img.onload = () => {
+      const aspect = img.naturalHeight / img.naturalWidth;
+      let width = maxWidth;
+      let height = width * aspect;
+      if(height > maxHeight){
+        height = maxHeight;
+        width = height / aspect;
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = width * scale;
+      canvas.height = height * scale;
+      const ctx = canvas.getContext('2d');
+      ctx.scale(scale, scale);
+      ctx.drawImage(img, 0, 0, width, height);
+      canvas.toBlob(blob => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.readAsArrayBuffer(blob);
+      });
+    };
+    img.src = 'data:image/svg+xml;base64,' + btoa(svgText);
+  });
+}
+
+document.getElementById('exportPdf').addEventListener('click', async () => {
+  const exportButton = document.getElementById('exportPdf');
+  const originalText = exportButton.textContent;
+  exportButton.textContent = 'Exporting';
+  const spinner = document.createElement('span');
+  spinner.className = 'spinner';
+  exportButton.appendChild(spinner);
+  exportButton.disabled = true;
+
+  try {
+    const { PDFDocument, StandardFonts, rgb } = PDFLib;
+    const pdfDoc = await PDFDocument.create();
+    const pageWidth = 595, pageHeight = 842;
+    const margin = 20, gap = 10, padding = 4;
+
+    const fontRegular = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+
+    const cardsPerRow = Math.min(Math.max(parseInt(inputCardsPerRow.value)||1,1),8);
+    const cardWidthPdf = (pageWidth - margin*2 - gap*(cardsPerRow-1)) / cardsPerRow;
+    const sampleCard = cards[0];
+    const screenFontSize = getDynamicFontSize(cardsPerRow);
+    const cardRect = sampleCard.getBoundingClientRect();
+    const scaleFactor = cardWidthPdf / cardRect.width;
+    const pdfFontSize = screenFontSize * scaleFactor;
+
+    const imageBuffers = await Promise.all(cards.map(async card => {
+      const src = card.dataset.image;
+      if(src.endsWith('.svg')){
+        return svgToPng(src, cardWidthPdf, cardWidthPdf * 0.6, 6);
+      } else if(src.endsWith('.png')){
+        return fetch(src).then(r => r.arrayBuffer());
+      } else {
+        return fetch(src).then(r => r.arrayBuffer());
+      }
+    }));
+
+    let page = pdfDoc.addPage([pageWidth,pageHeight]);
+    let yOffset = pageHeight - margin;
+
+    for(let i=0; i<cards.length; i+=cardsPerRow){
+      const rowCards = cards.slice(i,i+cardsPerRow);
+      const imgMaxHeightPdf = cardWidthPdf * 0.6;
+      const textHeight = Math.max(...rowCards.map(c => c.querySelectorAll('.meta').length)) * (pdfFontSize + 2);
+      const rowHeight = imgMaxHeightPdf + padding + textHeight;
+
+      if(yOffset - rowHeight < margin){
+        page = pdfDoc.addPage([pageWidth,pageHeight]);
+        yOffset = pageHeight - margin;
+      }
+
+      let xOffset = margin;
+      for(const card of rowCards){
+        const idx = cards.indexOf(card);
+        const buffer = imageBuffers[idx];
+        if(buffer){
+          let image;
+          const fileName = card.dataset.image.toLowerCase();
+          if(fileName.endsWith('.svg') || fileName.endsWith('.png')) image = await pdfDoc.embedPng(buffer);
+          else if(fileName.endsWith('.jpg') || fileName.endsWith('.jpeg')) image = await pdfDoc.embedJpg(buffer);
+
+          if(image){
+            const aspect = image.height / image.width;
+            let imgWidthPdf = cardWidthPdf;
+            let imgHeightPdf = imgWidthPdf * aspect;
+            if(imgHeightPdf > imgMaxHeightPdf){
+              imgHeightPdf = imgMaxHeightPdf;
+              imgWidthPdf = imgHeightPdf / aspect;
+            }
+            const xImage = xOffset + (cardWidthPdf - imgWidthPdf)/2;
+            page.drawImage(image, {
+              x: xImage,
+              y: yOffset - imgHeightPdf - padding,
+              width: imgWidthPdf,
+              height: imgHeightPdf
+            });
+          }
+        }
+
+        const metaContainer = card.querySelector('.meta-container');
+        let containerWidth = 0;
+        const paragraphs = Array.from(metaContainer.querySelectorAll('.meta'));
+        paragraphs.forEach(p => {
+          const spans = p.querySelectorAll('.meta__part');
+          let width = 0;
+          spans.forEach(span => width += fontBold.widthOfTextAtSize(span.textContent, pdfFontSize) + 4);
+          const remaining = p.textContent.replace(Array.from(spans).map(s=>s.textContent).join(''), '');
+          if(remaining) width += fontRegular.widthOfTextAtSize(remaining, pdfFontSize);
+          if(width > containerWidth) containerWidth = width;
+        });
+        const xTextContainer = xOffset + (cardWidthPdf - containerWidth)/2;
+        let textY = yOffset - imgMaxHeightPdf - padding - pdfFontSize;
+
+        paragraphs.forEach(p => {
+          let xText = xTextContainer;
+          const spans = p.querySelectorAll('.meta__part');
+          spans.forEach(span => {
+            page.drawText(span.textContent, { x:xText, y:textY, size:pdfFontSize, font:fontBold, color:rgb(0,0,0) });
+            xText += fontBold.widthOfTextAtSize(span.textContent, pdfFontSize) + 4;
+          });
+          const remaining = p.textContent.replace(Array.from(spans).map(s=>s.textContent).join(''), '');
+          if(remaining.trim() !== '') {
+            page.drawText(remaining, { x:xText, y:textY, size:pdfFontSize, font:fontRegular, color:rgb(0,0,0) });
+          }
+          textY -= pdfFontSize + 2;
+        });
+
+        xOffset += cardWidthPdf + gap;
+      }
+      yOffset -= rowHeight + gap;
+    }
+
+    const pdfBytes = await pdfDoc.save();
+    const blob = new Blob([pdfBytes], { type:'application/pdf' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'cards.pdf';
+    link.click();
+
+  } finally {
+    exportButton.textContent = originalText;
+    exportButton.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
