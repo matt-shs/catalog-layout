@@ -28,17 +28,17 @@ function updateCardLayout() {
   const baseFontSize = getDynamicFontSize(cardsPerRow);
   const imgHeight = Math.max(80, Math.round(cardWidth * 0.6));
 
-  // Corrected floating logic using index in 'cards' array
-  cards.forEach((card, index) => {
+  cards.forEach((card) => {
+    // FIX: Use the index within the category for correct margin calculation
+    const indexInCategory = parseInt(card.dataset.indexInCategory) || 0;
+
     card.style.width = cardWidth + "px";
     
     // Ensure cards are always floating left
     card.style.float = 'left'; 
     
-    // Calculate if it's the last card in the row (using the index from the 'cards' array)
-    // NOTE: This index is relative to the entire 'cards' array, not the cardGroup, but
-    // the margins will still work correctly based on the 'cardsPerRow' setting.
-    const isLastInRow = (index + 1) % cardsPerRow === 0;
+    // Calculate if it's the last card in the row using its category index
+    const isLastInRow = (indexInCategory + 1) % cardsPerRow === 0;
     
     // Set right margin: 0 for last card, 'gap' for others
     card.style.marginRight = isLastInRow ? '0' : gap + 'px';
@@ -94,18 +94,31 @@ function createCardsFromJson(dataArray) {
     const categoryHeader = document.createElement("h3");
     categoryHeader.className = "category-header";
     categoryHeader.textContent = category;
-    // Set to clear both and take full width (though h3 is block already)
-    categoryHeader.style.cssText = "clear: both; margin-top: 30px; margin-bottom: 15px; font-weight: bold; font-size: 1.5rem; display: block; width: 100%;";
+    
+    // UPDATED CSS: Add a bottom border to underline the text, similar to the PDF line.
+    categoryHeader.style.cssText = `
+      clear: both; 
+      margin-top: 30px; 
+      margin-bottom: 20px; 
+      font-weight: bold; 
+      font-size: 1.5rem; 
+      display: block; 
+      width: 100%;
+      padding-bottom: 5px; /* Space between text and underline */
+      border-bottom: 1px solid #555; /* The underline effect */
+    `;
     cardsContainer.appendChild(categoryHeader);
     
     // NEW: Create a container for the floating cards in this category
-    // Using overflow: hidden is a common 'clearfix' technique to contain floats
     const cardGroup = document.createElement("div");
     cardGroup.className = "card-group";
-    cardGroup.style.cssText = "overflow: hidden; width: 100%;";
+    // Using overflow: hidden is a common 'clearfix' technique to contain floats
+    cardGroup.style.cssText = "overflow: hidden; width: 100%;"; 
     cardsContainer.appendChild(cardGroup);
 
-
+    // Track index within this specific category for correct row margin calculation
+    let indexInCategory = 0; 
+    
     // 2. Iterate through products in this category (already sorted by title from lookupSKUs)
     categories[category].forEach((item) => {
       const card = document.createElement("div");
@@ -117,7 +130,11 @@ function createCardsFromJson(dataArray) {
       
       // Attach product metadata to the card element for PDF export
       card.dataset.title = item.producttitle || '';
-      card.dataset.category = item.category || 'Uncategorized'; // Storing category again for PDF check
+      card.dataset.category = item.category || 'Uncategorized';
+      
+      // FIX 1/3: Store the index within the category for correct row margin calculation on resize
+      card.dataset.indexInCategory = indexInCategory; 
+      indexInCategory++; 
 
       preloadImage(card.dataset.image)
         .then((realSrc) => {
@@ -133,11 +150,13 @@ function createCardsFromJson(dataArray) {
       const metaContainer = document.createElement("div");
       metaContainer.className = "meta-container";
 
-      // Display Product Title above variants (We keep this for on-screen visibility)
-      const titleText = document.createElement("p");
-      titleText.className = "meta meta-title";
-      titleText.innerHTML = `<strong>${item.producttitle}</strong>`;
-      metaContainer.appendChild(titleText);
+      // FIX 2/3: Product Title is no longer displayed on the HTML page. 
+      // We keep a hidden reference for PDF logic compatibility.
+      const titleReference = document.createElement("p");
+      titleReference.className = "meta meta-title hidden-ref";
+      titleReference.textContent = item.producttitle || '';
+      titleReference.style.display = 'none'; // Hide it visually
+      metaContainer.appendChild(titleReference);
 
       // Loop through all variants found for this product group and create a line for each
       (item.variants || []).forEach(variant => {
@@ -155,10 +174,8 @@ function createCardsFromJson(dataArray) {
     });
 
     // Separator for clear visual break on the HTML screen after all cards in the category
-    // This element will now reliably clear the floats inside the 'cardGroup' container
     const groupEnd = document.createElement("div");
-    // Use clear:both and a high visibility style to ensure the break is enforced and seen.
-    groupEnd.style.cssText = "clear: both; height: 40px; border-bottom: 4px solid #2563eb; margin-top: 20px; margin-bottom: 40px;";
+    groupEnd.style.cssText = "clear: both; height: 40px; margin-bottom: 20px;"; 
     cardsContainer.appendChild(groupEnd);
   });
 
@@ -300,18 +317,20 @@ async function lookupSKUs() {
   }
   
   // --- PDF Library Feature Check ---
-  let pdfFeatureStatus = "";
-  if (typeof PDFLib !== 'undefined') {
-    if (typeof PDFLib.PDFDocument === 'function') { 
-        pdfFeatureStatus = " | PDFLib: Loaded - Ready";
-    } else {
-        pdfFeatureStatus = " | PDFLib: Loaded - Check your script tag";
-    }
-  } else {
-    pdfFeatureStatus = " | PDFLib: Not Loaded - Check your script tag";
-  }
-  statusLine.textContent = statusText + pdfFeatureStatus;
+  // let pdfFeatureStatus = "";
+  // if (typeof PDFLib !== 'undefined') {
+  //   if (typeof PDFLib.PDFDocument === 'function') { 
+  //       pdfFeatureStatus = " | PDFLib: Loaded - Ready";
+  //   } else {
+  //       pdfFeatureStatus = " | PDFLib: Loaded - Check your script tag";
+  //   }
+  // } else {
+  //   pdfFeatureStatus = " | PDFLib: Not Loaded - Check your script tag";
+  // }
+  //statusLine.textContent = statusText + pdfFeatureStatus;
   // --- End: PDF Library Feature Check ---
+
+  statusLine.textContent = statusText;
 }
 
 document.getElementById("copyBtn").addEventListener("click", async () => {
@@ -451,6 +470,8 @@ document.getElementById("exportPdf").addEventListener("click", async () => {
     const categoryTitleHeight = categoryTitleSize * 1.5;
     const categorySeparatorHeight = 5;
     const spaceAfterCategory = gap; // Space after the category line
+    
+    // NOTE: spaceBeforeCategory is now unused since we force a page break
 
     const cardsPerRow = Math.min(
       Math.max(parseInt(inputCardsPerRow.value) || 1, 1),
@@ -475,10 +496,10 @@ document.getElementById("exportPdf").addEventListener("click", async () => {
     groupedCardsByHtml.forEach(card => {
         // Count all meta lines
         const totalLines = card.querySelectorAll(".meta").length; 
-        // The product title line has class 'meta-title', so we subtract 1 if it exists.
-        const hasTitle = card.querySelector(".meta-title") !== null;
+        // The product title reference line has class 'meta-title', so we subtract 1.
+        const hasTitleReference = card.querySelector(".meta-title") !== null;
         
-        const lineCountForPdf = hasTitle ? totalLines - 1 : totalLines;
+        const lineCountForPdf = hasTitleReference ? totalLines - 1 : totalLines;
         
         if (lineCountForPdf > maxLinesPerCard) {
             maxLinesPerCard = lineCountForPdf;
@@ -517,178 +538,242 @@ document.getElementById("exportPdf").addEventListener("click", async () => {
         )
       )
     );
+    
+    // --- Custom Max Cards Per Page Logic ---
+    let maxCardsPerPage = Infinity;
+    if (cardsPerRow === 1) {
+        maxCardsPerPage = 1; // 1 card per page
+    } else if (cardsPerRow === 2) {
+        maxCardsPerPage = 4; // 4 cards per page (2 rows of 2)
+    } 
+    // --- END NEW LOGIC ---
+
+    // Calculate category boundaries for controlled drawing
+    const categoryBoundaries = []; 
+    let startIndex = 0;
+    
+    if (groupedCardsByHtml.length > 0) {
+        let currentCat = groupedCardsByHtml[0].dataset.category;
+        for (let i = 0; i < groupedCardsByHtml.length; i++) {
+            const nextCat = groupedCardsByHtml[i].dataset.category;
+            
+            if (nextCat !== currentCat) {
+                // Category break found. Record the previous category's range.
+                categoryBoundaries.push({
+                    category: currentCat,
+                    startIndex: startIndex,
+                    endIndex: i // exclusive end index
+                });
+                
+                // Start tracking the new category
+                currentCat = nextCat;
+                startIndex = i;
+            }
+        }
+        // Always push the final category
+        categoryBoundaries.push({
+            category: currentCat,
+            startIndex: startIndex,
+            endIndex: groupedCardsByHtml.length
+        });
+    }
 
     let page = null; // Start with no page
     let yOffset = pageHeight - margin;
-    let currentCategory = null; 
+    let cardsDrawnOnPage = 0; // Counter for cards drawn on the current page
+    let isFirstCategory = true; // New flag to ensure the first category is handled
 
-    for (let i = 0; i < groupedCardsByHtml.length; i += cardsPerRow) {
-        const firstCardInRow = groupedCardsByHtml[i];
-        const nextCategory = firstCardInRow.dataset.category || 'Uncategorized';
+    // Function to draw the category header block
+    const drawCategoryHeader = (page, category, y) => {
+        // Draw the category title
+        y -= categoryTitleHeight;
+        page.drawText(category, {
+            x: margin,
+            y: y,
+            size: categoryTitleSize,
+            font: fontBold, 
+            color: rgb(0.1, 0.1, 0.3), 
+        });
         
-        // Vertical space required for the current row
-        const requiredVerticalSpace = rowHeight + gap;
+        // Add a small separator line
+        y -= categorySeparatorHeight; 
+        page.drawLine({
+            start: { x: margin, y: y },
+            end: { x: pageWidth - margin, y: y },
+            thickness: 0.5,
+            color: rgb(0.5, 0.5, 0.5),
+        });
+        y -= spaceAfterCategory; // Space before the cards begin
+        return y;
+    };
+    
+    // Iterate through category boundaries instead of fixed row steps
+    for (const boundary of categoryBoundaries) {
+        const currentCategory = boundary.category;
+        let categoryCardIndex = boundary.startIndex;
 
-        // --- NEW PAGE FOR CATEGORY CHANGE OR OVERFLOW ---
-        const isNewCategory = nextCategory !== currentCategory;
-        
-        // Check if we need a new page:
-        // 1. If page hasn't been created yet (first item).
-        // 2. If the category changed.
-        // 3. If there's not enough space for the next row.
-        if (page === null || isNewCategory || yOffset - requiredVerticalSpace < margin) {
+        // --- NEW FIX: Force a new page for every category (except the very first one) ---
+        if (isFirstCategory) {
+            // This runs once for the very first category
+            page = pdfDoc.addPage([pageWidth, pageHeight]);
+            yOffset = pageHeight - margin;
+            isFirstCategory = false; // Mark the first one as done
+        } else {
+            // This runs for all subsequent categories, ensuring a forced page break
+            page = pdfDoc.addPage([pageWidth, pageHeight]);
+            yOffset = pageHeight - margin;
+            cardsDrawnOnPage = 0; // Reset card counter for the new page
+        }
+
+        // Draw Category Header (always at the top of a fresh page)
+        yOffset = drawCategoryHeader(page, currentCategory, yOffset);
+
+        // 2. Iterate through rows *within* this category
+        while (categoryCardIndex < boundary.endIndex) {
+            const cardsRemaining = boundary.endIndex - categoryCardIndex;
+            const cardsInThisRow = Math.min(cardsPerRow, cardsRemaining);
             
-            // If page exists AND (category changed OR ran out of space), add a new page.
-            if (page !== null && (isNewCategory || yOffset - requiredVerticalSpace < margin)) {
+            // Vertical space required for the current row
+            const requiredVerticalSpace = rowHeight + gap;
+            
+            // Check if the current row will exceed the custom card limit for the page
+            const isPageFullByCardCount = (maxCardsPerPage !== Infinity && cardsDrawnOnPage > 0 && cardsDrawnOnPage + cardsInThisRow > maxCardsPerPage);
+
+            // Determine if we need to start a new page just for cards
+            let needsNewPageForCards = isPageFullByCardCount || yOffset - requiredVerticalSpace < margin;
+            
+            if (needsNewPageForCards) {
+                // Add new page, reset Y offset/counters
                 page = pdfDoc.addPage([pageWidth, pageHeight]);
                 yOffset = pageHeight - margin;
-            } else if (page === null) {
-                // First run, initialize page
-                page = pdfDoc.addPage([pageWidth, pageHeight]);
-                yOffset = pageHeight - margin;
+                cardsDrawnOnPage = 0; // Reset card counter for the new page
+
+                // Redraw Category Header on the new page (for mid-category breaks)
+                yOffset = drawCategoryHeader(page, currentCategory, yOffset);
             }
 
-            // Draw Category Title if it's a new category
-            if (isNewCategory) {
-                currentCategory = nextCategory;
-
-                // Draw Category Title
-                yOffset -= categoryTitleHeight;
-                page.drawText(currentCategory, {
-                    x: margin,
-                    y: yOffset,
-                    size: categoryTitleSize,
-                    font: fontBold, 
-                    color: rgb(0.1, 0.1, 0.3), 
-                });
-                
-                // Add a small separator line
-                yOffset -= categorySeparatorHeight; 
-                page.drawLine({
-                    start: { x: margin, y: yOffset },
-                    end: { x: pageWidth - margin, y: yOffset },
-                    thickness: 0.5,
-                    color: rgb(0.5, 0.5, 0.5),
-                });
-                yOffset -= spaceAfterCategory;
-            }
-        }
-        
-        // Ensure a page exists before attempting to draw (should always be true here)
-        if (!page) continue; 
-
-        let rowCards = groupedCardsByHtml.slice(i, i + cardsPerRow);
-        if (rowCards.length < cardsPerRow) {
+            // Slice the cards for the current row (only within the category)
+            let rowCards = groupedCardsByHtml.slice(categoryCardIndex, categoryCardIndex + cardsInThisRow);
+            
+            // Pad with nulls to fill the row, ensuring the next category starts on a new line.
             const missing = cardsPerRow - rowCards.length;
-            for (let m = 0; m < missing; m++) rowCards.push(null); // blank placeholder
-        }
+            for (let m = 0; m < missing; m++) rowCards.push(null); 
 
-        const rowWidth =
-            rowCards.length * cardWidthPdf + (rowCards.length - 1) * gap;
-        const containerX = (pageWidth - rowWidth) / 2;
+            // Calculate horizontal positioning for the row (same as before)
+            const rowWidth =
+                rowCards.length * cardWidthPdf + (rowCards.length - 1) * gap;
+            const containerX = (pageWidth - rowWidth) / 2;
 
-        for (let j = 0; j < rowCards.length; j++) {
-            const card = rowCards[j];
-            const xOffset = containerX + j * (cardWidthPdf + gap);
+            // Draw the row
+            for (let j = 0; j < rowCards.length; j++) {
+                const card = rowCards[j];
+                const xOffset = containerX + j * (cardWidthPdf + gap);
 
-            if (card) {
-                const buffer = imageBuffers[groupedCardsByHtml.indexOf(card)];
-                if (buffer) {
-                    let image;
-                    const fileName = card.dataset.image.toLowerCase();
-                    if (
-                        fileName.endsWith(".svg") ||
-                        fileName.endsWith(".png") ||
-                        fileName.endsWith(".bmp")
-                    )
-                        image = await pdfDoc.embedPng(buffer);
-                    else if (fileName.endsWith(".jpg") || fileName.endsWith(".jpeg"))
-                        image = await pdfDoc.embedJpg(buffer);
+                if (card) {
+                    const buffer = imageBuffers[groupedCardsByHtml.indexOf(card)]; // Get buffer via index
+                    
+                    // --- Image Drawing ---
+                    if (buffer) {
+                        let image;
+                        const fileName = card.dataset.image.toLowerCase();
+                        if (
+                            fileName.endsWith(".svg") ||
+                            fileName.endsWith(".png") ||
+                            fileName.endsWith(".bmp")
+                        )
+                            image = await pdfDoc.embedPng(buffer);
+                        else if (fileName.endsWith(".jpg") || fileName.endsWith(".jpeg"))
+                            image = await pdfDoc.embedJpg(buffer);
 
-                    if (image) {
-                        const aspect = image.height / image.width;
-                        let imgWidthPdf = cardWidthPdf;
-                        let imgHeightPdf = imgWidthPdf * aspect;
-                        if (imgHeightPdf > imgMaxHeightPdf) {
-                            imgHeightPdf = imgMaxHeightPdf;
-                            imgWidthPdf = imgHeightPdf / aspect;
+                        if (image) {
+                            const aspect = image.height / image.width;
+                            let imgWidthPdf = cardWidthPdf;
+                            let imgHeightPdf = imgWidthPdf * aspect;
+                            if (imgHeightPdf > imgMaxHeightPdf) {
+                                imgHeightPdf = imgMaxHeightPdf;
+                                imgWidthPdf = imgHeightPdf / aspect;
+                            }
+                            const xImage = xOffset + (cardWidthPdf - imgWidthPdf) / 2;
+                            page.drawImage(image, {
+                                x: xImage,
+                                y: yOffset - imgMaxHeightPdf - padding,
+                                width: imgWidthPdf,
+                                height: imgHeightPdf,
+                            });
                         }
-                        const xImage = xOffset + (cardWidthPdf - imgWidthPdf) / 2;
-                        page.drawImage(image, {
-                            x: xImage,
-                            y: yOffset - imgHeightPdf - padding,
-                            width: imgWidthPdf,
-                            height: imgHeightPdf,
-                        });
                     }
-                }
 
-                // --- Draw Text (Metadata) for all variants (excluding product title) ---
-                // FILTER: Only select variants, exclude the product title (.meta-title)
-                const paragraphs = Array.from(card.querySelectorAll(".meta")).filter(
-                    p => !p.classList.contains('meta-title')
-                );
-                
-                // Calculate the Y coordinate for the baseline of the first line of text.
-                let currentTextY = yOffset - imgMaxHeightPdf - padding - textLineHeight; 
-
-                paragraphs.forEach((p) => {
-                    const spans = p.querySelectorAll(".meta__part");
-                    let lineWidth = 0;
-                    const textFont = fontRegular;
-                    const metaPartFont = fontBold;
-
-                    spans.forEach(
-                        (span) =>
-                        (lineWidth +=
-                            metaPartFont.widthOfTextAtSize(span.textContent, pdfFontSize) + 4)
+                    // --- Draw Text (Metadata) for all variants (excluding product title) ---
+                    // FILTER: Only select variants, exclude the product title (.meta-title)
+                    const paragraphs = Array.from(card.querySelectorAll(".meta")).filter(
+                        p => !p.classList.contains('meta-title')
                     );
-                    let remainingText = p.textContent.replace(
-                        Array.from(spans)
-                            .map((s) => s.textContent)
-                            .join(""),
-                        ""
-                    );
+                    
+                    // Calculate the Y coordinate for the baseline of the first line of text.
+                    let currentTextY = yOffset - imgMaxHeightPdf - padding - textLineHeight; 
 
-                    if (remainingText.trim() !== "")
-                        lineWidth += textFont.widthOfTextAtSize(
-                            remainingText,
-                            pdfFontSize
+                    paragraphs.forEach((p) => {
+                        const spans = p.querySelectorAll(".meta__part");
+                        let lineWidth = 0;
+                        const textFont = fontRegular;
+                        const metaPartFont = fontBold;
+
+                        spans.forEach(
+                            (span) =>
+                            (lineWidth +=
+                                metaPartFont.widthOfTextAtSize(span.textContent, pdfFontSize) + 4)
+                        );
+                        let remainingText = p.textContent.replace(
+                            Array.from(spans)
+                                .map((s) => s.textContent)
+                                .join(""),
+                            ""
                         );
 
-                    const xTextStart = xOffset + (cardWidthPdf - lineWidth) / 2;
-                    let currentX = xTextStart;
+                        if (remainingText.trim() !== "")
+                            lineWidth += textFont.widthOfTextAtSize(
+                                remainingText,
+                                pdfFontSize
+                            );
 
-                    spans.forEach((span) => {
-                        page.drawText(span.textContent, {
-                            x: currentX,
-                            y: currentTextY,
-                            size: pdfFontSize,
-                            font: metaPartFont,
-                            color: rgb(0, 0, 0),
+                        const xTextStart = xOffset + (cardWidthPdf - lineWidth) / 2;
+                        let currentX = xTextStart;
+
+                        spans.forEach((span) => {
+                            page.drawText(span.textContent, {
+                                x: currentX,
+                                y: currentTextY,
+                                size: pdfFontSize,
+                                font: metaPartFont,
+                                color: rgb(0, 0, 0),
+                            });
+                            currentX +=
+                                metaPartFont.widthOfTextAtSize(span.textContent, pdfFontSize) + 4;
                         });
-                        currentX +=
-                            metaPartFont.widthOfTextAtSize(span.textContent, pdfFontSize) + 4;
+
+                        if (remainingText.trim() !== "") {
+                            page.drawText(remainingText, {
+                                x: currentX,
+                                y: currentTextY,
+                                size: pdfFontSize,
+                                font: textFont, 
+                                color: rgb(0, 0, 0),
+                            });
+                        }
+                        
+                        // Move the Y baseline position up for the next variant line
+                        currentTextY -= textLineHeight; 
                     });
-
-                    if (remainingText.trim() !== "") {
-                        page.drawText(remainingText, {
-                            x: currentX,
-                            y: currentTextY,
-                            size: pdfFontSize,
-                            font: textFont, 
-                            color: rgb(0, 0, 0),
-                        });
-                    }
-                    
-                    // Move the Y baseline position up for the next variant line
-                    currentTextY -= textLineHeight; 
-                });
+                }
             }
+            
+            // Update pointers/counters after the row is drawn
+            cardsDrawnOnPage += cardsInThisRow; // Only count actual cards
+            yOffset -= requiredVerticalSpace; // Decrement Y offset by row height + gap
+            categoryCardIndex += cardsInThisRow; // Move index pointer forward by actual drawn cards
         }
-
-        yOffset -= rowHeight + gap;
     }
+
 
     const pdfBytes = await pdfDoc.save();
     const blob = new Blob([pdfBytes], { type: "application/pdf" });
