@@ -87,7 +87,16 @@ function createCardsFromJson(dataArray) {
   }, {});
 
   // Determine the desired display order (Category then Product Title)
-  const sortedCategories = Object.keys(categories).sort();
+  //const sortedCategories = Object.keys(categories).sort();
+  const sortedCategories = Object.keys(categories).sort((a, b) => {
+    // 1. Get the first item in each category group to find its order
+    // Use 0 or a high number as a fallback if the property is missing
+    const orderA = categories[a][0]?.categoryorder ?? 999999;
+    const orderB = categories[b][0]?.categoryorder ?? 999999;
+
+    // 2. Perform a numeric subtraction for ascending order
+    return orderA - orderB;
+  });
 
   sortedCategories.forEach((category) => {
     // 1. Create Category Header for HTML display

@@ -110,9 +110,9 @@ input[type="number"] {
   min-height: 80px;
 }
 .card {
-  background: #fff;
-  border-radius: 2px;
-  padding: 8px;
+  /*background: #fff;
+  border-radius: 0px;*/
+  padding: 2px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -121,7 +121,7 @@ input[type="number"] {
 .card img {
   width: 100%;
   height: auto;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   object-fit: contain;
 }
 .meta-container {

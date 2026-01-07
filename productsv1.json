@@ -1,0 +1,1650 @@
+[
+  {
+    "sku": "1457E410KA",
+    "producttitle": "MASTER LOCK PERSONAL SAFETY LOCKOUT KIT ELECTRICAL FOCUS",
+    "picturename": "1457E410KA.jpg",
+    "size": null,
+    "material": "MSTRLK",
+    "category": "MasterLock"
+  },
+  {
+    "sku": "1457VE410KA",
+    "producttitle": "MASTER LOCK PERSONAL LOCKOUT KITS VALVE & ELECTRICAL FOCUS",
+    "picturename": "1457VE410KA.jpg",
+    "size": null,
+    "material": "MSTRLK",
+    "category": "MasterLock"
+  },
+  {
+    "sku": "410BLK",
+    "producttitle": "MASTER LOCK MODEL NO. 410 THERMOPLASTIC SAFETY PADLOCK",
+    "picturename": "410BLK.jpg",
+    "size": "1.5\" SHK",
+    "material": "MSTRLK",
+    "category": "MasterLock"
+  },
+  {
+    "sku": "410BLU",
+    "producttitle": "MASTER LOCK MODEL NO. 410 THERMOPLASTIC SAFETY PADLOCK",
+    "picturename": "410BLU.jpg",
+    "size": "1.5\" SHK",
+    "material": "MSTRLK",
+    "category": "MasterLock"
+  },
+  {
+    "sku": "410GRN",
+    "producttitle": "MASTER LOCK MODEL NO. 410 THERMOPLASTIC SAFETY PADLOCK",
+    "picturename": "410-gn.jpg",
+    "size": "1.5\" SHK",
+    "material": "MSTRLK",
+    "category": "MasterLock"
+  },
+  {
+    "sku": "410ORJ",
+    "producttitle": "MASTER LOCK MODEL NO. 410 THERMOPLASTIC SAFETY PADLOCK",
+    "picturename": "410ORG.jpg",
+    "size": "1.5\" SHK",
+    "material": "MSTRLK",
+    "category": "MasterLock"
+  },
+  {
+    "sku": "410PRP",
+    "producttitle": "MASTER LOCK MODEL NO. 410 THERMOPLASTIC SAFETY PADLOCK",
+    "picturename": null,
+    "size": "1.5\" SHK",
+    "material": "MSTRLK",
+    "category": "MasterLock"
+  },
+  {
+    "sku": "410RED",
+    "producttitle": "MASTER LOCK MODEL NO. 410 THERMOPLASTIC SAFETY PADLOCK",
+    "picturename": "410RED.jpg",
+    "size": "1.5\" SHK",
+    "material": "MSTRLK",
+    "category": "MasterLock"
+  },
+  {
+    "sku": "410TEAL",
+    "producttitle": "MASTER LOCK MODEL NO. 410 THERMOPLASTIC SAFETY PADLOCK",
+    "picturename": "410TEAL.JPG",
+    "size": "1.5\" SHK",
+    "material": "MSTRLK",
+    "category": "MasterLock"
+  },
+  {
+    "sku": "410YLW",
+    "producttitle": "MASTER LOCK MODEL NO. 410 THERMOPLASTIC SAFETY PADLOCK",
+    "picturename": "410YLW.jpg",
+    "size": "1.5\" SHK",
+    "material": "MSTRLK",
+    "category": "MasterLock"
+  },
+  {
+    "sku": "493B",
+    "producttitle": "MASTER LOCK ELECTRICAL LOCK OUT",
+    "picturename": "TL-493B.jpg",
+    "size": null,
+    "material": "MSTRLK",
+    "category": "MasterLock"
+  },
+  {
+    "sku": "BT4044",
+    "producttitle": "BARRICADE TAPE - CAUTION DO NOT ENTER",
+    "picturename": "sbt-08.jpg",
+    "size": "3”X1000",
+    "material": "TAPE",
+    "category": "Barricade Tape"
+  },
+  {
+    "sku": "BT4057",
+    "producttitle": "BARRICADE TAPE - DANGER",
+    "picturename": "sbt-49.jpg",
+    "size": "3”X1000",
+    "material": "TAPE",
+    "category": "Barricade Tape"
+  },
+  {
+    "sku": "BT4058",
+    "producttitle": "BARRICADE TAPE - CAUTION",
+    "picturename": "sbt-05.jpg",
+    "size": "3”X1000",
+    "material": "TAPE",
+    "category": "Barricade Tape"
+  },
+  {
+    "sku": "BT4064",
+    "producttitle": "BARRICADE TAPE - DANGER HIGH VOLTAGE AREA",
+    "picturename": "sbt-54.jpg",
+    "size": "3”X1000",
+    "material": "TAPE",
+    "category": "Barricade Tape"
+  },
+  {
+    "sku": "C-080631",
+    "producttitle": "CAUTION BLANK - CAUTION SIGN",
+    "picturename": "c-0806.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "Caution"
+  },
+  {
+    "sku": "C-080633",
+    "producttitle": "CAUTION BLANK - CAUTION SIGN",
+    "picturename": "c-0806.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "Caution"
+  },
+  {
+    "sku": "C-083031",
+    "producttitle": "CONSTRUCTION AREA - CAUTION SIGN",
+    "picturename": "c-0830.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "Caution"
+  },
+  {
+    "sku": "C-083033",
+    "producttitle": "CONSTRUCTION AREA - CAUTION SIGN",
+    "picturename": "c-0830.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "Caution"
+  },
+  {
+    "sku": "C-162731",
+    "producttitle": "EYE PROTECTION REQUIRED - CAUTION SIGN",
+    "picturename": "c_1627.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "Caution"
+  },
+  {
+    "sku": "C-162733",
+    "producttitle": "EYE PROTECTION REQUIRED - CAUTION SIGN",
+    "picturename": "c_1627.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "Caution"
+  },
+  {
+    "sku": "D-111031",
+    "producttitle": "DO NOT ENTER - DANGER SIGN",
+    "picturename": "d-1110.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-111033",
+    "producttitle": "DO NOT ENTER - DANGER SIGN",
+    "picturename": "d-1110.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-111431",
+    "producttitle": "DO NOT ENTER AUTHORIZED PERSONNEL ONLY - DANGER SIGN",
+    "picturename": "d-1114.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-111433",
+    "producttitle": "DO NOT ENTER AUTHORIZED PERSONNEL ONLY - DANGER SIGN",
+    "picturename": "d-1114.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-162531",
+    "producttitle": "EXPLOSIVES KEEP AWAY - DANGER SIGN",
+    "picturename": "d-1625.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-162533",
+    "producttitle": "EXPLOSIVES KEEP AWAY - DANGER SIGN",
+    "picturename": "d-1625.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-260231",
+    "producttitle": "FALLING MATERIAL - DANGER SIGN",
+    "picturename": "d_2602.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-260233",
+    "producttitle": "FALLING MATERIAL - DANGER SIGN",
+    "picturename": "d_2602.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-370831",
+    "producttitle": "HARD HAT AREA - DANGER SIGN",
+    "picturename": "d-3708.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-370833",
+    "producttitle": "HARD HAT AREA - DANGER SIGN",
+    "picturename": "d-3708.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-371131",
+    "producttitle": "HAZARDOUS AREA - DANGER SIGN",
+    "picturename": "d-3711.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-371133",
+    "producttitle": "HAZARDOUS AREA - DANGER SIGN",
+    "picturename": "d-3711.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-372631",
+    "producttitle": "HIGH VOLTAGE - DANGER SIGN",
+    "picturename": "d-3726.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-372633",
+    "producttitle": "HIGH VOLTAGE - DANGER SIGN",
+    "picturename": "d-3726.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-373931",
+    "producttitle": "HIGH VOLTAGE KEEP OUT - DANGER SIGN",
+    "picturename": "d-3739.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-373933",
+    "producttitle": "HIGH VOLTAGE KEEP OUT - DANGER SIGN",
+    "picturename": "d-3739.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-441731",
+    "producttitle": "DANGER KEEP OUT - DANGER SIGN",
+    "picturename": "d-4417.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-441733",
+    "producttitle": "DANGER KEEP OUT - DANGER SIGN",
+    "picturename": "d-4417.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-450131",
+    "producttitle": "LASER  WITH LASER PICTO - DANGER SIGN",
+    "picturename": "d-4501.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-450133",
+    "producttitle": "LASER  WITH LASER PICTO - DANGER SIGN",
+    "picturename": "d-4501.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-460731",
+    "producttitle": "WORKERS WORKING ABOVE UP ARROWS - DANGER SIGN",
+    "picturename": "D-4607.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-460733",
+    "producttitle": "WORKERS WORKING ABOVE UP ARROWS - DANGER SIGN",
+    "picturename": "D-4607.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-472331",
+    "producttitle": "NO SMOKING - DANGER SIGN",
+    "picturename": "d_4723.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-472333",
+    "producttitle": "NO SMOKING - DANGER SIGN",
+    "picturename": "d_4723.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-474231",
+    "producttitle": "NO SMOKING OR OPEN FLAMES - DANGER SIGN",
+    "picturename": "d-4742.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-474233",
+    "producttitle": "NO SMOKING OR OPEN FLAMES - DANGER SIGN",
+    "picturename": "d-4742.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-475631",
+    "producttitle": "NO TRESPASSING - DANGER SIGN",
+    "picturename": "d-4756.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-475633",
+    "producttitle": "NO TRESPASSING - DANGER SIGN",
+    "picturename": "d-4756.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-570131",
+    "producttitle": "OPEN EXCAVATION - DANGER SIGN",
+    "picturename": "d-5701.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-570133",
+    "producttitle": "OPEN EXCAVATION - DANGER SIGN",
+    "picturename": "d-5701.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-570331",
+    "producttitle": "OPEN HOLE - DANGER SIGN",
+    "picturename": "d-5703.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-570333",
+    "producttitle": "OPEN HOLE - DANGER SIGN",
+    "picturename": "d-5703.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-571231",
+    "producttitle": "OVERHEAD POWER LINES - DANGER SIGN",
+    "picturename": "d-5712.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-571233",
+    "producttitle": "OVERHEAD POWER LINES - DANGER SIGN",
+    "picturename": "d-5712.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-874231",
+    "producttitle": "FALL PROTECTION REQUIRED BEYOND THIS POINT - DANGER SIGN",
+    "picturename": "d-8742.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "Danger"
+  },
+  {
+    "sku": "D-874233",
+    "producttitle": "FALL PROTECTION REQUIRED BEYOND THIS POINT - DANGER SIGN",
+    "picturename": "d-8742.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "Danger"
+  },
+  {
+    "sku": "EM-017",
+    "producttitle": "MAP HOLDER FOR 11”X17” MAP WITH  2 ADHESIVE STRIPS",
+    "picturename": "em-017.jpg",
+    "size": "12.5X18.5",
+    "material": "LX",
+    "category": "Evacuation Maps"
+  },
+  {
+    "sku": "EM-085",
+    "producttitle": "MAP HOLDER FOR 8.5”X11” MAP WITH  2 ADHESIVE STRIPS",
+    "picturename": "em-085.jpg",
+    "size": "10X12",
+    "material": "LX",
+    "category": "Evacuation Maps"
+  },
+  {
+    "sku": "FD-46",
+    "producttitle": "PPE REQUIRED BEYOND THIS POINT WITH THREE WORKER HEADS PICTOS FLOOR DECAL",
+    "picturename": "fd-46.jpg",
+    "size": "17x17",
+    "material": "ANTI-SLIP",
+    "category": "Floor Decals"
+  },
+  {
+    "sku": "FD-49",
+    "producttitle": "PEDESTRIAN AISLE PICTO FLOOR DECAL",
+    "picturename": "fd_49.jpg",
+    "size": "17X17",
+    "material": "ANTI-SLIP",
+    "category": "Floor Decals"
+  },
+  {
+    "sku": "FD-9901",
+    "producttitle": "STOP FLOOR DECAL",
+    "picturename": "fd_9901.jpg",
+    "size": "17x17",
+    "material": "ANTI-SLIP",
+    "category": "Floor Decals"
+  },
+  {
+    "sku": "G-170831",
+    "producttitle": "EYE WASH STATION",
+    "picturename": "g-1708.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "General"
+  },
+  {
+    "sku": "G-170833",
+    "producttitle": "EYE WASH STATION",
+    "picturename": "g-1708.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "General"
+  },
+  {
+    "sku": "G-267131",
+    "producttitle": "FIRST AID KIT",
+    "picturename": "g-2671.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "General"
+  },
+  {
+    "sku": "G-267133",
+    "producttitle": "FIRST AID KIT",
+    "picturename": "g-2671.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "General"
+  },
+  {
+    "sku": "G-271031",
+    "producttitle": "FULL CYLINDERS",
+    "picturename": "g-2710.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "General"
+  },
+  {
+    "sku": "G-271033",
+    "producttitle": "FULL CYLINDERS",
+    "picturename": "g-2710.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "General"
+  },
+  {
+    "sku": "G-485631",
+    "producttitle": "NO SMOKING - RED ON WHITE ",
+    "picturename": "g-4856.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "General"
+  },
+  {
+    "sku": "G-485633",
+    "producttitle": "NO SMOKING - RED ON WHITE ",
+    "picturename": "g-4856.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "General"
+  },
+  {
+    "sku": "G-486031",
+    "producttitle": "NO SMOKING  WITH SMOKING PICTO",
+    "picturename": "page55_64 (95).jpg",
+    "size": "14X10",
+    "material": "AL",
+    "category": "General"
+  },
+  {
+    "sku": "G-486033",
+    "producttitle": "NO SMOKING  WITH SMOKING PICTO",
+    "picturename": "G-486033.jpg",
+    "size": "14X10",
+    "material": "PL",
+    "category": "General"
+  },
+  {
+    "sku": "G-490831",
+    "producttitle": "NO TRESPASSING",
+    "picturename": "g-4908.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "General"
+  },
+  {
+    "sku": "G-490833",
+    "producttitle": "NO TRESPASSING",
+    "picturename": "g-4908.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "General"
+  },
+  {
+    "sku": "G-781431",
+    "producttitle": "MUSTER AREA",
+    "picturename": "G_7814 MUSTER AREA.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "General"
+  },
+  {
+    "sku": "G-781433",
+    "producttitle": "MUSTER AREA",
+    "picturename": "G_7814 MUSTER AREA.jpg",
+    "size": "10X14",
+    "material": "PL-G",
+    "category": "General"
+  },
+  {
+    "sku": "G-911131",
+    "producttitle": "PPE REQUIRED",
+    "picturename": "g_911114.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "General"
+  },
+  {
+    "sku": "G-911133",
+    "producttitle": "PPE REQUIRED",
+    "picturename": "g_911114.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "General"
+  },
+  {
+    "sku": "G-934531",
+    "producttitle": "AUTHORIZED PERSONNEL ONLY",
+    "picturename": "g-9345.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "General"
+  },
+  {
+    "sku": "G-934533",
+    "producttitle": "AUTHORIZED PERSONNEL ONLY",
+    "picturename": "g-9345.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "General"
+  },
+  {
+    "sku": "HM-113",
+    "producttitle": "LOCKOUT TAG-OUT TRAINED WITH PICTO OF HASP  TAG & LOCK - HELMET / HARD HAT MARKERS",
+    "picturename": "hm-113.jpg",
+    "size": "2x2",
+    "material": "PO",
+    "category": "Helmet Markers"
+  },
+  {
+    "sku": "HM-125",
+    "producttitle": "10 HOUR OSHA TRAINED - HELMET / HARD HAT MARKERS",
+    "picturename": "hm_125.jpg",
+    "size": "2x2",
+    "material": "PO",
+    "category": "Helmet Markers"
+  },
+  {
+    "sku": "HM-126",
+    "producttitle": "30 HOUR OSHA TRAINED - HELMET / HARD HAT MARKERS",
+    "picturename": "hm_126.jpg",
+    "size": "2x2",
+    "material": "PO",
+    "category": "Helmet Markers"
+  },
+  {
+    "sku": "HM-96",
+    "producttitle": "CERTIFIED FORKLIFT DRIVER WITH FORKLIFT PICTO - HELMET / HARD HAT MARKERS",
+    "picturename": "hm_96.jpg",
+    "size": "2x2",
+    "material": "PO",
+    "category": "Helmet Markers"
+  },
+  {
+    "sku": "HM-97",
+    "producttitle": "FALL PROTECTION TRAINED PICTO - HELMET / HARD HAT MARKERS",
+    "picturename": "hm_97.jpg",
+    "size": "2x2",
+    "material": "PO",
+    "category": "Helmet Markers"
+  },
+  {
+    "sku": "HMR-113",
+    "producttitle": "LOCKOUT TAG-OUT TRAINED WITH PICTO OF HASP  TAG & LOCK - HELMET / HARD HAT MARKERS",
+    "picturename": "hm-113.jpg",
+    "size": "2x2",
+    "material": "RFPO",
+    "category": "Helmet Markers"
+  },
+  {
+    "sku": "HMRS-522",
+    "producttitle": "PREMIUM REFLECTIVE STRIPS - HELMET / HARD HAT MARKERS",
+    "picturename": "hmrs-522.jpg",
+    "size": "1X4",
+    "material": "PO",
+    "category": "Helmet Markers"
+  },
+  {
+    "sku": "HMRS-523",
+    "producttitle": "PREMIUM REFLECTIVE STRIPS - HELMET / HARD HAT MARKERS",
+    "picturename": "hmrs-623.jpg",
+    "size": "1X4",
+    "material": "PO",
+    "category": "Helmet Markers"
+  },
+  {
+    "sku": "HMRS-524",
+    "producttitle": "PREMIUM REFLECTIVE STRIPS - HELMET / HARD HAT MARKERS",
+    "picturename": "hmrs-524.jpg",
+    "size": "1X4",
+    "material": "PO",
+    "category": "Helmet Markers"
+  },
+  {
+    "sku": "LT-1004",
+    "producttitle": "DANGER DO NOT OPERATE - THIS TAG AND LOCK TO BE REMOVED TAGS",
+    "picturename": "1004.jpg",
+    "size": "6.125X3",
+    "material": "LT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "LT-1005",
+    "producttitle": "DANGER THIS TAG & LOCK TO BE REMOVED ONLY BY THE PERSON TAG",
+    "picturename": "1005.jpg",
+    "size": "6.125X3",
+    "material": "LT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "LT-101-2",
+    "producttitle": "DANGER BLANK TAGS - BACK 2",
+    "picturename": "101-2.jpg",
+    "size": "6.125X3",
+    "material": "LT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "LT-108-1",
+    "producttitle": "DANGER DO NOT OPERATE TAGS - BACK 1",
+    "picturename": "108-1.jpg",
+    "size": "6.125X3",
+    "material": "LT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "LT-108-2",
+    "producttitle": "DANGER DO NOT OPERATE TAGS - BACK 2",
+    "picturename": "108-2.jpg",
+    "size": "6.125X3",
+    "material": "LT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "LT-147",
+    "producttitle": "DANGER EQUIPMENT LOCKED BY TAGS",
+    "picturename": "147.jpg",
+    "size": "6.125X3",
+    "material": "LT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "LT-149",
+    "producttitle": "DANGER DO NOT OPERATE TAGS",
+    "picturename": "tb_149.jpg",
+    "size": "6.125X3",
+    "material": "LT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "LT-176",
+    "producttitle": "DANGER DO NOT OPERATE DATE TAGS",
+    "picturename": "176.jpg",
+    "size": "6.125X3",
+    "material": "LT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "LT-177",
+    "producttitle": "DANGER DO NOT OPERATE THIS ENERGY SOURCE HAS BEEN LOCKED OUT TAGS",
+    "picturename": "177.jpg",
+    "size": "6.125X3",
+    "material": "LT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "LT-182",
+    "producttitle": "DANGER BARRICADE TAGS",
+    "picturename": "page95_110 (390).jpg",
+    "size": "6.125X3",
+    "material": "LT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "LT-201",
+    "producttitle": "EMERGENCY SHOWER & EYE WASH TAGS",
+    "picturename": "201.jpg",
+    "size": "6.125X3",
+    "material": "LT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "LT-205",
+    "producttitle": "FIRE EXTINGUISHER TAGS",
+    "picturename": "tb_205.jpg",
+    "size": "6.125X3",
+    "material": "LT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "LT-206",
+    "producttitle": "FIRE EXTINGUISHER RECHARGE AND INSPECTION TAGS",
+    "picturename": "tb_206.jpg",
+    "size": "6.125X3",
+    "material": "LT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "LT-312",
+    "producttitle": "CAUTION BARRICADE TAG POTENTIAL HAZARD TAG",
+    "picturename": "tb_312.jpg",
+    "size": "6.125X3",
+    "material": "LT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "LT-422",
+    "producttitle": "SCAFFOLD INSPECTION TAGS",
+    "picturename": "422.jpg",
+    "size": "6.125X3",
+    "material": "LT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "LT-423",
+    "producttitle": "LADDER INSPECTION TAGS",
+    "picturename": "tb_423.jpg",
+    "size": "6.125X3",
+    "material": "LT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "M-000531",
+    "producttitle": "DO NOT ENTER PELIGRO NO ENTRE - DANGER SIGN",
+    "picturename": "m-0005.jpg",
+    "size": "14X10",
+    "material": "AL",
+    "category": "Bilingual"
+  },
+  {
+    "sku": "M-000533",
+    "producttitle": "DO NOT ENTER PELIGRO NO ENTRE - DANGER SIGN",
+    "picturename": "m-0005.jpg",
+    "size": "14X10",
+    "material": "PL",
+    "category": "Bilingual"
+  },
+  {
+    "sku": "M-001431",
+    "producttitle": "NO SMOKING PELIGRO NO FUMAR - DANGER SIGN",
+    "picturename": "m-0014.jpg",
+    "size": "14X10",
+    "material": "AL",
+    "category": "Bilingual"
+  },
+  {
+    "sku": "M-001433",
+    "producttitle": "NO SMOKING PELIGRO NO FUMAR - DANGER SIGN",
+    "picturename": "m-0014.jpg",
+    "size": "14X10",
+    "material": "PL",
+    "category": "Bilingual"
+  },
+  {
+    "sku": "M-070231",
+    "producttitle": "CONSTRUCTION AREA KEEP OUT PELIGRO ÁREA DE CONSTRUCCIÓN NO ENTRE - DANGER SIGN",
+    "picturename": "m-0702.jpg",
+    "size": "14x10",
+    "material": "AL",
+    "category": "Bilingual"
+  },
+  {
+    "sku": "M-070233",
+    "producttitle": "CONSTRUCTION AREA KEEP OUT PELIGRO ÁREA DE CONSTRUCCIÓN NO ENTRE - DANGER SIGN",
+    "picturename": "m-0702.jpg",
+    "size": "14x10",
+    "material": "PL",
+    "category": "Bilingual"
+  },
+  {
+    "sku": "M-070431",
+    "producttitle": "DO NOT ENTER AUTHORIZED PERSONNEL ONLY PELIGRO NO ENTRE SOLO - DANGER SIGN",
+    "picturename": "m-0704.jpg",
+    "size": "14x10",
+    "material": "AL",
+    "category": "Bilingual"
+  },
+  {
+    "sku": "M-070433",
+    "producttitle": "DO NOT ENTER AUTHORIZED PERSONNEL ONLY PELIGRO NO ENTRE SOLO - DANGER SIGN",
+    "picturename": "m-0704.jpg",
+    "size": "14X10",
+    "material": "PL",
+    "category": "Bilingual"
+  },
+  {
+    "sku": "M-071331",
+    "producttitle": "FALL PROTECTION REQUIRED BEYOND THIS POINT PELIGRO PROTECCION DE CAÍDA - DANGER SIGN",
+    "picturename": "m-0713.jpg",
+    "size": "14X10",
+    "material": "AL",
+    "category": "Bilingual"
+  },
+  {
+    "sku": "M-071333",
+    "producttitle": "FALL PROTECTION REQUIRED BEYOND THIS POINT PELIGRO PROTECCION DE CAÍDA - DANGER SIGN",
+    "picturename": "m-0713.jpg",
+    "size": "14X10",
+    "material": "PL",
+    "category": "Bilingual"
+  },
+  {
+    "sku": "M-993731",
+    "producttitle": "NO TRESPASSING PELIGRO NO TRASPASE - DANGER SIGN",
+    "picturename": "m-9937.jpg",
+    "size": "14X10",
+    "material": "AL",
+    "category": "Bilingual"
+  },
+  {
+    "sku": "M-993733",
+    "producttitle": "NO TRESPASSING PELIGRO NO TRASPASE - DANGER SIGN",
+    "picturename": "m-9937.jpg",
+    "size": "14X10",
+    "material": "PL",
+    "category": "Bilingual"
+  },
+  {
+    "sku": "M-995731",
+    "producttitle": "KEEP OUT/ PELIGRO MANTENGASE AFUERA - DANGER SIGN",
+    "picturename": "m-9957.jpg",
+    "size": "14X10",
+    "material": "AL",
+    "category": "Bilingual"
+  },
+  {
+    "sku": "M-995733",
+    "producttitle": "KEEP OUT/ PELIGRO MANTENGASE AFUERA - DANGER SIGN",
+    "picturename": "m-9957.jpg",
+    "size": "14X10",
+    "material": "PL",
+    "category": "Bilingual"
+  },
+  {
+    "sku": "N-001331",
+    "producttitle": "AUTHORIZED PERSONNEL ONLY - NOTICE SIGN",
+    "picturename": "n-0013.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "Notice"
+  },
+  {
+    "sku": "N-001333",
+    "producttitle": "AUTHORIZED PERSONNEL ONLY - NOTICE SIGN",
+    "picturename": "n-0013.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "Notice"
+  },
+  {
+    "sku": "N-370331",
+    "producttitle": "HARD HATS AND SAFETY GLASSES REQUIRED BEYOND THIS POINT - NOTICE SIGN",
+    "picturename": "n-3703.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "Notice"
+  },
+  {
+    "sku": "N-370333",
+    "producttitle": "HARD HATS AND SAFETY GLASSES REQUIRED BEYOND THIS POINT - NOTICE SIGN",
+    "picturename": "n-3703.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "Notice"
+  },
+  {
+    "sku": "N-475131",
+    "producttitle": "NOTICE BLANK - NOTICE SIGN",
+    "picturename": "n-4751.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "Notice"
+  },
+  {
+    "sku": "N-475133",
+    "producttitle": "NOTICE BLANK - NOTICE SIGN",
+    "picturename": "n-4751.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "Notice"
+  },
+  {
+    "sku": "N-710531",
+    "producttitle": "SAFETY GLASSES REQUIRED BEYOND THIS POINT - NOTICE SIGN",
+    "picturename": "n-7105.jpg",
+    "size": "10X14",
+    "material": "AL",
+    "category": "Notice"
+  },
+  {
+    "sku": "N-710533",
+    "producttitle": "SAFETY GLASSES REQUIRED BEYOND THIS POINT - NOTICE SIGN",
+    "picturename": "n-7105.jpg",
+    "size": "10X14",
+    "material": "PL",
+    "category": "Notice"
+  },
+  {
+    "sku": "N-965131",
+    "producttitle": "VIDEO SURVEILLANCE IN USE ON THESE PREMISES  WITH PICTO - NOTICE SIGN",
+    "picturename": "n_965114.JPG",
+    "size": "10X14",
+    "material": "AL",
+    "category": "Notice"
+  },
+  {
+    "sku": "N-965133",
+    "producttitle": "VIDEO SURVEILLANCE IN USE ON THESE PREMISES  WITH PICTO - NOTICE SIGN",
+    "picturename": "n_965114.JPG",
+    "size": "10X14",
+    "material": "PL",
+    "category": "Notice"
+  },
+  {
+    "sku": "PWS-100",
+    "producttitle": "AED RED HEART WITH  FLASH - PROJECTING WALL SIGN",
+    "picturename": "pws_100.jpg",
+    "size": "6X12",
+    "material": "ACR",
+    "category": "Projecting Wall Signs"
+  },
+  {
+    "sku": "PWS-12",
+    "producttitle": "FIRE EXTINGUISHER WITH ARROW POINTING DOWN - PROJECTING WALL SIGN",
+    "picturename": "pws_12.jpg",
+    "size": "6X12",
+    "material": "ACRY",
+    "category": "Projecting Wall Signs"
+  },
+  {
+    "sku": "PWS-2",
+    "producttitle": "EYE WASH WITH FOUNTAIN PICTO - PROJECTING WALL SIGN",
+    "picturename": "pws_2.jpg",
+    "size": "6X12",
+    "material": "ACRY",
+    "category": "Projecting Wall Signs"
+  },
+  {
+    "sku": "PWS-5",
+    "producttitle": "FIRST AID WITH CROSS - PROJECTING WALL SIGN",
+    "picturename": "pws_5.jpg",
+    "size": "6X12",
+    "material": "ACRY",
+    "category": "Projecting Wall Signs"
+  },
+  {
+    "sku": "PWS-70",
+    "producttitle": "SEVERE WEATHER SHELTER WITH TORNADO AND HOUSE SYMBOLS - PROJECTING WALL SIGN",
+    "picturename": "pws_70.jpg",
+    "size": "6X12",
+    "material": "ACRY",
+    "category": "Projecting Wall Signs"
+  },
+  {
+    "sku": "RST106",
+    "producttitle": "STRIPED REFLECTIVE SAFETY TAPE - 2 INCH",
+    "picturename": "rst9-by.jpg",
+    "size": "2”x10Y",
+    "material": "AD",
+    "category": "Reflective and Conspicuity Tape"
+  },
+  {
+    "sku": "RST111",
+    "producttitle": "REFLECTIVE SAFETY TAPE - 1 INCH",
+    "picturename": "RST1-WT.jpg",
+    "size": "1”X10Y",
+    "material": "AD",
+    "category": "Reflective and Conspicuity Tape"
+  },
+  {
+    "sku": "RST112",
+    "producttitle": "REFLECTIVE SAFETY TAPE - 1 INCH",
+    "picturename": "rst1-rd.jpg",
+    "size": "1”X10Y",
+    "material": "AD",
+    "category": "Reflective and Conspicuity Tape"
+  },
+  {
+    "sku": "RT1-147",
+    "producttitle": "DANGER EQUIPMENT LOCKED BY TAGS",
+    "picturename": "RT1-147.jpg",
+    "size": "6X3",
+    "material": "Synthetic",
+    "category": "Safety on a Roll Tags"
+  },
+  {
+    "sku": "RT1-149",
+    "producttitle": "DANGER DO NOT OPERATE TAGS",
+    "picturename": "RT1-149.jpg",
+    "size": "6X3",
+    "material": "Synthetic",
+    "category": "Safety on a Roll Tags"
+  },
+  {
+    "sku": "RT1-176",
+    "producttitle": "DANGER DO NOT OPERATE DATE TAGS",
+    "picturename": "RT1-176.jpg",
+    "size": "6X3",
+    "material": "Synthetic",
+    "category": "Safety on a Roll Tags"
+  },
+  {
+    "sku": "RT1-177",
+    "producttitle": "DANGER DO NOT OPERATE THIS ENERGY SOURCE HAS BEEN LOCKED OUT TAGS",
+    "picturename": "RT1-177.jpg",
+    "size": "6X3",
+    "material": "Synthetic",
+    "category": "Safety on a Roll Tags"
+  },
+  {
+    "sku": "RT1-182",
+    "producttitle": "DANGER BARRICADE TAGS",
+    "picturename": "RT1-182.jpg",
+    "size": "6X3",
+    "material": "Synthetic",
+    "category": "Safety on a Roll Tags"
+  },
+  {
+    "sku": "RT1-312",
+    "producttitle": "CAUTION BARRICADE TAG POTENTIAL HAZARD TAG",
+    "picturename": "RT1-312.jpg",
+    "size": "6X3",
+    "material": "Synthetic",
+    "category": "Safety on a Roll Tags"
+  },
+  {
+    "sku": "RT1-712",
+    "producttitle": "SCAFFOLD OK TAGS",
+    "picturename": "RT1-712.jpg",
+    "size": "6X3",
+    "material": "Synthetic",
+    "category": "Safety on a Roll Tags"
+  },
+  {
+    "sku": "RT1-713",
+    "producttitle": "CAUTION SCAFFOLD TAGS",
+    "picturename": "RT1-713.jpg",
+    "size": "6X3",
+    "material": "Synthetic",
+    "category": "Safety on a Roll Tags"
+  },
+  {
+    "sku": "RT1-714",
+    "producttitle": "DANGER SCAFFOLD TAGS",
+    "picturename": "RT1-714.jpg",
+    "size": "6X3",
+    "material": "Synthetic",
+    "category": "Safety on a Roll Tags"
+  },
+  {
+    "sku": "RT2-147",
+    "producttitle": "DANGER EQUIPMENT LOCKED BY TAGS",
+    "picturename": "RT2-147.jpg",
+    "size": "6X3",
+    "material": "Synthetic",
+    "category": "Safety on a Roll Tags"
+  },
+  {
+    "sku": "RT2-149",
+    "producttitle": "DANGER DO NOT OPERATE TAGS",
+    "picturename": "RT2-149.jpg",
+    "size": "6X3",
+    "material": "Synthetic",
+    "category": "Safety on a Roll Tags"
+  },
+  {
+    "sku": "RT2-176",
+    "producttitle": "DANGER DO NOT OPERATE DATE TAGS",
+    "picturename": "RT2-176.jpg",
+    "size": "6X3",
+    "material": "Synthetic",
+    "category": "Safety on a Roll Tags"
+  },
+  {
+    "sku": "RT2-177",
+    "producttitle": "DANGER DO NOT OPERATE THIS ENERGY SOURCE HAS BEEN LOCKED OUT TAGS",
+    "picturename": "RT2-177.jpg",
+    "size": "6X3",
+    "material": "Synthetic",
+    "category": "Safety on a Roll Tags"
+  },
+  {
+    "sku": "RT2-182",
+    "producttitle": "DANGER BARRICADE TAGS",
+    "picturename": "RT2-182.jpg",
+    "size": "6X3",
+    "material": "Synthetic",
+    "category": "Safety on a Roll Tags"
+  },
+  {
+    "sku": "RT2-312",
+    "producttitle": "CAUTION BARRICADE TAG POTENTIAL HAZARD TAG",
+    "picturename": "RT2-312.jpg",
+    "size": "6X3",
+    "material": "Synthetic",
+    "category": "Safety on a Roll Tags"
+  },
+  {
+    "sku": "RT2-712",
+    "producttitle": "SCAFFOLD OK TAGS",
+    "picturename": "RT2-712.jpg",
+    "size": "6X3",
+    "material": "Synthetic",
+    "category": "Safety on a Roll Tags"
+  },
+  {
+    "sku": "RT2-713",
+    "producttitle": "CAUTION SCAFFOLD TAGS",
+    "picturename": "RT2-713.jpg",
+    "size": "6X3",
+    "material": "Synthetic",
+    "category": "Safety on a Roll Tags"
+  },
+  {
+    "sku": "RT2-714",
+    "producttitle": "DANGER SCAFFOLD TAGS",
+    "picturename": "RT2-714.jpg",
+    "size": "6X3",
+    "material": "Synthetic",
+    "category": "Safety on a Roll Tags"
+  },
+  {
+    "sku": "S1010E410KA",
+    "producttitle": "STANDARD ELECTRICAL LOCKOUT POUCH KIT",
+    "picturename": null,
+    "size": null,
+    "material": "LOCK",
+    "category": "MasterLock"
+  },
+  {
+    "sku": "S3821",
+    "producttitle": "LOCKOUT DEVICE MINIATURE CIRCUIT BREAKER 120/240V",
+    "picturename": "S3821.JPG",
+    "size": null,
+    "material": "MSTRLK",
+    "category": "MasterLock"
+  },
+  {
+    "sku": "S806",
+    "producttitle": "VALVE LOCKOUT ADJUSTABLE CABLE",
+    "picturename": "s_806.jpg",
+    "size": "6 FOOT CORD",
+    "material": "MSTRLK",
+    "category": "MasterLock"
+  },
+  {
+    "sku": "SG3104B",
+    "producttitle": "SAFE STEP ANTI-SKID TAPE",
+    "picturename": "ns-02.jpg",
+    "size": "4”X60FT",
+    "material": "TAPE",
+    "category": "Anti-Skid Tape"
+  },
+  {
+    "sku": "TB-1004",
+    "producttitle": "DANGER DO NOT OPERATE - THIS TAG AND LOCK TO BE REMOVED TAGS",
+    "picturename": "1004.jpg",
+    "size": "6X3",
+    "material": "TB",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "TB-1005",
+    "producttitle": "DANGER THIS TAG & LOCK TO BE REMOVED ONLY BY THE PERSON TAG",
+    "picturename": "1005.jpg",
+    "size": "6.125X3",
+    "material": "TB",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "TB-101-2",
+    "producttitle": "DANGER BLANK TAGS - BACK 2",
+    "picturename": "101-2.jpg",
+    "size": "6.125X3",
+    "material": "TB",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "TB-108-1",
+    "producttitle": "DANGER DO NOT OPERATE TAGS - BACK 1",
+    "picturename": "108-1.jpg",
+    "size": "6.125X3",
+    "material": "TB",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "TB-108-2",
+    "producttitle": "DANGER DO NOT OPERATE TAGS - BACK 2",
+    "picturename": "108-2.jpg",
+    "size": "6.125X3",
+    "material": "TB",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "TB-147",
+    "producttitle": "DANGER EQUIPMENT LOCKED BY TAGS",
+    "picturename": "147.jpg",
+    "size": "6.125X3",
+    "material": "TB",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "TB-149",
+    "producttitle": "DANGER DO NOT OPERATE TAGS",
+    "picturename": "tb_149.jpg",
+    "size": "6.125X3",
+    "material": "TB",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "TB-176",
+    "producttitle": "DANGER DO NOT OPERATE DATE TAGS",
+    "picturename": "176.jpg",
+    "size": "6.125X3",
+    "material": "TB",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "TB-177",
+    "producttitle": "DANGER DO NOT OPERATE THIS ENERGY SOURCE HAS BEEN LOCKED OUT TAGS",
+    "picturename": "177.jpg",
+    "size": "6.125X3",
+    "material": "TB",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "TB-182",
+    "producttitle": "DANGER BARRICADE TAGS",
+    "picturename": "tb_182.jpg",
+    "size": "6.125X3",
+    "material": "TB",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "TB-201",
+    "producttitle": "EMERGENCY SHOWER & EYE WASH TAGS",
+    "picturename": "201.jpg",
+    "size": "6.125X3",
+    "material": "TB",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "TB-205",
+    "producttitle": "FIRE EXTINGUISHER TAGS",
+    "picturename": "tb_205.jpg",
+    "size": "6.125X3",
+    "material": "TB",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "TB-206",
+    "producttitle": "FIRE EXTINGUISHER RECHARGE AND INSPECTION TAGS",
+    "picturename": "tb_206.jpg",
+    "size": "6.125X3",
+    "material": "TB",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "TB-312",
+    "producttitle": "CAUTION BARRICADE TAG POTENTIAL HAZARD TAG",
+    "picturename": "tb_312.jpg",
+    "size": "6.125X3",
+    "material": "TB",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "TB-422",
+    "producttitle": "SCAFFOLD INSPECTION TAG",
+    "picturename": "422.jpg",
+    "size": "6.125X3",
+    "material": "TB",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "TB-423",
+    "producttitle": "LADDER INSPECTION TAGS",
+    "picturename": "tb_423.jpg",
+    "size": "6.125X3",
+    "material": "TB",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "TB-712",
+    "producttitle": "SCAFFOLD OK TAGS",
+    "picturename": "tb_712.jpg",
+    "size": "6.125X3",
+    "material": "TB",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "TB-713",
+    "producttitle": "SCAFFOLD TAG/ CAUTION  THIS SCAFFOLD DOES NOT MEET FEDERAL/STATE",
+    "picturename": "tb_713.jpg",
+    "size": "6.125X3",
+    "material": "TB",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "TB-714",
+    "producttitle": "DANGER SCAFFOLD TAGS",
+    "picturename": "tb_714.jpg",
+    "size": "6.125X3",
+    "material": "TB",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "V57203SR",
+    "producttitle": "CONSPICUITY REFLECTIVE TAPE",
+    "picturename": "v57203.jpg",
+    "size": "2”x30FT",
+    "material": "AD",
+    "category": "Reflective and Conspicuity Tape"
+  },
+  {
+    "sku": "V5720WH",
+    "producttitle": "CONSPICUITY REFLECTIVE TAPE",
+    "picturename": "v57203.jpg",
+    "size": "2”x150FT",
+    "material": "TAPE",
+    "category": "Reflective and Conspicuity Tape"
+  },
+  {
+    "sku": "VT-1004",
+    "producttitle": "DANGER DO NOT OPERATE - THIS TAG AND LOCK TO BE REMOVED TAGS",
+    "picturename": "1004.jpg",
+    "size": "6.125X3",
+    "material": "VT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "VT-1005",
+    "producttitle": "DANGER THIS TAG & LOCK TO BE REMOVED ONLY BY THE PERSON TAG",
+    "picturename": "1005.jpg",
+    "size": "6.125X3",
+    "material": "VT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "VT-101-2",
+    "producttitle": "DANGER BLANK TAGS - BACK 2",
+    "picturename": "101-2.jpg",
+    "size": "6.125X3",
+    "material": "VT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "VT-108-1",
+    "producttitle": "DANGER DO NOT OPERATE TAGS - BACK 1",
+    "picturename": "108-1.jpg",
+    "size": "6.125X3",
+    "material": "VT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "VT-108-2",
+    "producttitle": "DANGER DO NOT OPERATE TAGS - BACK 2",
+    "picturename": "108-2.jpg",
+    "size": "6.125X3",
+    "material": "VT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "VT-147",
+    "producttitle": "DANGER EQUIPMENT LOCKED BY TAGS",
+    "picturename": "147.jpg",
+    "size": "6.125X3",
+    "material": "VT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "VT-149",
+    "producttitle": "DANGER DO NOT OPERATE TAGS",
+    "picturename": "tb_149.jpg",
+    "size": "6.125X3",
+    "material": "VT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "VT-176",
+    "producttitle": "DANGER DO NOT OPERATE DATE TAGS",
+    "picturename": "176.jpg",
+    "size": "6.125X3",
+    "material": "VT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "VT-177",
+    "producttitle": "DANGER DO NOT OPERATE THIS ENERGY SOURCE HAS BEEN LOCKED OUT TAGS",
+    "picturename": "177.jpg",
+    "size": "6.125X3",
+    "material": "VT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "VT-179",
+    "producttitle": "BLANK WHITE TAGS",
+    "picturename": "VT_179.jpg",
+    "size": "6.125X3",
+    "material": "VT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "VT-180",
+    "producttitle": "BLANK RED TAGS",
+    "picturename": "vt_180.jpg",
+    "size": "6.125X3",
+    "material": "VT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "VT-182",
+    "producttitle": "DANGER BARRICADE TAGS",
+    "picturename": "tb_182.jpg",
+    "size": "6.125X3",
+    "material": "VT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "VT-201",
+    "producttitle": "EMERGENCY SHOWER & EYE WASH TAGS",
+    "picturename": "201.jpg",
+    "size": "6.125X3",
+    "material": "VT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "VT-205",
+    "producttitle": "FIRE EXTINGUISHER TAGS",
+    "picturename": "tb_205.jpg",
+    "size": "#8",
+    "material": "VT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "VT-206",
+    "producttitle": "FIRE EXTINGUISHER RECHARGE AND INSPECTION TAGS",
+    "picturename": "tb_206.jpg",
+    "size": "6.125X3",
+    "material": "VT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "VT-312",
+    "producttitle": "CAUTION BARRICADE TAG POTENTIAL HAZARD TAG",
+    "picturename": "tb_312.jpg",
+    "size": "6.125X3",
+    "material": "VT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "VT-422",
+    "producttitle": "SCAFFOLD INSPECTION TAGS",
+    "picturename": "422.jpg",
+    "size": "6.125X3",
+    "material": "VT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "VT-423",
+    "producttitle": "LADDER INSPECTION TAGS",
+    "picturename": "tb_423.jpg",
+    "size": "6.125X3",
+    "material": "VT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "VT-712",
+    "producttitle": "SCAFFOLD OK TAGS",
+    "picturename": "vt_712.jpg",
+    "size": "6.125X3",
+    "material": "VT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "VT-713",
+    "producttitle": "CAUTION SCAFFOLD TAGS",
+    "picturename": "vt_713.jpg",
+    "size": "6.125X3",
+    "material": "VT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "VT-714",
+    "producttitle": "DANGER SCAFFOLD TAGS",
+    "picturename": "vt_714.jpg",
+    "size": "6.125X3",
+    "material": "VT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "VT-992",
+    "producttitle": "DO NOT OPERATE  TAG LOCK TO BE REMOVED BY PERSON TAG WITH PHOTO",
+    "picturename": "vt_992.jpg",
+    "size": "6.125X3",
+    "material": "VT",
+    "category": "Safety Tags"
+  },
+  {
+    "sku": "WBC-02RB",
+    "producttitle": "WOVEN PLASTIC BARRIER TAPE - 2 INCH",
+    "picturename": "wbc-02rb.jpg",
+    "size": "2’’X200’",
+    "material": "PL",
+    "category": "Barricade Tape"
+  },
+  {
+    "sku": "WBC-02YB",
+    "producttitle": "WOVEN PLASTIC BARRIER TAPE - 2 INCH",
+    "picturename": "wbc-02yb.jpg",
+    "size": "2’’X200’",
+    "material": "PL",
+    "category": "Barricade Tape"
+  },
+  {
+    "sku": "WBC-03",
+    "producttitle": "CAUTION WOVEN PLASTIC BARRIER TAPE - 2 INCH",
+    "picturename": "WBC-03.jpg",
+    "size": "2” X 200",
+    "material": "PL",
+    "category": "Barricade Tape"
+  },
+  {
+    "sku": "WBC-04",
+    "producttitle": "DANGER  WOVEN PLASTIC BARRIER TAPE - 2 INCH",
+    "picturename": "wbc-04.jpg",
+    "size": "2” X 200’",
+    "material": "PL",
+    "category": "Barricade Tape"
+  }
+]
