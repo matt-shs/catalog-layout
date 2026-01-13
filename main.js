@@ -244,102 +244,68 @@ async function lookupSKUs() {
   if (skus.length === 0) {
     cardsContainer.innerHTML = "";
     cards = [];
-    statusLine.textContent = "No SKUs entered. Enter SKUs and press Lookup.";
+    statusLine.textContent = "No SKUs entered.";
     return;
   }
 
-  statusLine.textContent = "Searching for products...";
-
+  statusLine.textContent = "Searching...";
   const products = await loadProductsJson();
-
-  if (!products.length) {
-    createCardsFromJson([]);
-    statusLine.textContent = "No product data is available to search against.";
-    return;
-  }
-
-  const map = new Map();
-  products.forEach((p) => map.set(String(p.sku).toUpperCase(), p));
-
-  // Map to hold the final grouped products. 
-  // Key: normalized producttitle, Value: {representativeProduct, variants: []}
+  
   const finalResults = new Map(); 
   const notFound = [];
+  
+  // Use a Set to ensure we don't process the same input SKU twice
+  const uniqueInputSkus = [...new Set(skus)];
 
-  skus.forEach((sku) => {
-    const p = map.get(sku);
+  uniqueInputSkus.forEach((inputSku) => {
+    // Find all records in the JSON matching this SKU
+    const matches = products.filter(p => String(p.sku).toUpperCase() === inputSku);
 
-    if (p) {
-      const title = p.producttitle.trim().toUpperCase();
-      
-      const variantData = {
-          sku: p.sku,
-          size: p.size || '',
-          material: p.material || ''
-      };
+    if (matches.length > 0) {
+      matches.forEach(p => {
+        // UNIQUE KEY: Group by Category AND Title
+        // This keeps PWS-1 in 'Fire Protection' separate from PWS-1 in 'Wall Signs'
+        const categoryName = p.category || 'Uncategorized';
+        const groupKey = `${categoryName}_${p.producttitle.trim().toUpperCase()}`;
+        
+        const variantData = {
+            sku: p.sku,
+            size: p.size || '',
+            material: p.material || ''
+        };
 
-      if (!finalResults.has(title)) {
-        // First time seeing this title. Set up the representative product structure, 
-        // ensuring the category is available for later sorting.
-        finalResults.set(title, {
-            ...p, 
-            variants: [], // Initialize variants array
-            category: p.category || 'Uncategorized' // Store category
-        });
-      }
-      
-      // Add the requested variant to the list for this product group
-      finalResults.get(title).variants.push(variantData);
-
+        if (!finalResults.has(groupKey)) {
+          finalResults.set(groupKey, {
+              ...p, 
+              variants: [], 
+              category: categoryName 
+          });
+        }
+        
+        finalResults.get(groupKey).variants.push(variantData);
+      });
     } else {
-      notFound.push(sku);
+      notFound.push(inputSku);
     }
   });
   
-  const found = Array.from(finalResults.values()); // Array of grouped product objects
+  const found = Array.from(finalResults.values());
 
-  // Sort the found array first by category, then by product title for structured output
+  // Existing Sort Logic (Category Order -> Product Order -> Title)
   found.sort((a, b) => {
-      const categoryA = a.category || '';
-      const categoryB = b.category || '';
-      if (categoryA < categoryB) return -1;
-      if (categoryA > categoryB) return 1;
+      const catOrderA = a.categoryorder ?? 999999;
+      const catOrderB = b.categoryorder ?? 999999;
+      if (catOrderA !== catOrderB) return catOrderA - catOrderB;
+
+      const prodOrderA = a.productorder ?? 999999;
+      const prodOrderB = b.productorder ?? 999999;
+      if (prodOrderA !== prodOrderB) return prodOrderA - prodOrderB;
       
-      // Secondary sort by product title
-      const titleA = a.producttitle || '';
-      const titleB = b.producttitle || '';
-      if (titleA < titleB) return -1;
-      if (titleA > titleB) return 1;
-      return 0;
+      return (a.producttitle || '').localeCompare(b.producttitle || '');
   });
 
-  createCardsFromJson(found); // Pass the full grouped structure
-
-  const titleCount = found.length;
-  let statusText = `${titleCount} unique product group(s) found based on title.`;
-
-  if (notFound.length) {
-    statusText += ` SKUs not found (${notFound.length}): ${notFound.join(", ")}`;
-  } else if (titleCount < skus.length) {
-    const groupedCount = skus.length - titleCount;
-    statusText += ` (${groupedCount} duplicate variants were grouped.)`;
-  }
-  
-  // --- PDF Library Feature Check ---
-  // let pdfFeatureStatus = "";
-  // if (typeof PDFLib !== 'undefined') {
-  //   if (typeof PDFLib.PDFDocument === 'function') { 
-  //       pdfFeatureStatus = " | PDFLib: Loaded - Ready";
-  //   } else {
-  //       pdfFeatureStatus = " | PDFLib: Loaded - Check your script tag";
-  //   }
-  // } else {
-  //   pdfFeatureStatus = " | PDFLib: Not Loaded - Check your script tag";
-  // }
-  //statusLine.textContent = statusText + pdfFeatureStatus;
-  // --- End: PDF Library Feature Check ---
-
-  statusLine.textContent = statusText;
+  createCardsFromJson(found);
+  statusLine.textContent = `${found.length} unique items placed in their respective categories.`;
 }
 
 document.getElementById("copyBtn").addEventListener("click", async () => {

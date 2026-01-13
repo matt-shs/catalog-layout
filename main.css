@@ -172,3 +172,15 @@ input[type="number"] {
     align-items: stretch;
   }
 }
+
+
+
+/* Adjusts the overall tag size and internal text */
+.tagify__tag {
+    font-size: 12px; /* Set your desired size */
+}
+
+/* Specific target for the text label if needed */
+.tagify__tag > div > .tagify__tag-text {
+    font-size: 12px;
+}

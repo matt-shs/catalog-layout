@@ -884,7 +884,7 @@
     "producttitle": "EXIT GLOW",
     "picturename": "gl-1681.jpg",
     "size": "10x14",
-    "material": "GLOW ALUMINUM",
+    "material": "ALUMINUM",
     "category": "Exit Signs",
     "productorder": 89,
     "categoryorder": 87
@@ -894,7 +894,7 @@
     "producttitle": "EXIT GLOW",
     "picturename": "gl-1681.jpg",
     "size": "10x14",
-    "material": "GLOW PLASTIC",
+    "material": "PLASTIC",
     "category": "Exit Signs",
     "productorder": 90,
     "categoryorder": 87
@@ -910,23 +910,13 @@
     "categoryorder": 91
   },
   {
-    "sku": "PWS-1",
-    "producttitle": "EXIT - PROJECTING WALL SIGN",
-    "picturename": "pws_1.jpg",
-    "size": "6x12",
-    "material": "ACRYLIC",
-    "category": "Projecting Wall Signs",
-    "productorder": 92,
-    "categoryorder": 91
-  },
-  {
     "sku": "PWS-2",
     "producttitle": "EYE WASH WITH FOUNTAIN PICTO - PROJECTING WALL SIGN",
     "picturename": "pws_2.jpg",
     "size": "6x12",
     "material": "ACRYLIC",
     "category": "Projecting Wall Signs",
-    "productorder": 93,
+    "productorder": 92,
     "categoryorder": 91
   },
   {
@@ -936,7 +926,7 @@
     "size": "6x12",
     "material": "ACRYLIC",
     "category": "Projecting Wall Signs",
-    "productorder": 94,
+    "productorder": 93,
     "categoryorder": 91
   },
   {
@@ -946,7 +936,17 @@
     "size": "6x12",
     "material": "ACRYLIC",
     "category": "Projecting Wall Signs",
-    "productorder": 95,
+    "productorder": 94,
+    "categoryorder": 91
+  },
+  {
+    "sku": "PWS-1",
+    "producttitle": "EXIT - PROJECTING WALL SIGN",
+    "picturename": "pws_1.jpg",
+    "size": "6x12",
+    "material": "ACRYLIC",
+    "category": "Projecting Wall Signs",
+    "productorder": 96,
     "categoryorder": 91
   },
   {
@@ -956,7 +956,7 @@
     "size": "6x12",
     "material": "ACRYLIC",
     "category": "Projecting Wall Signs",
-    "productorder": 96,
+    "productorder": 97,
     "categoryorder": 91
   },
   {
@@ -966,8 +966,8 @@
     "size": "17x17",
     "material": "NON-SLIP",
     "category": "Floor Decals",
-    "productorder": 97,
-    "categoryorder": 97
+    "productorder": 98,
+    "categoryorder": 98
   },
   {
     "sku": "FD-49",
@@ -976,8 +976,8 @@
     "size": "17x17",
     "material": "NON-SLIP",
     "category": "Floor Decals",
-    "productorder": 98,
-    "categoryorder": 97
+    "productorder": 99,
+    "categoryorder": 98
   },
   {
     "sku": "FD-46",
@@ -986,18 +986,8 @@
     "size": "17x17",
     "material": "NON-SLIP",
     "category": "Floor Decals",
-    "productorder": 99,
-    "categoryorder": 97
-  },
-  {
-    "sku": "FD-9901",
-    "producttitle": "STOP FLOOR DECAL",
-    "picturename": "fd_9901.jpg",
-    "size": "17x17",
-    "material": "NON-SLIP",
-    "category": "Floor Decals",
     "productorder": 100,
-    "categoryorder": 97
+    "categoryorder": 98
   },
   {
     "sku": "FD-21",
@@ -1007,7 +997,17 @@
     "material": "NON-SLIP",
     "category": "Floor Decals",
     "productorder": 101,
-    "categoryorder": 97
+    "categoryorder": 98
+  },
+  {
+    "sku": "FD-9901",
+    "producttitle": "STOP FLOOR DECAL",
+    "picturename": "fd_9901.jpg",
+    "size": "17x17",
+    "material": "NON-SLIP",
+    "category": "Floor Decals",
+    "productorder": 102,
+    "categoryorder": 98
   },
   {
     "sku": "EM-017",
@@ -1016,8 +1016,8 @@
     "size": "12.5x18.5",
     "material": "LEXAN",
     "category": "Evacuation Map Holder",
-    "productorder": 102,
-    "categoryorder": 102
+    "productorder": 103,
+    "categoryorder": 103
   },
   {
     "sku": "EM-085",
@@ -1026,8 +1026,8 @@
     "size": "10x12",
     "material": "LEXAN",
     "category": "Evacuation Map Holder",
-    "productorder": 103,
-    "categoryorder": 102
+    "productorder": 104,
+    "categoryorder": 103
   },
   {
     "sku": "RT1-312",
@@ -1036,8 +1036,8 @@
     "size": "6x3",
     "material": "100|ROLL",
     "category": "Safety On A Roll Tags",
-    "productorder": 104,
-    "categoryorder": 104
+    "productorder": 105,
+    "categoryorder": 105
   },
   {
     "sku": "RT2-312",
@@ -1046,8 +1046,8 @@
     "size": "6x3",
     "material": "250|ROLL",
     "category": "Safety On A Roll Tags",
-    "productorder": 105,
-    "categoryorder": 104
+    "productorder": 106,
+    "categoryorder": 105
   },
   {
     "sku": "RT1-713",
@@ -1056,8 +1056,8 @@
     "size": "6x3",
     "material": "100|ROLL",
     "category": "Safety On A Roll Tags",
-    "productorder": 106,
-    "categoryorder": 104
+    "productorder": 107,
+    "categoryorder": 105
   },
   {
     "sku": "RT2-713",
@@ -1066,8 +1066,8 @@
     "size": "6x3",
     "material": "250|ROLL",
     "category": "Safety On A Roll Tags",
-    "productorder": 107,
-    "categoryorder": 104
+    "productorder": 108,
+    "categoryorder": 105
   },
   {
     "sku": "RT1-182",
@@ -1076,8 +1076,8 @@
     "size": "6x3",
     "material": "100|ROLL",
     "category": "Safety On A Roll Tags",
-    "productorder": 108,
-    "categoryorder": 104
+    "productorder": 109,
+    "categoryorder": 105
   },
   {
     "sku": "RT2-182",
@@ -1086,8 +1086,8 @@
     "size": "6x3",
     "material": "250|ROLL",
     "category": "Safety On A Roll Tags",
-    "productorder": 109,
-    "categoryorder": 104
+    "productorder": 110,
+    "categoryorder": 105
   },
   {
     "sku": "RT1-176",
@@ -1096,8 +1096,8 @@
     "size": "6x3",
     "material": "100|ROLL",
     "category": "Safety On A Roll Tags",
-    "productorder": 110,
-    "categoryorder": 104
+    "productorder": 111,
+    "categoryorder": 105
   },
   {
     "sku": "RT2-176",
@@ -1106,8 +1106,8 @@
     "size": "6x3",
     "material": "250|ROLL",
     "category": "Safety On A Roll Tags",
-    "productorder": 111,
-    "categoryorder": 104
+    "productorder": 112,
+    "categoryorder": 105
   },
   {
     "sku": "RT1-149",
@@ -1116,8 +1116,8 @@
     "size": "6x3",
     "material": "100|ROLL",
     "category": "Safety On A Roll Tags",
-    "productorder": 112,
-    "categoryorder": 104
+    "productorder": 113,
+    "categoryorder": 105
   },
   {
     "sku": "RT2-149",
@@ -1126,8 +1126,8 @@
     "size": "6x3",
     "material": "250|ROLL",
     "category": "Safety On A Roll Tags",
-    "productorder": 113,
-    "categoryorder": 104
+    "productorder": 114,
+    "categoryorder": 105
   },
   {
     "sku": "RT1-177",
@@ -1136,8 +1136,8 @@
     "size": "6x3",
     "material": "100|ROLL",
     "category": "Safety On A Roll Tags",
-    "productorder": 114,
-    "categoryorder": 104
+    "productorder": 115,
+    "categoryorder": 105
   },
   {
     "sku": "RT2-177",
@@ -1146,8 +1146,8 @@
     "size": "6x3",
     "material": "250|ROLL",
     "category": "Safety On A Roll Tags",
-    "productorder": 115,
-    "categoryorder": 104
+    "productorder": 116,
+    "categoryorder": 105
   },
   {
     "sku": "RT1-147",
@@ -1156,8 +1156,8 @@
     "size": "6x3",
     "material": "100|ROLL",
     "category": "Safety On A Roll Tags",
-    "productorder": 116,
-    "categoryorder": 104
+    "productorder": 117,
+    "categoryorder": 105
   },
   {
     "sku": "RT2-147",
@@ -1166,8 +1166,8 @@
     "size": "6x3",
     "material": "250|ROLL",
     "category": "Safety On A Roll Tags",
-    "productorder": 117,
-    "categoryorder": 104
+    "productorder": 118,
+    "categoryorder": 105
   },
   {
     "sku": "RT1-714",
@@ -1176,8 +1176,8 @@
     "size": "6x3",
     "material": "100|ROLL",
     "category": "Safety On A Roll Tags",
-    "productorder": 118,
-    "categoryorder": 104
+    "productorder": 119,
+    "categoryorder": 105
   },
   {
     "sku": "RT2-714",
@@ -1186,8 +1186,8 @@
     "size": "6x3",
     "material": "250|ROLL",
     "category": "Safety On A Roll Tags",
-    "productorder": 119,
-    "categoryorder": 104
+    "productorder": 120,
+    "categoryorder": 105
   },
   {
     "sku": "RT1-712",
@@ -1196,8 +1196,8 @@
     "size": "6x3",
     "material": "100|ROLL",
     "category": "Safety On A Roll Tags",
-    "productorder": 120,
-    "categoryorder": 104
+    "productorder": 121,
+    "categoryorder": 105
   },
   {
     "sku": "RT2-712",
@@ -1206,8 +1206,8 @@
     "size": "6x3",
     "material": "250|ROLL",
     "category": "Safety On A Roll Tags",
-    "productorder": 121,
-    "categoryorder": 104
+    "productorder": 122,
+    "categoryorder": 105
   },
   {
     "sku": "VT-182",
@@ -1216,8 +1216,8 @@
     "size": "6x3",
     "material": "RIGID VINYL 25|PACK",
     "category": "Accident Prevention Tags",
-    "productorder": 122,
-    "categoryorder": 122
+    "productorder": 123,
+    "categoryorder": 123
   },
   {
     "sku": "TB-182",
@@ -1226,8 +1226,8 @@
     "size": "6x3",
     "material": "TAGBOARD 25|PACK",
     "category": "Accident Prevention Tags",
-    "productorder": 123,
-    "categoryorder": 122
+    "productorder": 124,
+    "categoryorder": 123
   },
   {
     "sku": "LT-182",
@@ -1236,8 +1236,8 @@
     "size": "6x3",
     "material": "LAMINATED 10|PACK",
     "category": "Accident Prevention Tags",
-    "productorder": 124,
-    "categoryorder": 122
+    "productorder": 125,
+    "categoryorder": 123
   },
   {
     "sku": "VT-101-2",
@@ -1246,8 +1246,8 @@
     "size": "6x3",
     "material": "RIGID VINYL 25|PACK",
     "category": "Accident Prevention Tags",
-    "productorder": 125,
-    "categoryorder": 122
+    "productorder": 126,
+    "categoryorder": 123
   },
   {
     "sku": "TB-101-2",
@@ -1256,8 +1256,8 @@
     "size": "6x3",
     "material": "TAGBOARD 25|PACK",
     "category": "Accident Prevention Tags",
-    "productorder": 126,
-    "categoryorder": 122
+    "productorder": 127,
+    "categoryorder": 123
   },
   {
     "sku": "LT-101-2",
@@ -1266,8 +1266,8 @@
     "size": "6x3",
     "material": "LAMINATED 10|PACK",
     "category": "Accident Prevention Tags",
-    "productorder": 127,
-    "categoryorder": 122
+    "productorder": 128,
+    "categoryorder": 123
   },
   {
     "sku": "VT-108-1",
@@ -1276,8 +1276,8 @@
     "size": "6x3",
     "material": "RIGID VINYL 25|PACK",
     "category": "Accident Prevention Tags",
-    "productorder": 128,
-    "categoryorder": 122
+    "productorder": 129,
+    "categoryorder": 123
   },
   {
     "sku": "TB-108-1",
@@ -1286,8 +1286,8 @@
     "size": "6x3",
     "material": "TAGBOARD 25|PACK",
     "category": "Accident Prevention Tags",
-    "productorder": 129,
-    "categoryorder": 122
+    "productorder": 130,
+    "categoryorder": 123
   },
   {
     "sku": "LT-108-1",
@@ -1296,8 +1296,8 @@
     "size": "6x3",
     "material": "LAMINATED 10|PACK",
     "category": "Accident Prevention Tags",
-    "productorder": 130,
-    "categoryorder": 122
+    "productorder": 131,
+    "categoryorder": 123
   },
   {
     "sku": "VT-108-2",
@@ -1306,8 +1306,8 @@
     "size": "6x3",
     "material": "RIGID VINYL 25|PACK",
     "category": "Accident Prevention Tags",
-    "productorder": 131,
-    "categoryorder": 122
+    "productorder": 132,
+    "categoryorder": 123
   },
   {
     "sku": "TB-108-2",
@@ -1316,8 +1316,8 @@
     "size": "6x3",
     "material": "TAGBOARD 25|PACK",
     "category": "Accident Prevention Tags",
-    "productorder": 132,
-    "categoryorder": 122
+    "productorder": 133,
+    "categoryorder": 123
   },
   {
     "sku": "LT-108-2",
@@ -1326,8 +1326,8 @@
     "size": "6x3",
     "material": "LAMINATED 10|PACK",
     "category": "Accident Prevention Tags",
-    "productorder": 133,
-    "categoryorder": 122
+    "productorder": 134,
+    "categoryorder": 123
   },
   {
     "sku": "VT-312",
@@ -1336,8 +1336,8 @@
     "size": "6x3",
     "material": "RIGID VINYL 25|PACK",
     "category": "Accident Prevention Tags",
-    "productorder": 134,
-    "categoryorder": 122
+    "productorder": 135,
+    "categoryorder": 123
   },
   {
     "sku": "TB-312",
@@ -1346,8 +1346,8 @@
     "size": "6x3",
     "material": "TAGBOARD 25|PACK",
     "category": "Accident Prevention Tags",
-    "productorder": 135,
-    "categoryorder": 122
+    "productorder": 136,
+    "categoryorder": 123
   },
   {
     "sku": "LT-312",
@@ -1356,8 +1356,8 @@
     "size": "6x3",
     "material": "LAMINATED 10|PACK",
     "category": "Accident Prevention Tags",
-    "productorder": 136,
-    "categoryorder": 122
+    "productorder": 137,
+    "categoryorder": 123
   },
   {
     "sku": "VT-1004",
@@ -1366,8 +1366,8 @@
     "size": "6x3",
     "material": "RIGID VINYL 25|PACK",
     "category": "Bilingual Tags",
-    "productorder": 137,
-    "categoryorder": 137
+    "productorder": 138,
+    "categoryorder": 138
   },
   {
     "sku": "TB-1004",
@@ -1376,8 +1376,8 @@
     "size": "6x3",
     "material": "TAGBOARD 25|PACK",
     "category": "Bilingual Tags",
-    "productorder": 138,
-    "categoryorder": 137
+    "productorder": 139,
+    "categoryorder": 138
   },
   {
     "sku": "LT-1004",
@@ -1386,8 +1386,8 @@
     "size": "6x3",
     "material": "LAMINATED 10|PACK",
     "category": "Bilingual Tags",
-    "productorder": 139,
-    "categoryorder": 137
+    "productorder": 140,
+    "categoryorder": 138
   },
   {
     "sku": "VT-176",
@@ -1396,8 +1396,8 @@
     "size": "6x3",
     "material": "RIGID VINYL 25|PACK",
     "category": "Lockout Tags",
-    "productorder": 140,
-    "categoryorder": 140
+    "productorder": 141,
+    "categoryorder": 141
   },
   {
     "sku": "TB-176",
@@ -1406,8 +1406,8 @@
     "size": "6x3",
     "material": "TAGBOARD 25|PACK",
     "category": "Lockout Tags",
-    "productorder": 141,
-    "categoryorder": 140
+    "productorder": 142,
+    "categoryorder": 141
   },
   {
     "sku": "LT-176",
@@ -1416,8 +1416,8 @@
     "size": "6x3",
     "material": "LAMINATED 10|PACK",
     "category": "Lockout Tags",
-    "productorder": 142,
-    "categoryorder": 140
+    "productorder": 143,
+    "categoryorder": 141
   },
   {
     "sku": "VT-149",
@@ -1426,8 +1426,8 @@
     "size": "6x3",
     "material": "RIGID VINYL 25|PACK",
     "category": "Lockout Tags",
-    "productorder": 143,
-    "categoryorder": 140
+    "productorder": 144,
+    "categoryorder": 141
   },
   {
     "sku": "TB-149",
@@ -1436,8 +1436,8 @@
     "size": "6x3",
     "material": "TAGBOARD 25|PACK",
     "category": "Lockout Tags",
-    "productorder": 144,
-    "categoryorder": 140
+    "productorder": 145,
+    "categoryorder": 141
   },
   {
     "sku": "LT-149",
@@ -1446,8 +1446,8 @@
     "size": "6x3",
     "material": "LAMINATED 10|PACK",
     "category": "Lockout Tags",
-    "productorder": 145,
-    "categoryorder": 140
+    "productorder": 146,
+    "categoryorder": 141
   },
   {
     "sku": "VT-177",
@@ -1456,8 +1456,8 @@
     "size": "6x3",
     "material": "RIGID VINYL 25|PACK",
     "category": "Lockout Tags",
-    "productorder": 146,
-    "categoryorder": 140
+    "productorder": 147,
+    "categoryorder": 141
   },
   {
     "sku": "TB-177",
@@ -1466,8 +1466,8 @@
     "size": "6x3",
     "material": "TAGBOARD 25|PACK",
     "category": "Lockout Tags",
-    "productorder": 147,
-    "categoryorder": 140
+    "productorder": 148,
+    "categoryorder": 141
   },
   {
     "sku": "LT-177",
@@ -1476,8 +1476,8 @@
     "size": "6x3",
     "material": "LAMINATED 10|PACK",
     "category": "Lockout Tags",
-    "productorder": 148,
-    "categoryorder": 140
+    "productorder": 149,
+    "categoryorder": 141
   },
   {
     "sku": "VT-147",
@@ -1486,8 +1486,8 @@
     "size": "6x3",
     "material": "RIGID VINYL 25|PACK",
     "category": "Lockout Tags",
-    "productorder": 149,
-    "categoryorder": 140
+    "productorder": 150,
+    "categoryorder": 141
   },
   {
     "sku": "TB-147",
@@ -1496,8 +1496,8 @@
     "size": "6x3",
     "material": "TAGBOARD 25|PACK",
     "category": "Lockout Tags",
-    "productorder": 150,
-    "categoryorder": 140
+    "productorder": 151,
+    "categoryorder": 141
   },
   {
     "sku": "LT-147",
@@ -1506,8 +1506,8 @@
     "size": "6x3",
     "material": "LAMINATED 10|PACK",
     "category": "Lockout Tags",
-    "productorder": 151,
-    "categoryorder": 140
+    "productorder": 152,
+    "categoryorder": 141
   },
   {
     "sku": "VT-992",
@@ -1516,8 +1516,8 @@
     "size": "6x3",
     "material": "RIGID VINYL 10|PACK",
     "category": "Lockout Tags",
-    "productorder": 152,
-    "categoryorder": 140
+    "productorder": 153,
+    "categoryorder": 141
   },
   {
     "sku": "VT-1005",
@@ -1526,8 +1526,8 @@
     "size": "6x3",
     "material": "RIGID VINYL 25|PACK",
     "category": "Bilingual Tags",
-    "productorder": 153,
-    "categoryorder": 137
+    "productorder": 154,
+    "categoryorder": 138
   },
   {
     "sku": "TB-1005",
@@ -1536,8 +1536,8 @@
     "size": "6x3",
     "material": "TAGBOARD 25|PACK",
     "category": "Bilingual Tags",
-    "productorder": 154,
-    "categoryorder": 137
+    "productorder": 155,
+    "categoryorder": 138
   },
   {
     "sku": "LT-1005",
@@ -1546,8 +1546,8 @@
     "size": "6x3",
     "material": "LAMINATED 10|PACK",
     "category": "Bilingual Tags",
-    "productorder": 155,
-    "categoryorder": 137
+    "productorder": 156,
+    "categoryorder": 138
   },
   {
     "sku": "VT-201",
@@ -1556,8 +1556,8 @@
     "size": "6x3",
     "material": "RIGID VINYL 25|PACK",
     "category": "Inspection Tags",
-    "productorder": 156,
-    "categoryorder": 156
+    "productorder": 157,
+    "categoryorder": 157
   },
   {
     "sku": "TB-201",
@@ -1566,8 +1566,8 @@
     "size": "6x3",
     "material": "TAGBOARD 25|PACK",
     "category": "Inspection Tags",
-    "productorder": 157,
-    "categoryorder": 156
+    "productorder": 158,
+    "categoryorder": 157
   },
   {
     "sku": "LT-201",
@@ -1576,8 +1576,8 @@
     "size": "6x3",
     "material": "LAMINATED 10|PACK",
     "category": "Inspection Tags",
-    "productorder": 158,
-    "categoryorder": 156
+    "productorder": 159,
+    "categoryorder": 157
   },
   {
     "sku": "VT-206",
@@ -1586,8 +1586,8 @@
     "size": "6x3",
     "material": "RIGID VINYL 25|PACK",
     "category": "Inspection Tags",
-    "productorder": 159,
-    "categoryorder": 156
+    "productorder": 160,
+    "categoryorder": 157
   },
   {
     "sku": "TB-206",
@@ -1596,8 +1596,8 @@
     "size": "6x3",
     "material": "TAGBOARD 25|PACK",
     "category": "Inspection Tags",
-    "productorder": 160,
-    "categoryorder": 156
+    "productorder": 161,
+    "categoryorder": 157
   },
   {
     "sku": "LT-206",
@@ -1606,8 +1606,8 @@
     "size": "6x3",
     "material": "LAMINATED 10|PACK",
     "category": "Inspection Tags",
-    "productorder": 161,
-    "categoryorder": 156
+    "productorder": 162,
+    "categoryorder": 157
   },
   {
     "sku": "VT-205",
@@ -1616,8 +1616,8 @@
     "size": "6x3",
     "material": "RIGID VINYL 25|PACK",
     "category": "Inspection Tags",
-    "productorder": 162,
-    "categoryorder": 156
+    "productorder": 163,
+    "categoryorder": 157
   },
   {
     "sku": "TB-205",
@@ -1626,8 +1626,8 @@
     "size": "6x3",
     "material": "TAGBOARD 25|PACK",
     "category": "Inspection Tags",
-    "productorder": 163,
-    "categoryorder": 156
+    "productorder": 164,
+    "categoryorder": 157
   },
   {
     "sku": "LT-205",
@@ -1636,8 +1636,8 @@
     "size": "6x3",
     "material": "LAMINATED 10|PACK",
     "category": "Inspection Tags",
-    "productorder": 164,
-    "categoryorder": 156
+    "productorder": 165,
+    "categoryorder": 157
   },
   {
     "sku": "VT-423",
@@ -1646,8 +1646,8 @@
     "size": "6x3",
     "material": "RIGID VINYL 25|PACK",
     "category": "Inspection Tags",
-    "productorder": 165,
-    "categoryorder": 156
+    "productorder": 166,
+    "categoryorder": 157
   },
   {
     "sku": "TB-423",
@@ -1656,8 +1656,8 @@
     "size": "6x3",
     "material": "TAGBOARD 25|PACK",
     "category": "Inspection Tags",
-    "productorder": 166,
-    "categoryorder": 156
+    "productorder": 167,
+    "categoryorder": 157
   },
   {
     "sku": "LT-423",
@@ -1666,8 +1666,8 @@
     "size": "6x3",
     "material": "LAMINATED 10|PACK",
     "category": "Inspection Tags",
-    "productorder": 167,
-    "categoryorder": 156
+    "productorder": 168,
+    "categoryorder": 157
   },
   {
     "sku": "VT-422",
@@ -1676,8 +1676,8 @@
     "size": "6x3",
     "material": "RIGID VINYL 25|PACK",
     "category": "Inspection Tags",
-    "productorder": 168,
-    "categoryorder": 156
+    "productorder": 169,
+    "categoryorder": 157
   },
   {
     "sku": "TB-422",
@@ -1686,8 +1686,8 @@
     "size": "6x3",
     "material": "TAGBOARD 25|PACK",
     "category": "Inspection Tags",
-    "productorder": 169,
-    "categoryorder": 156
+    "productorder": 170,
+    "categoryorder": 157
   },
   {
     "sku": "LT-422",
@@ -1696,8 +1696,8 @@
     "size": "6x3",
     "material": "LAMINATED 10|PACK",
     "category": "Inspection Tags",
-    "productorder": 170,
-    "categoryorder": 156
+    "productorder": 171,
+    "categoryorder": 157
   },
   {
     "sku": "VT-712",
@@ -1706,8 +1706,8 @@
     "size": "6x3",
     "material": "RIGID VINYL 25|PACK",
     "category": "Scaffold Tags",
-    "productorder": 171,
-    "categoryorder": 171
+    "productorder": 172,
+    "categoryorder": 172
   },
   {
     "sku": "TB-712",
@@ -1716,8 +1716,8 @@
     "size": "6x3",
     "material": "TAGBOARD 25|PACK",
     "category": "Scaffold Tags",
-    "productorder": 172,
-    "categoryorder": 171
+    "productorder": 173,
+    "categoryorder": 172
   },
   {
     "sku": "LT-712",
@@ -1726,8 +1726,8 @@
     "size": "6x3",
     "material": "LAMINATED 10|PACK",
     "category": "Scaffold Tags",
-    "productorder": 173,
-    "categoryorder": 171
+    "productorder": 174,
+    "categoryorder": 172
   },
   {
     "sku": "VT-713",
@@ -1736,8 +1736,8 @@
     "size": "6x3",
     "material": "RIGID VINYL 25|PACK",
     "category": "Scaffold Tags",
-    "productorder": 174,
-    "categoryorder": 171
+    "productorder": 175,
+    "categoryorder": 172
   },
   {
     "sku": "TB-713",
@@ -1746,8 +1746,8 @@
     "size": "6x3",
     "material": "TAGBOARD 25|PACK",
     "category": "Scaffold Tags",
-    "productorder": 175,
-    "categoryorder": 171
+    "productorder": 176,
+    "categoryorder": 172
   },
   {
     "sku": "LT-713",
@@ -1756,8 +1756,8 @@
     "size": "6x3",
     "material": "LAMINATED 10|PACK",
     "category": "Scaffold Tags",
-    "productorder": 176,
-    "categoryorder": 171
+    "productorder": 177,
+    "categoryorder": 172
   },
   {
     "sku": "VT-714",
@@ -1766,8 +1766,8 @@
     "size": "6x3",
     "material": "RIGID VINYL 25|PACK",
     "category": "Scaffold Tags",
-    "productorder": 177,
-    "categoryorder": 171
+    "productorder": 178,
+    "categoryorder": 172
   },
   {
     "sku": "TB-714",
@@ -1776,8 +1776,8 @@
     "size": "6x3",
     "material": "TAGBOARD 25|PACK",
     "category": "Scaffold Tags",
-    "productorder": 178,
-    "categoryorder": 171
+    "productorder": 179,
+    "categoryorder": 172
   },
   {
     "sku": "LT-714",
@@ -1786,8 +1786,8 @@
     "size": "6x3",
     "material": "LAMINATED 10|PACK",
     "category": "Scaffold Tags",
-    "productorder": 179,
-    "categoryorder": 171
+    "productorder": 180,
+    "categoryorder": 172
   },
   {
     "sku": "VT-179",
@@ -1796,8 +1796,8 @@
     "size": "6x3",
     "material": "RIGID VINYL 100|PACK",
     "category": "Blank Tags",
-    "productorder": 180,
-    "categoryorder": 180
+    "productorder": 181,
+    "categoryorder": 181
   },
   {
     "sku": "VT-180",
@@ -1806,8 +1806,8 @@
     "size": "6x3",
     "material": "RIGID VINYL 100|PACK",
     "category": "Blank Tags",
-    "productorder": 181,
-    "categoryorder": 180
+    "productorder": 182,
+    "categoryorder": 181
   },
   {
     "sku": "BT4058",
@@ -1816,8 +1816,8 @@
     "size": "3”x1000’",
     "material": "",
     "category": "Barricade Tape",
-    "productorder": 182,
-    "categoryorder": 182
+    "productorder": 183,
+    "categoryorder": 183
   },
   {
     "sku": "BT4044",
@@ -1826,8 +1826,8 @@
     "size": "3”x1000’",
     "material": "",
     "category": "Barricade Tape",
-    "productorder": 183,
-    "categoryorder": 182
+    "productorder": 184,
+    "categoryorder": 183
   },
   {
     "sku": "BT4057",
@@ -1836,8 +1836,8 @@
     "size": "3”x1000’",
     "material": "",
     "category": "Barricade Tape",
-    "productorder": 184,
-    "categoryorder": 182
+    "productorder": 185,
+    "categoryorder": 183
   },
   {
     "sku": "BT4064",
@@ -1846,8 +1846,8 @@
     "size": "3”x1000’",
     "material": "",
     "category": "Barricade Tape",
-    "productorder": 185,
-    "categoryorder": 182
+    "productorder": 186,
+    "categoryorder": 183
   },
   {
     "sku": "WBC-03",
@@ -1856,8 +1856,8 @@
     "size": "2”x200’",
     "material": "PLASTIC",
     "category": "Woven Plastic Barrier Tape",
-    "productorder": 186,
-    "categoryorder": 186
+    "productorder": 187,
+    "categoryorder": 187
   },
   {
     "sku": "WBC-04",
@@ -1866,8 +1866,8 @@
     "size": "2”x200’",
     "material": "PLASTIC",
     "category": "Woven Plastic Barrier Tape",
-    "productorder": 187,
-    "categoryorder": 186
+    "productorder": 188,
+    "categoryorder": 187
   },
   {
     "sku": "WBC-02RB",
@@ -1876,8 +1876,8 @@
     "size": "2”x200’",
     "material": "PLASTIC",
     "category": "Woven Plastic Barrier Tape",
-    "productorder": 188,
-    "categoryorder": 186
+    "productorder": 189,
+    "categoryorder": 187
   },
   {
     "sku": "WBC-02YB",
@@ -1886,8 +1886,8 @@
     "size": "2”x200’",
     "material": "PLASTIC",
     "category": "Woven Plastic Barrier Tape",
-    "productorder": 189,
-    "categoryorder": 186
+    "productorder": 190,
+    "categoryorder": 187
   },
   {
     "sku": "V57203SR",
@@ -1896,8 +1896,8 @@
     "size": "2”x30’",
     "material": "RED|WHITE",
     "category": "Conspicuity Tape",
-    "productorder": 190,
-    "categoryorder": 190
+    "productorder": 191,
+    "categoryorder": 191
   },
   {
     "sku": "V5720WH",
@@ -1906,8 +1906,8 @@
     "size": "2”x150’",
     "material": "WHITE",
     "category": "Conspicuity Tape",
-    "productorder": 191,
-    "categoryorder": 190
+    "productorder": 192,
+    "categoryorder": 191
   },
   {
     "sku": "RST100",
@@ -1916,8 +1916,8 @@
     "size": "2”x30’",
     "material": "GREEN",
     "category": "Reflective Tape",
-    "productorder": 192,
-    "categoryorder": 192
+    "productorder": 193,
+    "categoryorder": 193
   },
   {
     "sku": "RST101",
@@ -1926,8 +1926,8 @@
     "size": "2”x30’",
     "material": "WHITE",
     "category": "Reflective Tape",
-    "productorder": 193,
-    "categoryorder": 192
+    "productorder": 194,
+    "categoryorder": 193
   },
   {
     "sku": "RTS102",
@@ -1936,8 +1936,8 @@
     "size": "2”x30’",
     "material": "RED",
     "category": "Reflective Tape",
-    "productorder": 194,
-    "categoryorder": 192
+    "productorder": 195,
+    "categoryorder": 193
   },
   {
     "sku": "RST103",
@@ -1946,8 +1946,8 @@
     "size": "2”x30’",
     "material": "BLUE",
     "category": "Reflective Tape",
-    "productorder": 195,
-    "categoryorder": 192
+    "productorder": 196,
+    "categoryorder": 193
   },
   {
     "sku": "RTS104",
@@ -1956,8 +1956,8 @@
     "size": "2”x30’",
     "material": "YELLOW",
     "category": "Reflective Tape",
-    "productorder": 196,
-    "categoryorder": 192
+    "productorder": 197,
+    "categoryorder": 193
   },
   {
     "sku": "RST105",
@@ -1966,48 +1966,48 @@
     "size": "2”x30’",
     "material": "ORANGE",
     "category": "Reflective Tape",
-    "productorder": 197,
-    "categoryorder": 192
+    "productorder": 198,
+    "categoryorder": 193
   },
   {
     "sku": "RST106",
     "producttitle": "REFLECTIVE SAFETY TAPE - 2 Inch",
     "picturename": "RST1.JPG",
     "size": "2”x30’",
-    "material": "YLW|BLK",
+    "material": "YELLOW|BLACK",
     "category": "Reflective Tape",
-    "productorder": 198,
-    "categoryorder": 192
+    "productorder": 199,
+    "categoryorder": 193
   },
   {
     "sku": "RST107",
     "producttitle": "REFLECTIVE SAFETY TAPE - 2 Inch",
     "picturename": "RST1.JPG",
     "size": "2”x30’",
-    "material": "RED|WHT",
+    "material": "RED|WHITE",
     "category": "Reflective Tape",
-    "productorder": 199,
-    "categoryorder": 192
+    "productorder": 200,
+    "categoryorder": 193
   },
   {
     "sku": "RST109",
     "producttitle": "REFLECTIVE SAFETY TAPE - 2 Inch",
     "picturename": "RST1.JPG",
     "size": "2”x30’",
-    "material": "ORG|WHT",
+    "material": "ORANGE|WHITE",
     "category": "Reflective Tape",
-    "productorder": 200,
-    "categoryorder": 192
+    "productorder": 201,
+    "categoryorder": 193
   },
   {
     "sku": "RST1010",
     "producttitle": "REFLECTIVE SAFETY TAPE - 2 Inch",
     "picturename": "RST1.JPG",
     "size": "2”x30’",
-    "material": "WHT|BLK",
+    "material": "WHITE|BLACK",
     "category": "Reflective Tape",
-    "productorder": 201,
-    "categoryorder": 192
+    "productorder": 202,
+    "categoryorder": 193
   },
   {
     "sku": "SG3104B",
@@ -2015,9 +2015,9 @@
     "picturename": "ns-02.jpg",
     "size": "4”x60’",
     "material": "",
-    "category": "Anti-Slip Tape",
-    "productorder": 202,
-    "categoryorder": 202
+    "category": "Anti-Skid Tape",
+    "productorder": 203,
+    "categoryorder": 203
   },
   {
     "sku": "MF-02WH",
@@ -2026,8 +2026,8 @@
     "size": "2.5x3.5x30",
     "material": "WHITE",
     "category": "Marking Flags",
-    "productorder": 203,
-    "categoryorder": 203
+    "productorder": 204,
+    "categoryorder": 204
   },
   {
     "sku": "MF-02RD",
@@ -2036,8 +2036,8 @@
     "size": "2.5x3.5x30",
     "material": "RED",
     "category": "Marking Flags",
-    "productorder": 204,
-    "categoryorder": 203
+    "productorder": 205,
+    "categoryorder": 204
   },
   {
     "sku": "MF-02YL",
@@ -2046,8 +2046,8 @@
     "size": "2.5x3.5x30",
     "material": "YELLOW",
     "category": "Marking Flags",
-    "productorder": 205,
-    "categoryorder": 203
+    "productorder": 206,
+    "categoryorder": 204
   },
   {
     "sku": "MF-02OR",
@@ -2056,8 +2056,8 @@
     "size": "2.5x3.5x30",
     "material": "ORANGE",
     "category": "Marking Flags",
-    "productorder": 206,
-    "categoryorder": 203
+    "productorder": 207,
+    "categoryorder": 204
   },
   {
     "sku": "MF-02BL",
@@ -2066,8 +2066,8 @@
     "size": "2.5x3.5x30",
     "material": "BLUE",
     "category": "Marking Flags",
-    "productorder": 207,
-    "categoryorder": 203
+    "productorder": 208,
+    "categoryorder": 204
   },
   {
     "sku": "MF-02GN",
@@ -2076,8 +2076,8 @@
     "size": "2.5x3.5x30",
     "material": "GREEN",
     "category": "Marking Flags",
-    "productorder": 208,
-    "categoryorder": 203
+    "productorder": 209,
+    "categoryorder": 204
   },
   {
     "sku": "PBC-02",
@@ -2086,8 +2086,8 @@
     "size": "60’",
     "material": "RED",
     "category": "Pennant Flags",
-    "productorder": 209,
-    "categoryorder": 209
+    "productorder": 210,
+    "categoryorder": 210
   },
   {
     "sku": "PBC-04",
@@ -2096,8 +2096,8 @@
     "size": "100’",
     "material": "MULTI",
     "category": "Pennant Flags",
-    "productorder": 210,
-    "categoryorder": 209
+    "productorder": 211,
+    "categoryorder": 210
   },
   {
     "sku": "AF-01",
@@ -2106,8 +2106,8 @@
     "size": "36x36",
     "material": "NYLON",
     "category": "Airport Flag",
-    "productorder": 211,
-    "categoryorder": 211
+    "productorder": 212,
+    "categoryorder": 212
   },
   {
     "sku": "1457VE410KA",
@@ -2116,8 +2116,8 @@
     "size": "",
     "material": "",
     "category": "Master Lock™",
-    "productorder": 212,
-    "categoryorder": 212
+    "productorder": 213,
+    "categoryorder": 213
   },
   {
     "sku": "S1010E410KA",
@@ -2126,8 +2126,8 @@
     "size": "",
     "material": "",
     "category": "Master Lock™",
-    "productorder": 213,
-    "categoryorder": 212
+    "productorder": 214,
+    "categoryorder": 213
   },
   {
     "sku": "410RED",
@@ -2136,8 +2136,8 @@
     "size": "",
     "material": "RED",
     "category": "Master Lock™",
-    "productorder": 214,
-    "categoryorder": 212
+    "productorder": 215,
+    "categoryorder": 213
   },
   {
     "sku": "410YLW",
@@ -2146,8 +2146,8 @@
     "size": "",
     "material": "YELLOW",
     "category": "Master Lock™",
-    "productorder": 215,
-    "categoryorder": 212
+    "productorder": 216,
+    "categoryorder": 213
   },
   {
     "sku": "410ORG",
@@ -2156,8 +2156,8 @@
     "size": "",
     "material": "ORANGE",
     "category": "Master Lock™",
-    "productorder": 216,
-    "categoryorder": 212
+    "productorder": 217,
+    "categoryorder": 213
   },
   {
     "sku": "410BLU",
@@ -2166,8 +2166,8 @@
     "size": "",
     "material": "BLUE",
     "category": "Master Lock™",
-    "productorder": 217,
-    "categoryorder": 212
+    "productorder": 218,
+    "categoryorder": 213
   },
   {
     "sku": "410TEAL",
@@ -2176,8 +2176,8 @@
     "size": "",
     "material": "TEAL",
     "category": "Master Lock™",
-    "productorder": 218,
-    "categoryorder": 212
+    "productorder": 219,
+    "categoryorder": 213
   },
   {
     "sku": "410PRP",
@@ -2186,8 +2186,8 @@
     "size": "",
     "material": "PURPLE",
     "category": "Master Lock™",
-    "productorder": 219,
-    "categoryorder": 212
+    "productorder": 220,
+    "categoryorder": 213
   },
   {
     "sku": "410GRN",
@@ -2196,8 +2196,8 @@
     "size": "",
     "material": "GREEN",
     "category": "Master Lock™",
-    "productorder": 220,
-    "categoryorder": 212
+    "productorder": 221,
+    "categoryorder": 213
   },
   {
     "sku": "410BLK",
@@ -2206,8 +2206,8 @@
     "size": "",
     "material": "BLACK",
     "category": "Master Lock™",
-    "productorder": 221,
-    "categoryorder": 212
+    "productorder": 222,
+    "categoryorder": 213
   },
   {
     "sku": "3RED",
@@ -2216,8 +2216,8 @@
     "size": "",
     "material": "RED",
     "category": "Master Lock™",
-    "productorder": 222,
-    "categoryorder": 212
+    "productorder": 223,
+    "categoryorder": 213
   },
   {
     "sku": "3BLU",
@@ -2226,8 +2226,8 @@
     "size": "",
     "material": "BLUE",
     "category": "Master Lock™",
-    "productorder": 223,
-    "categoryorder": 212
+    "productorder": 224,
+    "categoryorder": 213
   },
   {
     "sku": "3GRN",
@@ -2236,8 +2236,8 @@
     "size": "",
     "material": "GREEN",
     "category": "Master Lock™",
-    "productorder": 224,
-    "categoryorder": 212
+    "productorder": 225,
+    "categoryorder": 213
   },
   {
     "sku": "3WHT",
@@ -2246,8 +2246,8 @@
     "size": "",
     "material": "WHITE",
     "category": "Master Lock™",
-    "productorder": 225,
-    "categoryorder": 212
+    "productorder": 226,
+    "categoryorder": 213
   },
   {
     "sku": "3YLW",
@@ -2256,8 +2256,8 @@
     "size": "",
     "material": "YELLOW",
     "category": "Master Lock™",
-    "productorder": 226,
-    "categoryorder": 212
+    "productorder": 227,
+    "categoryorder": 213
   },
   {
     "sku": "3BLK",
@@ -2266,8 +2266,8 @@
     "size": "",
     "material": "BLACK",
     "category": "Master Lock™",
-    "productorder": 227,
-    "categoryorder": 212
+    "productorder": 228,
+    "categoryorder": 213
   },
   {
     "sku": "S806",
@@ -2276,8 +2276,8 @@
     "size": "",
     "material": "",
     "category": "Master Lock™",
-    "productorder": 228,
-    "categoryorder": 212
+    "productorder": 229,
+    "categoryorder": 213
   },
   {
     "sku": "S3821",
@@ -2286,8 +2286,8 @@
     "size": "",
     "material": "",
     "category": "Master Lock™",
-    "productorder": 229,
-    "categoryorder": 212
+    "productorder": 230,
+    "categoryorder": 213
   },
   {
     "sku": "HM-125",
@@ -2296,8 +2296,8 @@
     "size": "2x2",
     "material": "ADHESIVE VINYL 25|PACK",
     "category": "Hard Hat and Helmet Markers",
-    "productorder": 230,
-    "categoryorder": 230
+    "productorder": 231,
+    "categoryorder": 231
   },
   {
     "sku": "HM-126",
@@ -2306,8 +2306,8 @@
     "size": "2x2",
     "material": "ADHESIVE VINYL 25|PACK",
     "category": "Hard Hat and Helmet Markers",
-    "productorder": 231,
-    "categoryorder": 230
+    "productorder": 232,
+    "categoryorder": 231
   },
   {
     "sku": "HM-96",
@@ -2316,8 +2316,8 @@
     "size": "2x2",
     "material": "ADHESIVE VINYL 25|PACK",
     "category": "Hard Hat and Helmet Markers",
-    "productorder": 232,
-    "categoryorder": 230
+    "productorder": 233,
+    "categoryorder": 231
   },
   {
     "sku": "HM-97",
@@ -2326,8 +2326,8 @@
     "size": "2x2",
     "material": "ADHESIVE VINYL 25|PACK",
     "category": "Hard Hat and Helmet Markers",
-    "productorder": 233,
-    "categoryorder": 230
+    "productorder": 234,
+    "categoryorder": 231
   },
   {
     "sku": "HM-113",
@@ -2336,8 +2336,8 @@
     "size": "2x2",
     "material": "ADHESIVE VINYL 25|PACK",
     "category": "Hard Hat and Helmet Markers",
-    "productorder": 234,
-    "categoryorder": 230
+    "productorder": 235,
+    "categoryorder": 231
   },
   {
     "sku": "HMRS-522",
@@ -2346,8 +2346,8 @@
     "size": "1x4",
     "material": "REFLECTIVE WHITE",
     "category": "Reflective Hard Hat Strips",
-    "productorder": 235,
-    "categoryorder": 235
+    "productorder": 236,
+    "categoryorder": 236
   },
   {
     "sku": "HMRS-523",
@@ -2356,8 +2356,8 @@
     "size": "1x4",
     "material": "REFLECTIVE YLW",
     "category": "Reflective Hard Hat Strips",
-    "productorder": 236,
-    "categoryorder": 235
+    "productorder": 237,
+    "categoryorder": 236
   },
   {
     "sku": "HMRS-524",
@@ -2366,8 +2366,8 @@
     "size": "1x4",
     "material": "REFLECTIVE RED",
     "category": "Reflective Hard Hat Strips",
-    "productorder": 237,
-    "categoryorder": 235
+    "productorder": 238,
+    "categoryorder": 236
   },
   {
     "sku": "HMRS-525",
@@ -2376,8 +2376,8 @@
     "size": "1x4",
     "material": "REFLECTIVE BLUE",
     "category": "Reflective Hard Hat Strips",
-    "productorder": 238,
-    "categoryorder": 235
+    "productorder": 239,
+    "categoryorder": 236
   },
   {
     "sku": "G4-26314",
@@ -2386,8 +2386,8 @@
     "size": "20x4",
     "material": "ADHESIVE VINYL",
     "category": "Fire Protection Signs",
-    "productorder": 239,
-    "categoryorder": 239
+    "productorder": 240,
+    "categoryorder": 240
   },
   {
     "sku": "G4-26313",
@@ -2396,8 +2396,8 @@
     "size": "20x4",
     "material": "PLASTIC",
     "category": "Fire Protection Signs",
-    "productorder": 240,
-    "categoryorder": 239
+    "productorder": 241,
+    "categoryorder": 240
   },
   {
     "sku": "G4-26311",
@@ -2406,8 +2406,8 @@
     "size": "20x4",
     "material": "ALUMINUM",
     "category": "Fire Protection Signs",
-    "productorder": 241,
-    "categoryorder": 239
+    "productorder": 242,
+    "categoryorder": 240
   },
   {
     "sku": "FWS-F2",
@@ -2416,8 +2416,8 @@
     "size": "4x12",
     "material": "ADHESIVE VINYL",
     "category": "Fire Protection Signs",
-    "productorder": 242,
-    "categoryorder": 239
+    "productorder": 243,
+    "categoryorder": 240
   },
   {
     "sku": "FWS-FS",
@@ -2426,8 +2426,8 @@
     "size": "4x12",
     "material": "ADHESIVE VINYL",
     "category": "Fire Protection Signs",
-    "productorder": 243,
-    "categoryorder": 239
+    "productorder": 244,
+    "categoryorder": 240
   },
   {
     "sku": "FWS-F6",
@@ -2436,18 +2436,8 @@
     "size": "4x12",
     "material": "ADHESIVE VINYL",
     "category": "Fire Protection Signs",
-    "productorder": 244,
-    "categoryorder": 239
-  },
-  {
-    "sku": "PWS-1",
-    "producttitle": "EXIT - PROJECTING WALL SIGN",
-    "picturename": "pws_1.jpg",
-    "size": "6x12",
-    "material": "ACRYLIC",
-    "category": "Fire Protection Signs",
     "productorder": 245,
-    "categoryorder": 239
+    "categoryorder": 240
   },
   {
     "sku": "PWS-12",
@@ -2457,7 +2447,17 @@
     "material": "ACRYLIC",
     "category": "Fire Protection Signs",
     "productorder": 246,
-    "categoryorder": 239
+    "categoryorder": 240
+  },
+  {
+    "sku": "PWS-1",
+    "producttitle": "EXIT - PROJECTING WALL SIGN",
+    "picturename": "pws_1.jpg",
+    "size": "6x12",
+    "material": "ACRYLIC",
+    "category": "Fire Protection Signs",
+    "productorder": 247,
+    "categoryorder": 240
   },
   {
     "sku": "P-0488",
@@ -2466,8 +2466,8 @@
     "size": "25x11",
     "material": "PLASTIC",
     "category": "Premium Folding Floor Stands",
-    "productorder": 247,
-    "categoryorder": 247
+    "productorder": 248,
+    "categoryorder": 248
   },
   {
     "sku": "P-0489",
@@ -2476,8 +2476,8 @@
     "size": "25x11",
     "material": "PLASTIC",
     "category": "Premium Folding Floor Stands",
-    "productorder": 248,
-    "categoryorder": 247
+    "productorder": 249,
+    "categoryorder": 248
   },
   {
     "sku": "BA-3001",
@@ -2486,8 +2486,8 @@
     "size": "18x96",
     "material": "BANNER",
     "category": "Banners",
-    "productorder": 249,
-    "categoryorder": 249
+    "productorder": 250,
+    "categoryorder": 250
   },
   {
     "sku": "SB-419",
@@ -2496,8 +2496,8 @@
     "size": "24x60",
     "material": "BANNER",
     "category": "Banners",
-    "productorder": 250,
-    "categoryorder": 249
+    "productorder": 251,
+    "categoryorder": 250
   },
   {
     "sku": "SB-451",
@@ -2506,8 +2506,8 @@
     "size": "24X60",
     "material": "BANNER",
     "category": "Banners",
-    "productorder": 251,
-    "categoryorder": 249
+    "productorder": 252,
+    "categoryorder": 250
   },
   {
     "sku": "SB-348",
@@ -2516,8 +2516,8 @@
     "size": "24x60",
     "material": "BANNER",
     "category": "Banners",
-    "productorder": 252,
-    "categoryorder": 249
+    "productorder": 253,
+    "categoryorder": 250
   },
   {
     "sku": "SB-351",
@@ -2526,8 +2526,8 @@
     "size": "24x60",
     "material": "BANNER",
     "category": "Banners",
-    "productorder": 253,
-    "categoryorder": 249
+    "productorder": 254,
+    "categoryorder": 250
   },
   {
     "sku": "R1-1RA16",
@@ -2536,8 +2536,8 @@
     "size": "24x24",
     "material": "EGP ALUMINUM",
     "category": "Traffic Signs",
-    "productorder": 254,
-    "categoryorder": 254
+    "productorder": 255,
+    "categoryorder": 255
   },
   {
     "sku": "R1-1RA22",
@@ -2546,8 +2546,8 @@
     "size": "30x30",
     "material": "EGP ALUMINUM",
     "category": "Traffic Signs",
-    "productorder": 255,
-    "categoryorder": 254
+    "productorder": 256,
+    "categoryorder": 255
   },
   {
     "sku": "R1-2RA22",
@@ -2556,8 +2556,8 @@
     "size": "30x30",
     "material": "EGP ALUMINUM",
     "category": "Traffic Signs",
-    "productorder": 256,
-    "categoryorder": 254
+    "productorder": 257,
+    "categoryorder": 255
   },
   {
     "sku": "R5-1RA16",
@@ -2566,8 +2566,8 @@
     "size": "24x24",
     "material": "EGP ALUMINUM",
     "category": "Traffic Signs",
-    "productorder": 257,
-    "categoryorder": 254
+    "productorder": 258,
+    "categoryorder": 255
   },
   {
     "sku": "R5-1HIA22",
@@ -2576,8 +2576,8 @@
     "size": "30x30",
     "material": "HIP ALUMINUM",
     "category": "Traffic Signs",
-    "productorder": 258,
-    "categoryorder": 254
+    "productorder": 259,
+    "categoryorder": 255
   },
   {
     "sku": "R2-1HIA9",
@@ -2586,8 +2586,8 @@
     "size": "24x18",
     "material": "HIP ALUMINUM",
     "category": "Traffic Signs",
-    "productorder": 259,
-    "categoryorder": 254
+    "productorder": 260,
+    "categoryorder": 255
   },
   {
     "sku": "W11-2ADG16",
@@ -2596,8 +2596,8 @@
     "size": "24x24",
     "material": "HIP ALUMINUM",
     "category": "Traffic Signs",
-    "productorder": 260,
-    "categoryorder": 254
+    "productorder": 261,
+    "categoryorder": 255
   },
   {
     "sku": "R-70AL5",
@@ -2606,8 +2606,8 @@
     "size": "18x12",
     "material": "ALUMINUM",
     "category": "Parking Signs",
-    "productorder": 261,
-    "categoryorder": 261
+    "productorder": 262,
+    "categoryorder": 262
   },
   {
     "sku": "R-70RA5",
@@ -2616,8 +2616,8 @@
     "size": "18x12",
     "material": "EGP ALUMINUM",
     "category": "Parking Signs",
-    "productorder": 262,
-    "categoryorder": 261
+    "productorder": 263,
+    "categoryorder": 262
   },
   {
     "sku": "R7-8NRA5",
@@ -2626,8 +2626,8 @@
     "size": "18x12",
     "material": "EGP ALUMINUM",
     "category": "Parking Signs",
-    "productorder": 263,
-    "categoryorder": 261
+    "productorder": 264,
+    "categoryorder": 262
   },
   {
     "sku": "W-65HIA32",
@@ -2636,8 +2636,8 @@
     "size": "48x48",
     "material": "HIP ALUMINUM",
     "category": "Road Construction Signs",
-    "productorder": 264,
-    "categoryorder": 264
+    "productorder": 265,
+    "categoryorder": 265
   },
   {
     "sku": "W3-4HIA27",
@@ -2646,8 +2646,8 @@
     "size": "36x36",
     "material": "HIP ALUMINUM",
     "category": "Road Construction Signs",
-    "productorder": 265,
-    "categoryorder": 264
+    "productorder": 266,
+    "categoryorder": 265
   },
   {
     "sku": "SMV-1",
@@ -2656,18 +2656,18 @@
     "size": "14x16",
     "material": "ALUMINUM",
     "category": "Slow Moving Vehicle Emblems",
-    "productorder": 266,
-    "categoryorder": 266
+    "productorder": 267,
+    "categoryorder": 267
   },
   {
     "sku": "SMV-2",
     "producttitle": "SLOW MOVING VEHICLE SIGN",
     "picturename": "smv_2.jpg",
     "size": "14x16",
-    "material": "REF ALUMINUM",
+    "material": "REFLECTIVE ALUMINUM",
     "category": "Slow Moving Vehicle Emblems",
-    "productorder": 267,
-    "categoryorder": 266
+    "productorder": 268,
+    "categoryorder": 267
   },
   {
     "sku": "PL-17R",
@@ -2676,8 +2676,8 @@
     "size": "18x18",
     "material": "EGP 12\" HANDLE",
     "category": "Stop | Slow Paddle Signs",
-    "productorder": 268,
-    "categoryorder": 268
+    "productorder": 269,
+    "categoryorder": 269
   },
   {
     "sku": "PL-18R",
@@ -2686,8 +2686,8 @@
     "size": "18x18",
     "material": "EGP 72\" HANDLE",
     "category": "Stop | Slow Paddle Signs",
-    "productorder": 269,
-    "categoryorder": 268
+    "productorder": 270,
+    "categoryorder": 269
   },
   {
     "sku": "PL-25R",
@@ -2696,8 +2696,8 @@
     "size": "24x24",
     "material": "EGP 81\" HANDLE",
     "category": "Stop | Slow Paddle Signs",
-    "productorder": 270,
-    "categoryorder": 268
+    "productorder": 271,
+    "categoryorder": 269
   },
   {
     "sku": "MS-1",
@@ -2706,8 +2706,8 @@
     "size": "48x48",
     "material": "MESH",
     "category": "Roll-up Signs and Stands",
-    "productorder": 271,
-    "categoryorder": 271
+    "productorder": 272,
+    "categoryorder": 272
   },
   {
     "sku": "MSV-1",
@@ -2716,8 +2716,8 @@
     "size": "48x48",
     "material": "FLUORESCENT",
     "category": "Roll-up Signs and Stands",
-    "productorder": 272,
-    "categoryorder": 271
+    "productorder": 273,
+    "categoryorder": 272
   },
   {
     "sku": "MSR-1",
@@ -2726,8 +2726,8 @@
     "size": "48x48",
     "material": "REFLECTIVE",
     "category": "Roll-up Signs and Stands",
-    "productorder": 273,
-    "categoryorder": 271
+    "productorder": 274,
+    "categoryorder": 272
   },
   {
     "sku": "MS-10",
@@ -2736,8 +2736,8 @@
     "size": "48x48",
     "material": "MESH",
     "category": "Roll-up Signs and Stands",
-    "productorder": 274,
-    "categoryorder": 271
+    "productorder": 275,
+    "categoryorder": 272
   },
   {
     "sku": "MSV-10",
@@ -2746,8 +2746,8 @@
     "size": "48x48",
     "material": "FLUORESCENT",
     "category": "Roll-up Signs and Stands",
-    "productorder": 275,
-    "categoryorder": 271
+    "productorder": 276,
+    "categoryorder": 272
   },
   {
     "sku": "MSR-10",
@@ -2756,8 +2756,8 @@
     "size": "48x48",
     "material": "REFLECTIVE",
     "category": "Roll-up Signs and Stands",
-    "productorder": 276,
-    "categoryorder": 271
+    "productorder": 277,
+    "categoryorder": 272
   },
   {
     "sku": "MS-24",
@@ -2766,8 +2766,8 @@
     "size": "48x48",
     "material": "MESH",
     "category": "Roll-up Signs and Stands",
-    "productorder": 277,
-    "categoryorder": 271
+    "productorder": 278,
+    "categoryorder": 272
   },
   {
     "sku": "MSV-24",
@@ -2776,8 +2776,8 @@
     "size": "48x48",
     "material": "FLUORESCENT",
     "category": "Roll-up Signs and Stands",
-    "productorder": 278,
-    "categoryorder": 271
+    "productorder": 279,
+    "categoryorder": 272
   },
   {
     "sku": "MSR-24",
@@ -2786,8 +2786,8 @@
     "size": "48x48",
     "material": "REFLECTIVE",
     "category": "Roll-up Signs and Stands",
-    "productorder": 279,
-    "categoryorder": 271
+    "productorder": 280,
+    "categoryorder": 272
   },
   {
     "sku": "DL-1000W",
@@ -2796,8 +2796,8 @@
     "size": "36x36",
     "material": "ALUMINUM | STEEL",
     "category": "Roll-up Signs and Stands",
-    "productorder": 280,
-    "categoryorder": 271
+    "productorder": 281,
+    "categoryorder": 272
   },
   {
     "sku": "P-8",
@@ -2806,8 +2806,8 @@
     "size": "8’",
     "material": "STEEL",
     "category": "Sign Posts",
-    "productorder": 281,
-    "categoryorder": 281
+    "productorder": 282,
+    "categoryorder": 282
   },
   {
     "sku": "P-10",
@@ -2816,8 +2816,8 @@
     "size": "10’",
     "material": "STEEL",
     "category": "Sign Posts",
-    "productorder": 282,
-    "categoryorder": 281
+    "productorder": 283,
+    "categoryorder": 282
   },
   {
     "sku": "P-12",
@@ -2826,8 +2826,8 @@
     "size": "12’",
     "material": "STEEL",
     "category": "Sign Posts",
-    "productorder": 283,
-    "categoryorder": 281
+    "productorder": 284,
+    "categoryorder": 282
   },
   {
     "sku": "GP-8",
@@ -2836,8 +2836,8 @@
     "size": "8’",
     "material": "GALVANIZED",
     "category": "Sign Posts",
-    "productorder": 284,
-    "categoryorder": 281
+    "productorder": 285,
+    "categoryorder": 282
   },
   {
     "sku": "GP-10",
@@ -2846,8 +2846,8 @@
     "size": "10’",
     "material": "GALVANIZED",
     "category": "Sign Posts",
-    "productorder": 285,
-    "categoryorder": 281
+    "productorder": 286,
+    "categoryorder": 282
   },
   {
     "sku": "GP-12",
@@ -2856,8 +2856,8 @@
     "size": "12’",
     "material": "GALVANIZED",
     "category": "Sign Posts",
-    "productorder": 286,
-    "categoryorder": 281
+    "productorder": 287,
+    "categoryorder": 282
   },
   {
     "sku": "ST-5",
@@ -2866,68 +2866,68 @@
     "size": "48x18",
     "material": "STEEL",
     "category": "Sign Posts",
-    "productorder": 287,
-    "categoryorder": 281
+    "productorder": 288,
+    "categoryorder": 282
   },
   {
     "sku": "CONE-18",
     "producttitle": "ULTRA BRITE TRAFFIC CONES",
     "picturename": "TRAFFIC CONES.jpg",
     "size": "18”",
-    "material": "",
+    "material": "RUBBER",
     "category": "Traffic Cones",
-    "productorder": 288,
-    "categoryorder": 288
+    "productorder": 289,
+    "categoryorder": 289
   },
   {
     "sku": "CONE-28",
     "producttitle": "ULTRA BRITE TRAFFIC CONES",
     "picturename": "TRAFFIC CONES.jpg",
     "size": "28”",
-    "material": "",
+    "material": "RUBBER",
     "category": "Traffic Cones",
-    "productorder": 289,
-    "categoryorder": 288
+    "productorder": 290,
+    "categoryorder": 289
   },
   {
     "sku": "CONE-36",
     "producttitle": "ULTRA BRITE TRAFFIC CONES",
     "picturename": "TRAFFIC CONES.jpg",
     "size": "36\"",
-    "material": "",
+    "material": "RUBBER",
     "category": "Traffic Cones",
-    "productorder": 290,
-    "categoryorder": 288
+    "productorder": 291,
+    "categoryorder": 289
   },
   {
     "sku": "REFCONE-18",
     "producttitle": "ULTRA BRITE TRAFFIC CONES",
     "picturename": "TRAFFIC CONES.jpg",
     "size": "18”",
-    "material": "",
+    "material": "RUBBER",
     "category": "Traffic Cones",
-    "productorder": 291,
-    "categoryorder": 288
+    "productorder": 292,
+    "categoryorder": 289
   },
   {
     "sku": "REFCONE-28",
     "producttitle": "ULTRA BRITE TRAFFIC CONES",
     "picturename": "TRAFFIC CONES.jpg",
     "size": "28”",
-    "material": "",
+    "material": "RUBBER",
     "category": "Traffic Cones",
-    "productorder": 292,
-    "categoryorder": 288
+    "productorder": 293,
+    "categoryorder": 289
   },
   {
     "sku": "REFCONE-36",
     "producttitle": "ULTRA BRITE TRAFFIC CONES",
     "picturename": "TRAFFIC CONES.jpg",
     "size": "36\"",
-    "material": "",
+    "material": "RUBBER",
     "category": "Traffic Cones",
-    "productorder": 293,
-    "categoryorder": 288
+    "productorder": 294,
+    "categoryorder": 289
   },
   {
     "sku": "DOT-05494",
@@ -2935,9 +2935,9 @@
     "picturename": "dot_0549.jpg",
     "size": "10.75x10.75",
     "material": "ADHESIVE VINYL",
-    "category": "DOT Placards",
-    "productorder": 294,
-    "categoryorder": 294
+    "category": "DOT Placards and Holders",
+    "productorder": 295,
+    "categoryorder": 295
   },
   {
     "sku": "DOT-05499",
@@ -2945,9 +2945,9 @@
     "picturename": "dot_0549.jpg",
     "size": "10.75x10.75",
     "material": "RIGID VINYL",
-    "category": "DOT Placards",
-    "productorder": 295,
-    "categoryorder": 294
+    "category": "DOT Placards and Holders",
+    "productorder": 296,
+    "categoryorder": 295
   },
   {
     "sku": "DOT-26224",
@@ -2955,9 +2955,9 @@
     "picturename": "dot_2622.jpg",
     "size": "10.75x10.75",
     "material": "ADHESIVE VINYL",
-    "category": "DOT Placards",
-    "productorder": 296,
-    "categoryorder": 294
+    "category": "DOT Placards and Holders",
+    "productorder": 297,
+    "categoryorder": 295
   },
   {
     "sku": "DOT-26229",
@@ -2965,19 +2965,19 @@
     "picturename": "dot_2622.jpg",
     "size": "10.75x10.75",
     "material": "RIGID VINYL",
-    "category": "DOT Placards",
-    "productorder": 297,
-    "categoryorder": 294
+    "category": "DOT Placards and Holders",
+    "productorder": 298,
+    "categoryorder": 295
   },
   {
-    "sku": "DOT-26804",
+    "sku": "DOT-20804",
     "producttitle": "DOT (FLAME PICTO) FLAMMABLE 3",
     "picturename": "dot-2680.jpg",
     "size": "10.75x10.75",
     "material": "ADHESIVE VINYL",
-    "category": "DOT Placards",
-    "productorder": 298,
-    "categoryorder": 294
+    "category": "DOT Placards and Holders",
+    "productorder": 299,
+    "categoryorder": 295
   },
   {
     "sku": "DOT-26809",
@@ -2985,9 +2985,9 @@
     "picturename": "dot-2680.jpg",
     "size": "10.75x10.75",
     "material": "RIGID VINYL",
-    "category": "DOT Placards",
-    "productorder": 299,
-    "categoryorder": 294
+    "category": "DOT Placards and Holders",
+    "productorder": 300,
+    "categoryorder": 295
   },
   {
     "sku": "DOT-20874",
@@ -2995,9 +2995,9 @@
     "picturename": "dot-2087.jpg",
     "size": "10.75x10.75",
     "material": "ADHESIVE VINYL",
-    "category": "DOT Placards",
-    "productorder": 300,
-    "categoryorder": 294
+    "category": "DOT Placards and Holders",
+    "productorder": 301,
+    "categoryorder": 295
   },
   {
     "sku": "DOT-20879",
@@ -3005,9 +3005,9 @@
     "picturename": "dot-2087.jpg",
     "size": "10.75x10.75",
     "material": "RIGID VINYL",
-    "category": "DOT Placards",
-    "productorder": 301,
-    "categoryorder": 294
+    "category": "DOT Placards and Holders",
+    "productorder": 302,
+    "categoryorder": 295
   },
   {
     "sku": "DOT-57244",
@@ -3015,9 +3015,9 @@
     "picturename": "dot-5724.jpg",
     "size": "10.75x10.75",
     "material": "ADHESIVE VINYL",
-    "category": "DOT Placards",
-    "productorder": 302,
-    "categoryorder": 294
+    "category": "DOT Placards and Holders",
+    "productorder": 303,
+    "categoryorder": 295
   },
   {
     "sku": "DOT-57249",
@@ -3025,9 +3025,9 @@
     "picturename": "dot-5724.jpg",
     "size": "10.75x10.75",
     "material": "RIGID VINYL",
-    "category": "DOT Placards",
-    "productorder": 303,
-    "categoryorder": 294
+    "category": "DOT Placards and Holders",
+    "productorder": 304,
+    "categoryorder": 295
   },
   {
     "sku": "DOT-18444",
@@ -3035,9 +3035,9 @@
     "picturename": "dot_1844.jpg",
     "size": "10.75x10.75",
     "material": "ADHESIVE VINYL",
-    "category": "DOT Placards",
-    "productorder": 304,
-    "categoryorder": 294
+    "category": "DOT Placards and Holders",
+    "productorder": 305,
+    "categoryorder": 295
   },
   {
     "sku": "DOT-18449",
@@ -3045,9 +3045,9 @@
     "picturename": "dot_1844.jpg",
     "size": "10.75x10.75",
     "material": "RIGID VINYL",
-    "category": "DOT Placards",
-    "productorder": 305,
-    "categoryorder": 294
+    "category": "DOT Placards and Holders",
+    "productorder": 306,
+    "categoryorder": 295
   },
   {
     "sku": "DOT-77774",
@@ -3055,9 +3055,9 @@
     "picturename": "dot-7777.jpg",
     "size": "10.75x10.75",
     "material": "ADHESIVE VINYL",
-    "category": "DOT Placards",
-    "productorder": 306,
-    "categoryorder": 294
+    "category": "DOT Placards and Holders",
+    "productorder": 307,
+    "categoryorder": 295
   },
   {
     "sku": "DOT-77779",
@@ -3065,9 +3065,9 @@
     "picturename": "dot-7777.jpg",
     "size": "10.75x10.75",
     "material": "RIGID VINYL",
-    "category": "DOT Placards",
-    "productorder": 307,
-    "categoryorder": 294
+    "category": "DOT Placards and Holders",
+    "productorder": 308,
+    "categoryorder": 295
   },
   {
     "sku": "DOT-08374",
@@ -3075,9 +3075,9 @@
     "picturename": "dot-0837.jpg",
     "size": "10.75x10.75",
     "material": "ADHESIVE VINYL",
-    "category": "DOT Placards",
-    "productorder": 308,
-    "categoryorder": 294
+    "category": "DOT Placards and Holders",
+    "productorder": 309,
+    "categoryorder": 295
   },
   {
     "sku": "DOT-08379",
@@ -3085,9 +3085,9 @@
     "picturename": "dot-0837.jpg",
     "size": "10.75x10.75",
     "material": "RIGID VINYL",
-    "category": "DOT Placards",
-    "productorder": 309,
-    "categoryorder": 294
+    "category": "DOT Placards and Holders",
+    "productorder": 310,
+    "categoryorder": 295
   },
   {
     "sku": "DOT-11084",
@@ -3095,9 +3095,9 @@
     "picturename": "dot-1108.jpg",
     "size": "10.75x10.75",
     "material": "ADHESIVE VINYL",
-    "category": "DOT Placards",
-    "productorder": 310,
-    "categoryorder": 294
+    "category": "DOT Placards and Holders",
+    "productorder": 311,
+    "categoryorder": 295
   },
   {
     "sku": "DOT-11089",
@@ -3105,9 +3105,9 @@
     "picturename": "dot-1108.jpg",
     "size": "10.75x10.75",
     "material": "RIGID VINYL",
-    "category": "DOT Placards",
-    "productorder": 311,
-    "categoryorder": 294
+    "category": "DOT Placards and Holders",
+    "productorder": 312,
+    "categoryorder": 295
   },
   {
     "sku": "DOT-96754",
@@ -3115,9 +3115,9 @@
     "picturename": "dot-9675.jpg",
     "size": "10.75x10.75",
     "material": "ADHESIVE VINYL",
-    "category": "DOT Placards",
-    "productorder": 312,
-    "categoryorder": 294
+    "category": "DOT Placards and Holders",
+    "productorder": 313,
+    "categoryorder": 295
   },
   {
     "sku": "DOT-96759",
@@ -3125,9 +3125,9 @@
     "picturename": "dot-9675.jpg",
     "size": "10.75x10.75",
     "material": "RIGID VINYL",
-    "category": "DOT Placards",
-    "productorder": 313,
-    "categoryorder": 294
+    "category": "DOT Placards and Holders",
+    "productorder": 314,
+    "categoryorder": 295
   },
   {
     "sku": "PLT-02",
@@ -3135,9 +3135,9 @@
     "picturename": "PLT-02.jpg",
     "size": "14X14",
     "material": "ALUMINUM",
-    "category": "DOT Flip Placards and Holders",
-    "productorder": 314,
-    "categoryorder": 314
+    "category": "DOT Placards and Holders",
+    "productorder": 315,
+    "categoryorder": 295
   },
   {
     "sku": "PLT-03",
@@ -3145,9 +3145,9 @@
     "picturename": "PLT-03.jpg",
     "size": "14X14",
     "material": "ALUMINUM",
-    "category": "DOT Flip Placards and Holders",
-    "productorder": 315,
-    "categoryorder": 314
+    "category": "DOT Placards and Holders",
+    "productorder": 316,
+    "categoryorder": 295
   },
   {
     "sku": "PLT-01",
@@ -3155,8 +3155,8 @@
     "picturename": "PLT-01.jpg",
     "size": "12x14",
     "material": "ALUMINUM",
-    "category": "DOT Flip Placards and Holders",
-    "productorder": 316,
-    "categoryorder": 314
+    "category": "DOT Placards and Holders",
+    "productorder": 317,
+    "categoryorder": 295
   }
 ]
